@@ -1,4 +1,6 @@
 import init, { bucket, cleanup, buttons } from './init';
+import { alertswitch } from './alert';
+import { confirmswitch } from './confirm';
 
 const handler = (type, params, alertbody) => {
 	init();
@@ -17,36 +19,10 @@ const handler = (type, params, alertbody) => {
 	if (params[0] && typeof params[0] === 'object' && !Array.isArray(params[0])) {
 		fixedParams = { ...fixedParams, ...params[0] };
 	} else {
-		switch (params.length) {
-			case 1:
-				fixedParams.text = params[0];
-				break;
-			case 6:
-				fixedParams.check = params[5];
-			case 5:
-				fixedParams.cancelCallback = params[4];
-			case 4:
-				if (typeof params[3] === 'function') {
-					fixedParams.okCallback = params[3];
-				} else {
-					fixedParams.cancel = params[3];
-				}
-			case 3:
-				if (typeof params[2] === 'function') {
-					fixedParams.okCallback = params[2];
-				} else {
-					fixedParams.button = params[2];
-				}
-			case 2:
-				fixedParams.title = params[0];
-				fixedParams.text = params[1];
-				break;
-			case 0:
-				console.warn('alertist: alert - Not enough parameters. Needs at least 1.');
-				break;
-			default:
-				console.warn('alertist: alert - Too many parameters. Max of 5 only.');
-				break;
+		if (type === 'alert') {
+			fixedParams = { ...fixedParams, ...alertswitch(params, fixedParams) };
+		} else if (type === 'confirm') {
+			fixedParams = { ...fixedParams, ...confirmswitch(params, fixedParams) };
 		}
 	}
 
