@@ -1,28 +1,4 @@
-let bucket;
-
-const buttons = {
-	close:
-		'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAElBMVEX///9HcEz///////////////84chYNAAAABnRSTlP9ABWejzIjLOoFAAAAlUlEQVQoz3VSWRbEIAwi2/2vPG5tg8nohz6JBBFIhDRjnEIB0xtQB2LMik1kADIXZ8xXOUTtuqcbEXzbB3lK8RIQ29zgLdz9EgWYJJODRElui9zcSRBIGEkFPyc/EOwBXCq0L3WEW3Ur4xxa8hrkKHkNMqMa9dfe7lN8fcqFfPQQr+E4AWhjYziJasJmK1ERWhOqI6I/koMDV9q/Is8AAAAASUVORK5CYII=',
-};
-
-const cleanup = () => {
-	bucket.querySelectorAll('dialog:not([open])').forEach((elem) => elem.remove());
-};
-
-const init = () => {
-	if (typeof document !== 'object') {
-		console.warn('alertjs: init - Not in a browser environment.');
-		return false;
-	}
-	let bucketSelector = document.querySelector('.alertjs-bucket');
-	if (!bucketSelector) {
-		bucketSelector = document.createElement('span');
-		bucketSelector.classList.add('alertjs-bucket');
-		document.querySelector('body').append(bucketSelector);
-	}
-	bucket = bucketSelector;
-	return bucketSelector;
-};
+import init, { bucket, cleanup, buttons } from './init';
 
 const handler = (type, params, alertbody) => {
 	init();
@@ -102,46 +78,4 @@ const handler = (type, params, alertbody) => {
 	parsedHTML.showModal();
 };
 
-const alertbody = /*html*/ `
-	<dialog class="alertjs alertjs-alert">
-		<div class="alertjs-container">
-			<div class="alertjs-header">
-				<div class="alertjs-title"></div>
-				<button class="alertjs-title_close"><img></button>
-			</div>
-			<div class="alertjs-body"></div>
-			<div class="alertjs-footer">
-				<button class="alertjs-footer_button"></button>
-			</div>
-		</div>
-	</dialog>`;
-
-const alertFn = (...params) => {
-	handler('alert', params, alertbody);
-};
-
-const confirmbody = /*html*/ `
-	<dialog class="alertjs alertjs-confirm">
-		<div class="alertjs-container">
-			<div class="alertjs-header">
-				<div class="alertjs-title"></div>
-				<button class="alertjs-title_close"><img></button>
-			</div>
-			<div class="alertjs-body"></div>
-			<div class="alertjs-footer">
-				<button class="alertjs-footer_cancelbutton"></button>
-				<button class="alertjs-footer_button"></button>
-			</div>
-		</div>
-	</dialog>`;
-
-const confirmFn = (...params) => {
-	handler('confirm', params, confirmbody);
-};
-
-const alertjs = {
-	alert: alertFn,
-	confirm: confirmFn,
-};
-
-export { alertjs as default };
+export default handler;

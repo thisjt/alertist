@@ -3,7 +3,19 @@
 	"version": "0.0.1",
 	"description": "A simple alert management system built on top of the native \"<dialog>\" HTML tag.",
 	"module": "dist/alertjs.js",
+	"main": "dist/alertjs.cjs",
+	"exports": {
+		".": {
+			"require": "./dist/alertjs.cjs",
+			"import": "./dist/alertjs.js"
+		}
+	},
 	"scripts": {
+		"build": "npm run build:esm && npm run build:iife && npm run build:cjs",
+		"build:esm": "rollup ./src/main.js --format esm --exports default --name \"alertjs\" --file ./dist/alertjs.js",
+		"build:iife": "rollup ./src/main.js --format iife --file ./dist/alertjs_browser.js",
+		"build:cjs": "rollup ./src/main.js --format cjs --file ./dist/alertjs.cjs",
+		"dev": "rollup ./src/main.js --format esm --exports default --name \"alertjs\" --file ./dist/alertjs.js --watch",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
