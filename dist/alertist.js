@@ -80,7 +80,7 @@ const handler = (type, params, alertbody) => {
 
 	let parsedHTML = new DOMParser().parseFromString(alertbody, 'text/html').querySelector('dialog');
 	parsedHTML.querySelector('.alertist-title').textContent = title;
-	parsedHTML.querySelector('.alertist-body').textContent = text;
+	parsedHTML.querySelector('.alertist-body').innerHTML = text;
 	parsedHTML.querySelector('.alertist-title_close img').setAttribute('src', buttons.close);
 	parsedHTML.querySelector('.alertist-footer_button').textContent = button;
 	parsedHTML.querySelector('.alertist-footer_button').addEventListener('click', (e) => {
