@@ -179,10 +179,10 @@ const confirmFn = (...params) => {
 	handler('confirm', params, confirmbody);
 };
 
-const alertjs = {
+const alertist = {
 	alert: alertFn,
 	confirm: confirmFn,
 	cleanup,
 };
 
-module.exports = alertjs;
+module.exports = alertist;

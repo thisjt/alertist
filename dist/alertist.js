@@ -177,10 +177,10 @@ const confirmFn = (...params) => {
 	handler('confirm', params, confirmbody);
 };
 
-const alertjs = {
+const alertist = {
 	alert: alertFn,
 	confirm: confirmFn,
 	cleanup,
 };
 
-export { alertjs as default };
+export { alertist as default };

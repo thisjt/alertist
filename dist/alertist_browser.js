@@ -180,12 +180,12 @@ var alertist = (function () {
 		handler('confirm', params, confirmbody);
 	};
 
-	const alertjs = {
+	const alertist = {
 		alert: alertFn,
 		confirm: confirmFn,
 		cleanup,
 	};
 
-	return alertjs;
+	return alertist;
 
 })();
