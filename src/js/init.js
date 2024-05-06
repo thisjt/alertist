@@ -6,7 +6,9 @@ export const buttons = {
 };
 
 export const cleanup = () => {
-	bucket.querySelectorAll('dialog:not([open])').forEach((elem) => elem.remove());
+	if (bucket) {
+		bucket.querySelectorAll('dialog:not([open])').forEach((elem) => elem.remove());
+	}
 };
 
 const init = () => {

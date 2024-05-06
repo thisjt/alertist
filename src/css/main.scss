@@ -1,0 +1,130 @@
+@import './variables.scss';
+
+.alertjs {
+	font-family: $alertjs-font-family;
+	outline: 0;
+
+	&::backdrop {
+		opacity: 1;
+		background-color: $alertjs-backdrop;
+		animation: fade 0.3s ease-out;
+	}
+
+	&[open] {
+		animation: bounce 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+
+	button {
+		transition: 0.2s;
+	}
+
+	& {
+		&-container {
+			min-width: 350px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		&-header {
+			display: flex;
+			background-color: $alertjs-header-bg;
+			color: $alertjs-header-color;
+		}
+		&-title {
+			padding-left: 10px;
+			flex-grow: 1;
+			display: flex;
+			align-items: center;
+			font-weight: $alertjs-header-bg-font;
+			user-select: none;
+			cursor: move;
+			cursor: grab;
+
+			&:active {
+				cursor: grabbing;
+			}
+		}
+		&-title_close {
+			padding: 10px;
+			outline: 0;
+
+			&:hover,
+			&:focus {
+				background-color: $alertjs-header-bg-close-hover;
+			}
+		}
+
+		&-body {
+			background-color: $alertjs-body-bg;
+			color: $alertjs-body-color;
+			min-height: 80px;
+			padding: 10px;
+		}
+
+		&-footer {
+			display: flex;
+
+			button {
+				padding: 10px 1%;
+				outline: 0;
+			}
+
+			&_button {
+				background-color: $alertjs-footer-button-bg;
+				color: $alertjs-footer-button-color;
+				font-weight: $alertjs-footer-button-font;
+				&:hover,
+				&:focus {
+					background-color: $alertjs-footer-button-bg-hover;
+				}
+			}
+			&_cancelbutton {
+				background-color: $alertjs-footer-cancel-bg;
+				color: $alertjs-footer-cancel-color;
+				font-weight: $alertjs-footer-cancel-font;
+				&:hover,
+				&:focus {
+					background-color: $alertjs-footer-cancel-bg-hover;
+				}
+			}
+		}
+	}
+
+	&-alert {
+		.alertjs-footer {
+			&_button {
+				width: 100%;
+			}
+		}
+	}
+
+	&-confirm {
+		.alertjs-footer {
+			&_button {
+				width: 50%;
+			}
+
+			&_cancelbutton {
+				width: 50%;
+			}
+		}
+	}
+
+	@keyframes fade {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes bounce {
+		from {
+			transform: scale(0.95);
+		}
+		to {
+			transform: scale(1);
+		}
+	}
+}

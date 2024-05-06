@@ -7,6 +7,7 @@ const handler = (type, params, alertbody) => {
 		title: '',
 		text: '',
 		button: 'OK',
+		cancel: 'Cancel',
 		okCallback: () => {},
 		cancelCallback: () => {},
 		check: () => {
@@ -25,9 +26,13 @@ const handler = (type, params, alertbody) => {
 			case 5:
 				fixedParams.cancelCallback = params[4];
 			case 4:
-				fixedParams.okCallback = params[3];
+				if (typeof params[3] === 'function') {
+					fixedParams.okCallback = params[3];
+				} else {
+					fixedParams.cancel = params[3];
+				}
 			case 3:
-				if (typeof params[2] == 'function') {
+				if (typeof params[2] === 'function') {
 					fixedParams.okCallback = params[2];
 				} else {
 					fixedParams.button = params[2];
@@ -45,12 +50,12 @@ const handler = (type, params, alertbody) => {
 		}
 	}
 
-	const { title, text, button, okCallback, cancelCallback, check } = fixedParams;
+	const { title, text, button, cancel, okCallback, cancelCallback, check } = fixedParams;
 
 	let parsedHTML = new DOMParser().parseFromString(alertbody, 'text/html').querySelector('dialog');
 	parsedHTML.querySelector('.alertjs-title').textContent = title;
 	parsedHTML.querySelector('.alertjs-body').textContent = text;
-	parsedHTML.querySelector('.alertjs-title_close').setAttribute('src', buttons.close);
+	parsedHTML.querySelector('.alertjs-title_close img').setAttribute('src', buttons.close);
 	parsedHTML.querySelector('.alertjs-footer_button').textContent = button;
 	parsedHTML.querySelector('.alertjs-footer_button').addEventListener('click', (e) => {
 		Promise.resolve(check).then((executeCallback) => {
@@ -66,11 +71,42 @@ const handler = (type, params, alertbody) => {
 		cancelCallback();
 		cleanup();
 	};
-	parsedHTML.querySelector('.alertjs-footer_cancelbutton')?.addEventListener('click', cancelCallbackFn);
+
+	if (type === 'confirm') {
+		parsedHTML.querySelector('.alertjs-footer_cancelbutton').textContent = cancel;
+		parsedHTML.querySelector('.alertjs-footer_cancelbutton').addEventListener('click', cancelCallbackFn);
+	}
 	parsedHTML.querySelector('.alertjs-title_close').addEventListener('click', cancelCallbackFn);
 	parsedHTML.addEventListener('click', (e) => {
 		if (e.target.tagName === 'DIALOG') {
 			cancelCallbackFn();
+		}
+	});
+
+	let cfcos = {
+		x: 0,
+		y: 0,
+	};
+	parsedHTML.querySelector('.alertjs-title').addEventListener('dragstart', (e) => {
+		cfcos.x ||= e.clientX;
+		cfcos.y ||= e.clientY;
+	});
+
+	parsedHTML.querySelector('.alertjs-title').addEventListener('dragend', (e) => {});
+
+	let dragThrottlerInt = 1;
+	const dragThrottler = (e) => {
+		parsedHTML.setAttribute('style', `transform: translate(${-cfcos.x + e.clientX}px, ${-cfcos.y + e.clientY}px)`);
+	};
+
+	parsedHTML.querySelector('.alertjs-title').addEventListener('drag', (e) => {
+		e.preventDefault();
+		if (e.screenX && dragThrottlerInt) {
+			dragThrottlerInt = 0;
+			dragThrottler(e);
+			setTimeout(() => {
+				dragThrottlerInt = 1;
+			}, 16);
 		}
 	});
 

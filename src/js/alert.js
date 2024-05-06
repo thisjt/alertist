@@ -1,10 +1,10 @@
 import handler from './handler';
 
 const alertbody = /*html*/ `
-	<dialog class="alertjs alertjs-alert">
+	<dialog class="alertjs alertjs-alert" style="transform: translate(0px, 0px)">
 		<div class="alertjs-container">
 			<div class="alertjs-header">
-				<div class="alertjs-title"></div>
+				<div class="alertjs-title" draggable="true"></div>
 				<button class="alertjs-title_close"><img></button>
 			</div>
 			<div class="alertjs-body"></div>

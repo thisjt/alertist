@@ -11,11 +11,14 @@
 		}
 	},
 	"scripts": {
-		"build": "npm run build:esm && npm run build:iife && npm run build:cjs",
-		"build:esm": "rollup ./src/main.js --format esm --exports default --name \"alertjs\" --file ./dist/alertjs.js",
-		"build:iife": "rollup ./src/main.js --format iife --file ./dist/alertjs_browser.js",
-		"build:cjs": "rollup ./src/main.js --format cjs --file ./dist/alertjs.cjs",
-		"dev": "rollup ./src/main.js --format esm --exports default --name \"alertjs\" --file ./dist/alertjs.js --watch",
+		"build": "npm-run-all -s build:*",
+		"build:esm": "rollup ./src/js/main.js --format esm --exports default --name \"alertjs\" --file ./dist/alertjs.js",
+		"build:iife": "rollup ./src/js/main.js --format iife --name \"alertjs\" --file ./dist/alertjs_browser.js",
+		"build:cjs": "rollup ./src/js/main.js --format cjs --file ./dist/alertjs.cjs",
+		"build:css": "sass ./src/css/main.scss ./dist/alertjs.css --no-source-map",
+		"dev": "npm-run-all -p dev:*",
+		"dev:js": "rollup ./src/js/main.js --format esm --exports default --name \"alertjs\" --file ./dist/alertjs.js --watch",
+		"dev:css": "sass ./src/css/main.scss ./dist/alertjs.css --watch --no-source-map",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -31,6 +34,8 @@
 	"type": "module",
 	"devDependencies": {
 		"eslint": "^9.2.0",
-		"rollup": "^4.17.2"
+		"npm-run-all": "^4.1.5",
+		"rollup": "^4.17.2",
+		"sass": "^1.76.0"
 	}
 }

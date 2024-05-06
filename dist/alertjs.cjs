@@ -1,3 +1,5 @@
+'use strict';
+
 let bucket;
 
 const buttons = {
@@ -183,4 +185,4 @@ const alertjs = {
 	cleanup,
 };
 
-export { alertjs as default };
+module.exports = alertjs;
