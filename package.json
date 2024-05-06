@@ -1,6 +1,6 @@
 {
 	"name": "alertjs",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "A simple alert management system built on top of the native \"<dialog>\" HTML tag.",
 	"module": "dist/alertjs.js",
 	"main": "dist/alertjs.cjs",
