@@ -1,40 +1,40 @@
 {
-	"name": "alertjs",
+	"name": "alertist",
 	"version": "0.0.3",
 	"description": "A simple alert management system built on top of the native \"<dialog>\" HTML tag.",
-	"style": "dist/alertjs.css",
-	"main": "dist/alertjs.cjs",
-	"module": "dist/alertjs.js",
-	"unpkg": "./dist/alertjs_browser.js",
+	"style": "dist/alertist.css",
+	"main": "dist/alertist.cjs",
+	"module": "dist/alertist.js",
+	"unpkg": "./dist/alertist_browser.js",
 	"exports": {
 		".": {
-			"require": "./dist/alertjs.cjs",
-			"import": "./dist/alertjs.js"
+			"require": "./dist/alertist.cjs",
+			"import": "./dist/alertist.js"
 		}
 	},
 	"scripts": {
 		"build": "npm-run-all -s build:*",
-		"build:esm": "rollup ./src/js/main.js --format esm --exports default --name \"alertjs\" --file ./dist/alertjs.js",
-		"build:iife": "rollup ./src/js/main.js --format iife --name \"alertjs\" --file ./dist/alertjs_browser.js",
-		"build:cjs": "rollup ./src/js/main.js --format cjs --file ./dist/alertjs.cjs",
-		"build:css": "sass ./src/css/main.scss ./dist/alertjs.css --no-source-map",
+		"build:esm": "rollup ./src/js/main.js --format esm --exports default --name \"alertist\" --file ./dist/alertist.js",
+		"build:iife": "rollup ./src/js/main.js --format iife --name \"alertist\" --file ./dist/alertist_browser.js",
+		"build:cjs": "rollup ./src/js/main.js --format cjs --file ./dist/alertist.cjs",
+		"build:css": "sass ./src/scss/main.scss ./dist/alertist.css --no-source-map",
 		"build:push": "git commit -am \"version patch\" && git push",
 		"build:patch": "npm version patch",
 		"dev": "npm-run-all -p dev:*",
-		"dev:js": "rollup ./src/js/main.js --format esm --exports default --name \"alertjs\" --file ./dist/alertjs.js --watch",
-		"dev:css": "sass ./src/css/main.scss ./dist/alertjs.css --watch --no-source-map",
+		"dev:js": "rollup ./src/js/main.js --format esm --exports default --name \"alertist\" --file ./dist/alertist.js --watch",
+		"dev:css": "sass ./src/css/main.scss ./dist/alertist.css --watch --no-source-map",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/thisjt/alertjs.git"
+		"url": "git+https://github.com/thisjt/alertist.git"
 	},
 	"author": "thisjt",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/thisjt/alertjs/issues"
+		"url": "https://github.com/thisjt/alertist/issues"
 	},
-	"homepage": "https://github.com/thisjt/alertjs#readme",
+	"homepage": "https://github.com/thisjt/alertist#readme",
 	"type": "module",
 	"keywords": [
 		"alert",
