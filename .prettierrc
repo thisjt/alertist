@@ -1,0 +1,10 @@
+{
+	"useTabs": true,
+	"singleQuote": true,
+	"trailingComma": "all",
+	"endOfLine": "auto",
+	"printWidth": 180,
+	"plugins": [],
+	"pluginSearchDirs": ["."],
+	"bracketSameLine": true
+}

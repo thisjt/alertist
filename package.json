@@ -1,0 +1,25 @@
+{
+	"name": "alertjs",
+	"version": "0.0.1",
+	"description": "A simple alert management system built on top of the native \"<dialog>\" HTML tag.",
+	"main": "dist/js/alertjs.cjs",
+	"module": "dist/js/alertjs.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/thisjt/alertjs.git"
+	},
+	"author": "thisjt",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/thisjt/alertjs/issues"
+	},
+	"homepage": "https://github.com/thisjt/alertjs#readme",
+	"type": "module",
+	"devDependencies": {
+		"eslint": "^9.2.0",
+		"rollup": "^4.17.2"
+	}
+}
