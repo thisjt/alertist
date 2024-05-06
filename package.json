@@ -1,0 +1,53 @@
+{
+	"name": "alertjs",
+	"version": "0.0.3",
+	"description": "A simple alert management system built on top of the native \"<dialog>\" HTML tag.",
+	"style": "dist/alertjs.css",
+	"main": "dist/alertjs.cjs",
+	"module": "dist/alertjs.js",
+	"unpkg": "./dist/alertjs_browser.js",
+	"exports": {
+		".": {
+			"require": "./dist/alertjs.cjs",
+			"import": "./dist/alertjs.js"
+		}
+	},
+	"scripts": {
+		"build": "npm-run-all -s build:*",
+		"build:esm": "rollup ./src/js/main.js --format esm --exports default --name \"alertjs\" --file ./dist/alertjs.js",
+		"build:iife": "rollup ./src/js/main.js --format iife --name \"alertjs\" --file ./dist/alertjs_browser.js",
+		"build:cjs": "rollup ./src/js/main.js --format cjs --file ./dist/alertjs.cjs",
+		"build:css": "sass ./src/css/main.scss ./dist/alertjs.css --no-source-map",
+		"build:push": "git commit -am \"version patch\" && git push",
+		"build:patch": "npm version patch",
+		"dev": "npm-run-all -p dev:*",
+		"dev:js": "rollup ./src/js/main.js --format esm --exports default --name \"alertjs\" --file ./dist/alertjs.js --watch",
+		"dev:css": "sass ./src/css/main.scss ./dist/alertjs.css --watch --no-source-map",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/thisjt/alertjs.git"
+	},
+	"author": "thisjt",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/thisjt/alertjs/issues"
+	},
+	"homepage": "https://github.com/thisjt/alertjs#readme",
+	"type": "module",
+	"keywords": [
+		"alert",
+		"alerts",
+		"confirm",
+		"prompt",
+		"toast",
+		"browser"
+	],
+	"devDependencies": {
+		"eslint": "^9.2.0",
+		"npm-run-all": "^4.1.5",
+		"rollup": "^4.17.2",
+		"sass": "^1.76.0"
+	}
+}

@@ -1,0 +1,99 @@
+.alertjs {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  outline: 0;
+}
+.alertjs::backdrop {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.3);
+  animation: fade 0.3s ease-out;
+}
+.alertjs[open] {
+  animation: bounce 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.alertjs button {
+  transition: 0.2s;
+}
+.alertjs-container {
+  min-width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+.alertjs-header {
+  display: flex;
+  background-color: #2d563b;
+  color: #fff;
+}
+.alertjs-title {
+  padding-left: 10px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  user-select: none;
+  cursor: move;
+  cursor: grab;
+}
+.alertjs-title:active {
+  cursor: grabbing;
+}
+.alertjs-title_close {
+  padding: 10px;
+  outline: 0;
+}
+.alertjs-title_close:hover, .alertjs-title_close:focus {
+  background-color: #5fae79;
+}
+.alertjs-body {
+  background-color: #fff;
+  color: #000;
+  min-height: 80px;
+  padding: 10px;
+}
+.alertjs-footer {
+  display: flex;
+}
+.alertjs-footer button {
+  padding: 10px 1%;
+  outline: 0;
+}
+.alertjs-footer_button {
+  background-color: #2d563b;
+  color: #fff;
+  font-weight: bold;
+}
+.alertjs-footer_button:hover, .alertjs-footer_button:focus {
+  background-color: #5fae79;
+}
+.alertjs-footer_cancelbutton {
+  background-color: #a73d3d;
+  color: #fff;
+  font-weight: bold;
+}
+.alertjs-footer_cancelbutton:hover, .alertjs-footer_cancelbutton:focus {
+  background-color: #f55;
+}
+.alertjs-alert .alertjs-footer_button {
+  width: 100%;
+}
+.alertjs-confirm .alertjs-footer_button {
+  width: 50%;
+}
+.alertjs-confirm .alertjs-footer_cancelbutton {
+  width: 50%;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes bounce {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
