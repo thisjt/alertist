@@ -1,3 +1,8 @@
+const buttons = {
+	close:
+		'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAElBMVEX///9HcEz///////////////84chYNAAAABnRSTlP9ABWejzIjLOoFAAAAlUlEQVQoz3VSWRbEIAwi2/2vPG5tg8nohz6JBBFIhDRjnEIB0xtQB2LMik1kADIXZ8xXOUTtuqcbEXzbB3lK8RIQ29zgLdz9EgWYJJODRElui9zcSRBIGEkFPyc/EOwBXCq0L3WEW3Ur4xxa8hrkKHkNMqMa9dfe7lN8fcqFfPQQr+E4AWhjYziJasJmK1ERWhOqI6I/koMDV9q/Is8AAAAASUVORK5CYII=',
+};
+
 const alertjs = {
 	elements: {
 		/**
@@ -5,19 +10,30 @@ const alertjs = {
 		 * If you don't have syntax highlighting for template literals, I suggest
 		 * you download the VSCode extension: tobermory.es6-string-html
 		 */
-		x: 'iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAElBMVEX///9HcEz///////////////84chYNAAAABnRSTlP9ABWejzIjLOoFAAAAlUlEQVQoz3VSWRbEIAwi2/2vPG5tg8nohz6JBBFIhDRjnEIB0xtQB2LMik1kADIXZ8xXOUTtuqcbEXzbB3lK8RIQ29zgLdz9EgWYJJODRElui9zcSRBIGEkFPyc/EOwBXCq0L3WEW3Ur4xxa8hrkKHkNMqMa9dfe7lN8fcqFfPQQr+E4AWhjYziJasJmK1ERWhOqI6I/koMDV9q/Is8AAAAASUVORK5CYII=',
-
+		alert: /*html*/ `
+			<dialog class="alertjs alertjs-alert">
+				<div class="alertjs-container">
+					<div class="alertjs-header">
+						<div class="alertjs-title"></div>
+						<button class="alertjs-title_close"><img></button>
+					</div>
+					<div class="alertjs-body"></div>
+					<div class="alertjs-footer">
+						<button class="alertjs-footer_button"></button>
+					</div>
+				</div>
+			</dialog>`,
 		confirm: /*html*/ `
 			<dialog class="alertjs alertjs-confirm">
 				<div class="alertjs-container">
 					<div class="alertjs-header">
 						<div class="alertjs-title"></div>
-						<button class="alertjs-title_close"><img src="data:image/png;base64,"></button>
+						<button class="alertjs-title_close"><img></button>
 					</div>
 					<div class="alertjs-body"></div>
 					<div class="alertjs-footer">
 						<button class="alertjs-footer_cancelbutton"></button>
-						<button class="alertjs-footer_okbutton"></button>
+						<button class="alertjs-footer_button"></button>
 					</div>
 				</div>
 			</dialog>`,
@@ -35,29 +51,24 @@ const alertjs = {
 	 * title, text, button, okCallback, cancelCallback
 	 */
 	alert: (...params) => {
-		const alerthtml =
-			/*html*/ `
-			<dialog class="alertjs alertjs-alert">
-				<div class="alertjs-container">
-					<div class="alertjs-header">
-						<div class="alertjs-title"></div>
-						<button class="alertjs-title_close"><img src="data:image/png;base64,` +
-			alertjs.elements.x +
-			`"></button>
-					</div>
-					<div class="alertjs-body"></div>
-					<div class="alertjs-footer">
-						<button class="alertjs-footer_button"></button>
-					</div>
-				</div>
-			</dialog>`;
+		alertjs.handler('alert', params);
+	},
 
+	confirm: (...params) => {
+		alertjs.handler('confirm', params);
+	},
+
+	handler: (type, params) => {
+		alertjs.init();
 		let fixedParams = {
 			title: '',
 			text: '',
 			button: 'OK',
 			okCallback: () => {},
 			cancelCallback: () => {},
+			check: () => {
+				return true;
+			},
 		};
 		if (params[0] && typeof params[0] === 'object' && !Array.isArray(params[0])) {
 			fixedParams = { ...fixedParams, ...params[0] };
@@ -66,6 +77,8 @@ const alertjs = {
 				case 1:
 					fixedParams.text = params[0];
 					break;
+				case 6:
+					fixedParams.check = params[5];
 				case 5:
 					fixedParams.cancelCallback = params[4];
 				case 4:
@@ -89,26 +102,41 @@ const alertjs = {
 			}
 		}
 
-		const { title, text, button, okCallback, cancelCallback } = fixedParams;
+		const { title, text, button, okCallback, cancelCallback, check } = fixedParams;
 
-		let parsedHTML = new DOMParser().parseFromString(alerthtml, 'text/html').querySelector('dialog');
+		let parsedHTML = new DOMParser().parseFromString(alertjs.elements[type], 'text/html').querySelector('dialog');
 		parsedHTML.querySelector('.alertjs-title').textContent = title;
 		parsedHTML.querySelector('.alertjs-body').textContent = text;
+		parsedHTML.querySelector('.alertjs-title_close').setAttribute('src', buttons.close);
 		parsedHTML.querySelector('.alertjs-footer_button').textContent = button;
 		parsedHTML.querySelector('.alertjs-footer_button').addEventListener('click', (e) => {
-			parsedHTML.close();
-			okCallback();
-			this.cleanup();
+			Promise.resolve(check).then((executeCallback) => {
+				if (executeCallback) {
+					parsedHTML.close();
+					okCallback();
+					alertjs.cleanup();
+				}
+			});
 		});
-		parsedHTML.querySelector('.alertjs-title_close').addEventListener('click', (e) => {
+		const cancelCallbackFn = () => {
 			parsedHTML.close();
 			cancelCallback();
-			this.cleanup();
+			alertjs.cleanup();
+		};
+		parsedHTML.querySelector('.alertjs-footer_cancelbutton')?.addEventListener('click', cancelCallbackFn);
+		parsedHTML.querySelector('.alertjs-title_close').addEventListener('click', cancelCallbackFn);
+		parsedHTML.addEventListener('click', (e) => {
+			if (e.target.tagName === 'DIALOG') {
+				cancelCallbackFn();
+			}
 		});
+
+		alertjs.bucket.append(parsedHTML);
+		parsedHTML.showModal();
 	},
 
 	cleanup: () => {
-		// this.bucket.querySelectorAll('dialog:not([open])').forEach((elem) => elem.remove());
+		alertjs.bucket.querySelectorAll('dialog:not([open])').forEach((elem) => elem.remove());
 	},
 
 	init: () => {
@@ -126,7 +154,5 @@ const alertjs = {
 		return bucketSelector;
 	},
 };
-
-alertjs.init();
 
 export default alertjs;
