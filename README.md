@@ -22,6 +22,14 @@ That's it!
 
 ---
 
+## Customization
+
+You can customize the dialog styling by changing the SASS variables inside the
+`src/scss/variables.scss`. If you want more customizability, you can style it
+yourself.
+
+---
+
 We currently have 2 types of alerts available. This will expand in the future but
 as of now this is what the package offers.
 
@@ -67,6 +75,22 @@ alertist.alert({
 })
 ```
 
+Here's the HTML if you want to style this alert type yourself:
+```html
+<dialog class="alertist alertist-alert" style="transform: translate(0px, 0px)">
+	<div class="alertist-container">
+		<div class="alertist-header">
+			<div class="alertist-title" draggable="true"></div>
+			<button class="alertist-title_close"><img></button>
+		</div>
+		<div class="alertist-body"></div>
+		<div class="alertist-footer">
+			<button class="alertist-footer_button"></button>
+		</div>
+	</div>
+</dialog>
+```
+
 ## Confirm
 
 Syntax:
@@ -106,3 +130,22 @@ alertist.confirm({
 	check,
 })
 ```
+
+Here's the HTML if you want to style this alert type yourself:
+```html
+<dialog class="alertist alertist-confirm" style="transform: translate(0px, 0px)">
+	<div class="alertist-container">
+		<div class="alertist-header">
+			<div class="alertist-title" draggable="true"></div>
+			<button class="alertist-title_close"><img></button>
+		</div>
+		<div class="alertist-body"></div>
+		<div class="alertist-footer">
+			<button class="alertist-footer_button"></button>
+			<button class="alertist-footer_cancelbutton"></button>
+		</div>
+	</div>
+</dialog>
+```
+
+
