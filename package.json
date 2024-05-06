@@ -16,6 +16,8 @@
 		"build:iife": "rollup ./src/js/main.js --format iife --name \"alertjs\" --file ./dist/alertjs_browser.js",
 		"build:cjs": "rollup ./src/js/main.js --format cjs --file ./dist/alertjs.cjs",
 		"build:css": "sass ./src/css/main.scss ./dist/alertjs.css --no-source-map",
+		"build:push": "git commit -am \"version patch\" && git push",
+		"build:patch": "npm version patch",
 		"dev": "npm-run-all -p dev:*",
 		"dev:js": "rollup ./src/js/main.js --format esm --exports default --name \"alertjs\" --file ./dist/alertjs.js --watch",
 		"dev:css": "sass ./src/css/main.scss ./dist/alertjs.css --watch --no-source-map",
