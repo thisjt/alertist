@@ -2,8 +2,10 @@
 	"name": "alertjs",
 	"version": "0.0.3",
 	"description": "A simple alert management system built on top of the native \"<dialog>\" HTML tag.",
-	"module": "dist/alertjs.js",
+	"style": "dist/alertjs.css",
 	"main": "dist/alertjs.cjs",
+	"module": "dist/alertjs.js",
+	"unpkg": "./dist/alertjs_browser.js",
 	"exports": {
 		".": {
 			"require": "./dist/alertjs.cjs",
@@ -34,6 +36,14 @@
 	},
 	"homepage": "https://github.com/thisjt/alertjs#readme",
 	"type": "module",
+	"keywords": [
+		"alert",
+		"alerts",
+		"confirm",
+		"prompt",
+		"toast",
+		"browser"
+	],
 	"devDependencies": {
 		"eslint": "^9.2.0",
 		"npm-run-all": "^4.1.5",
