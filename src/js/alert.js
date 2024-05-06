@@ -15,10 +15,10 @@ const alertbody = /*html*/ `
 	</dialog>`;
 
 const alertFn = (...params) => {
-	handler('alert', params, alertbody);
+	handler('alert', params, alertbody, alertswitch);
 };
 
-export const alertswitch = (params, fixedParams) => {
+const alertswitch = (params, fixedParams) => {
 	let paramcode = '';
 	params.forEach((param) => {
 		paramcode += typeof param === 'string' ? 's' : typeof param === 'function' ? 'f' : 'x';

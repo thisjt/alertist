@@ -1,8 +1,6 @@
 import init, { bucket, cleanup, buttons } from './init';
-import { alertswitch } from './alert';
-import { confirmswitch } from './confirm';
 
-const handler = (type, params, alertbody) => {
+const handler = (type, params, alertbody, alertswitch) => {
 	init();
 
 	let fixedParams = {
@@ -19,11 +17,7 @@ const handler = (type, params, alertbody) => {
 	if (params[0] && typeof params[0] === 'object' && !Array.isArray(params[0])) {
 		fixedParams = { ...fixedParams, ...params[0] };
 	} else {
-		if (type === 'alert') {
-			fixedParams = { ...fixedParams, ...alertswitch(params, fixedParams) };
-		} else if (type === 'confirm') {
-			fixedParams = { ...fixedParams, ...confirmswitch(params, fixedParams) };
-		}
+		fixedParams = { ...fixedParams, ...alertswitch(params, fixedParams) };
 	}
 
 	const { title, text, button, cancel, okCallback, cancelCallback, check } = fixedParams;

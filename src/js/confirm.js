@@ -16,10 +16,10 @@ const confirmbody = /*html*/ `
 	</dialog>`;
 
 const confirmFn = (...params) => {
-	handler('confirm', params, confirmbody);
+	handler('confirm', params, confirmbody, confirmswitch);
 };
 
-export const confirmswitch = (params, fixedParams) => {
+const confirmswitch = (params, fixedParams) => {
 	let paramcode = '';
 	params.forEach((param) => {
 		paramcode += typeof param === 'string' ? 's' : typeof param === 'function' ? 'f' : 'x';
