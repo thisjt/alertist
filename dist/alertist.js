@@ -13,13 +13,13 @@ const cleanup = () => {
 
 const init = () => {
 	if (typeof document !== 'object') {
-		console.warn('alertjs: init - Not in a browser environment.');
+		console.warn('alertist: init - Not in a browser environment.');
 		return false;
 	}
-	let bucketSelector = document.querySelector('.alertjs-bucket');
+	let bucketSelector = document.querySelector('.alertist-bucket');
 	if (!bucketSelector) {
 		bucketSelector = document.createElement('span');
-		bucketSelector.classList.add('alertjs-bucket');
+		bucketSelector.classList.add('alertist-bucket');
 		document.querySelector('body').append(bucketSelector);
 	}
 	bucket = bucketSelector;
@@ -68,10 +68,10 @@ const handler = (type, params, alertbody) => {
 				fixedParams.text = params[1];
 				break;
 			case 0:
-				console.warn('alertjs: alert - Not enough parameters. Needs at least 1.');
+				console.warn('alertist: alert - Not enough parameters. Needs at least 1.');
 				break;
 			default:
-				console.warn('alertjs: alert - Too many parameters. Max of 5 only.');
+				console.warn('alertist: alert - Too many parameters. Max of 5 only.');
 				break;
 		}
 	}
@@ -79,11 +79,11 @@ const handler = (type, params, alertbody) => {
 	const { title, text, button, cancel, okCallback, cancelCallback, check } = fixedParams;
 
 	let parsedHTML = new DOMParser().parseFromString(alertbody, 'text/html').querySelector('dialog');
-	parsedHTML.querySelector('.alertjs-title').textContent = title;
-	parsedHTML.querySelector('.alertjs-body').textContent = text;
-	parsedHTML.querySelector('.alertjs-title_close img').setAttribute('src', buttons.close);
-	parsedHTML.querySelector('.alertjs-footer_button').textContent = button;
-	parsedHTML.querySelector('.alertjs-footer_button').addEventListener('click', (e) => {
+	parsedHTML.querySelector('.alertist-title').textContent = title;
+	parsedHTML.querySelector('.alertist-body').textContent = text;
+	parsedHTML.querySelector('.alertist-title_close img').setAttribute('src', buttons.close);
+	parsedHTML.querySelector('.alertist-footer_button').textContent = button;
+	parsedHTML.querySelector('.alertist-footer_button').addEventListener('click', (e) => {
 		Promise.resolve(check).then((executeCallback) => {
 			if (executeCallback) {
 				parsedHTML.close();
@@ -99,10 +99,10 @@ const handler = (type, params, alertbody) => {
 	};
 
 	if (type === 'confirm') {
-		parsedHTML.querySelector('.alertjs-footer_cancelbutton').textContent = cancel;
-		parsedHTML.querySelector('.alertjs-footer_cancelbutton').addEventListener('click', cancelCallbackFn);
+		parsedHTML.querySelector('.alertist-footer_cancelbutton').textContent = cancel;
+		parsedHTML.querySelector('.alertist-footer_cancelbutton').addEventListener('click', cancelCallbackFn);
 	}
-	parsedHTML.querySelector('.alertjs-title_close').addEventListener('click', cancelCallbackFn);
+	parsedHTML.querySelector('.alertist-title_close').addEventListener('click', cancelCallbackFn);
 	parsedHTML.addEventListener('click', (e) => {
 		if (e.target.tagName === 'DIALOG') {
 			cancelCallbackFn();
@@ -113,19 +113,19 @@ const handler = (type, params, alertbody) => {
 		x: 0,
 		y: 0,
 	};
-	parsedHTML.querySelector('.alertjs-title').addEventListener('dragstart', (e) => {
+	parsedHTML.querySelector('.alertist-title').addEventListener('dragstart', (e) => {
 		cfcos.x ||= e.clientX;
 		cfcos.y ||= e.clientY;
 	});
 
-	parsedHTML.querySelector('.alertjs-title').addEventListener('dragend', (e) => {});
+	parsedHTML.querySelector('.alertist-title').addEventListener('dragend', (e) => {});
 
 	let dragThrottlerInt = 1;
 	const dragThrottler = (e) => {
 		parsedHTML.setAttribute('style', `transform: translate(${-cfcos.x + e.clientX}px, ${-cfcos.y + e.clientY}px)`);
 	};
 
-	parsedHTML.querySelector('.alertjs-title').addEventListener('drag', (e) => {
+	parsedHTML.querySelector('.alertist-title').addEventListener('drag', (e) => {
 		e.preventDefault();
 		if (e.screenX && dragThrottlerInt) {
 			dragThrottlerInt = 0;
@@ -141,15 +141,15 @@ const handler = (type, params, alertbody) => {
 };
 
 const alertbody = /*html*/ `
-	<dialog class="alertjs alertjs-alert" style="transform: translate(0px, 0px)">
-		<div class="alertjs-container">
-			<div class="alertjs-header">
-				<div class="alertjs-title" draggable="true"></div>
-				<button class="alertjs-title_close"><img></button>
+	<dialog class="alertist alertist-alert" style="transform: translate(0px, 0px)">
+		<div class="alertist-container">
+			<div class="alertist-header">
+				<div class="alertist-title" draggable="true"></div>
+				<button class="alertist-title_close"><img></button>
 			</div>
-			<div class="alertjs-body"></div>
-			<div class="alertjs-footer">
-				<button class="alertjs-footer_button"></button>
+			<div class="alertist-body"></div>
+			<div class="alertist-footer">
+				<button class="alertist-footer_button"></button>
 			</div>
 		</div>
 	</dialog>`;
@@ -159,16 +159,16 @@ const alertFn = (...params) => {
 };
 
 const confirmbody = /*html*/ `
-	<dialog class="alertjs alertjs-confirm" style="transform: translate(0px, 0px)">
-		<div class="alertjs-container">
-			<div class="alertjs-header">
-				<div class="alertjs-title" draggable="true"></div>
-				<button class="alertjs-title_close"><img></button>
+	<dialog class="alertist alertist-confirm" style="transform: translate(0px, 0px)">
+		<div class="alertist-container">
+			<div class="alertist-header">
+				<div class="alertist-title" draggable="true"></div>
+				<button class="alertist-title_close"><img></button>
 			</div>
-			<div class="alertjs-body"></div>
-			<div class="alertjs-footer">
-				<button class="alertjs-footer_button"></button>
-				<button class="alertjs-footer_cancelbutton"></button>
+			<div class="alertist-body"></div>
+			<div class="alertist-footer">
+				<button class="alertist-footer_button"></button>
+				<button class="alertist-footer_cancelbutton"></button>
 			</div>
 		</div>
 	</dialog>`;
@@ -177,10 +177,10 @@ const confirmFn = (...params) => {
 	handler('confirm', params, confirmbody);
 };
 
-const alertjs = {
+const alertist = {
 	alert: alertFn,
 	confirm: confirmFn,
 	cleanup,
 };
 
-export { alertjs as default };
+export { alertist as default };

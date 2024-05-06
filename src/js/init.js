@@ -13,13 +13,13 @@ export const cleanup = () => {
 
 const init = () => {
 	if (typeof document !== 'object') {
-		console.warn('alertjs: init - Not in a browser environment.');
+		console.warn('alertist: init - Not in a browser environment.');
 		return false;
 	}
-	let bucketSelector = document.querySelector('.alertjs-bucket');
+	let bucketSelector = document.querySelector('.alertist-bucket');
 	if (!bucketSelector) {
 		bucketSelector = document.createElement('span');
-		bucketSelector.classList.add('alertjs-bucket');
+		bucketSelector.classList.add('alertist-bucket');
 		document.querySelector('body').append(bucketSelector);
 	}
 	bucket = bucketSelector;

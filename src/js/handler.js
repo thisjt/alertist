@@ -42,10 +42,10 @@ const handler = (type, params, alertbody) => {
 				fixedParams.text = params[1];
 				break;
 			case 0:
-				console.warn('alertjs: alert - Not enough parameters. Needs at least 1.');
+				console.warn('alertist: alert - Not enough parameters. Needs at least 1.');
 				break;
 			default:
-				console.warn('alertjs: alert - Too many parameters. Max of 5 only.');
+				console.warn('alertist: alert - Too many parameters. Max of 5 only.');
 				break;
 		}
 	}
@@ -53,11 +53,11 @@ const handler = (type, params, alertbody) => {
 	const { title, text, button, cancel, okCallback, cancelCallback, check } = fixedParams;
 
 	let parsedHTML = new DOMParser().parseFromString(alertbody, 'text/html').querySelector('dialog');
-	parsedHTML.querySelector('.alertjs-title').textContent = title;
-	parsedHTML.querySelector('.alertjs-body').textContent = text;
-	parsedHTML.querySelector('.alertjs-title_close img').setAttribute('src', buttons.close);
-	parsedHTML.querySelector('.alertjs-footer_button').textContent = button;
-	parsedHTML.querySelector('.alertjs-footer_button').addEventListener('click', (e) => {
+	parsedHTML.querySelector('.alertist-title').textContent = title;
+	parsedHTML.querySelector('.alertist-body').textContent = text;
+	parsedHTML.querySelector('.alertist-title_close img').setAttribute('src', buttons.close);
+	parsedHTML.querySelector('.alertist-footer_button').textContent = button;
+	parsedHTML.querySelector('.alertist-footer_button').addEventListener('click', (e) => {
 		Promise.resolve(check).then((executeCallback) => {
 			if (executeCallback) {
 				parsedHTML.close();
@@ -73,10 +73,10 @@ const handler = (type, params, alertbody) => {
 	};
 
 	if (type === 'confirm') {
-		parsedHTML.querySelector('.alertjs-footer_cancelbutton').textContent = cancel;
-		parsedHTML.querySelector('.alertjs-footer_cancelbutton').addEventListener('click', cancelCallbackFn);
+		parsedHTML.querySelector('.alertist-footer_cancelbutton').textContent = cancel;
+		parsedHTML.querySelector('.alertist-footer_cancelbutton').addEventListener('click', cancelCallbackFn);
 	}
-	parsedHTML.querySelector('.alertjs-title_close').addEventListener('click', cancelCallbackFn);
+	parsedHTML.querySelector('.alertist-title_close').addEventListener('click', cancelCallbackFn);
 	parsedHTML.addEventListener('click', (e) => {
 		if (e.target.tagName === 'DIALOG') {
 			cancelCallbackFn();
@@ -87,19 +87,19 @@ const handler = (type, params, alertbody) => {
 		x: 0,
 		y: 0,
 	};
-	parsedHTML.querySelector('.alertjs-title').addEventListener('dragstart', (e) => {
+	parsedHTML.querySelector('.alertist-title').addEventListener('dragstart', (e) => {
 		cfcos.x ||= e.clientX;
 		cfcos.y ||= e.clientY;
 	});
 
-	parsedHTML.querySelector('.alertjs-title').addEventListener('dragend', (e) => {});
+	parsedHTML.querySelector('.alertist-title').addEventListener('dragend', (e) => {});
 
 	let dragThrottlerInt = 1;
 	const dragThrottler = (e) => {
 		parsedHTML.setAttribute('style', `transform: translate(${-cfcos.x + e.clientX}px, ${-cfcos.y + e.clientY}px)`);
 	};
 
-	parsedHTML.querySelector('.alertjs-title').addEventListener('drag', (e) => {
+	parsedHTML.querySelector('.alertist-title').addEventListener('drag', (e) => {
 		e.preventDefault();
 		if (e.screenX && dragThrottlerInt) {
 			dragThrottlerInt = 0;
