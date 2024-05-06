@@ -2,8 +2,7 @@
 	"name": "alertjs",
 	"version": "0.0.1",
 	"description": "A simple alert management system built on top of the native \"<dialog>\" HTML tag.",
-	"main": "dist/js/alertjs.cjs",
-	"module": "dist/js/alertjs.js",
+	"module": "dist/alertjs.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},

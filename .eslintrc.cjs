@@ -46,7 +46,7 @@ module.exports = {
 		],
 		'no-template-curly-in-string': 'error',
 		'no-useless-return': 'error',
-		'no-console': 'error',
+		// 'no-console': 'error',
 		'key-spacing': [
 			'error',
 			{
