@@ -1,12 +1,12 @@
 @import './variables.scss';
 
-.alertjs {
-	font-family: $alertjs-font-family;
+.alertist {
+	font-family: $alertist-font-family;
 	outline: 0;
 
 	&::backdrop {
 		opacity: 1;
-		background-color: $alertjs-backdrop;
+		background-color: $alertist-backdrop;
 		animation: fade 0.3s ease-out;
 	}
 
@@ -27,15 +27,15 @@
 
 		&-header {
 			display: flex;
-			background-color: $alertjs-header-bg;
-			color: $alertjs-header-color;
+			background-color: $alertist-header-bg;
+			color: $alertist-header-color;
 		}
 		&-title {
 			padding-left: 10px;
 			flex-grow: 1;
 			display: flex;
 			align-items: center;
-			font-weight: $alertjs-header-bg-font;
+			font-weight: $alertist-header-bg-font;
 			user-select: none;
 			cursor: move;
 			cursor: grab;
@@ -50,13 +50,13 @@
 
 			&:hover,
 			&:focus {
-				background-color: $alertjs-header-bg-close-hover;
+				background-color: $alertist-header-bg-close-hover;
 			}
 		}
 
 		&-body {
-			background-color: $alertjs-body-bg;
-			color: $alertjs-body-color;
+			background-color: $alertist-body-bg;
+			color: $alertist-body-color;
 			min-height: 80px;
 			padding: 10px;
 		}
@@ -70,28 +70,28 @@
 			}
 
 			&_button {
-				background-color: $alertjs-footer-button-bg;
-				color: $alertjs-footer-button-color;
-				font-weight: $alertjs-footer-button-font;
+				background-color: $alertist-footer-button-bg;
+				color: $alertist-footer-button-color;
+				font-weight: $alertist-footer-button-font;
 				&:hover,
 				&:focus {
-					background-color: $alertjs-footer-button-bg-hover;
+					background-color: $alertist-footer-button-bg-hover;
 				}
 			}
 			&_cancelbutton {
-				background-color: $alertjs-footer-cancel-bg;
-				color: $alertjs-footer-cancel-color;
-				font-weight: $alertjs-footer-cancel-font;
+				background-color: $alertist-footer-cancel-bg;
+				color: $alertist-footer-cancel-color;
+				font-weight: $alertist-footer-cancel-font;
 				&:hover,
 				&:focus {
-					background-color: $alertjs-footer-cancel-bg-hover;
+					background-color: $alertist-footer-cancel-bg-hover;
 				}
 			}
 		}
 	}
 
 	&-alert {
-		.alertjs-footer {
+		.alertist-footer {
 			&_button {
 				width: 100%;
 			}
@@ -99,7 +99,7 @@
 	}
 
 	&-confirm {
-		.alertjs-footer {
+		.alertist-footer {
 			&_button {
 				width: 50%;
 			}
