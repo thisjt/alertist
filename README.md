@@ -18,15 +18,33 @@ Don't forget to import either the SASS file for styling inside the
 `src/scss/main.scss` or include the `dist/alertist.css` file in your
 document.
 
+If you intend not to use this in a framework and instead just want to test
+it out in a browser, you can use `unpkg` and include the js and css files into
+your document.
+
+```html
+<link href="https://unpkg.com/alertist/dist/alertist.css" rel="stylesheet">
+<script src="https://unpkg.com/alertist/dist/alertist_browser.js"></script>
+```
+
 That's it!
+
+---
+
+## Features
+
+- Supports dragging of the alert window
+- Plenty of customizability
+- Function checker before calling okCallback (WIP)
+- Pop out a form into the alert window (WIP)
 
 ---
 
 ## Customization
 
-You can customize the dialog styling by changing the SASS variables inside the
-`src/scss/variables.scss`. If you want more customizability, you can style it
-yourself.
+You can customize the dialog styling by overwriting the SASS variables inside the
+`src/scss/variables.scss`. If you want more customizability, you can always style it
+yourself, up to you!
 
 ---
 
