@@ -82,6 +82,10 @@ const handler = (type, params, alertbody, alertswitch) => {
 
 	bucket.append(parsedHTML);
 	parsedHTML.showModal();
+	return {
+		parameters: fixedParams,
+		element: parsedHTML,
+	};
 };
 
 export default handler;

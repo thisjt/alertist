@@ -15,7 +15,7 @@ const alertbody = /*html*/ `
 	</dialog>`;
 
 const alertFn = (...params) => {
-	handler('alert', params, alertbody, alertswitch);
+	return handler('alert', params, alertbody, alertswitch);
 };
 
 const alertswitch = (params, fixedParams) => {
@@ -66,6 +66,8 @@ const alertswitch = (params, fixedParams) => {
 			console.warn('alertist: alert - Too many parameters or found invalid parameters. Max of 6 only.');
 			break;
 	}
+
+	fixedParams.paramcode = paramcode;
 
 	return fixedParams;
 };

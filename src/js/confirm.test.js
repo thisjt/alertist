@@ -18,10 +18,11 @@ global.document = dom.window.document;
 global.DOMParser = dom.window.DOMParser;
 
 describe('open basic alert and test all values', () => {
-	const alertist_run = alertist.alert('TITLE', 'BODY', 'OKBUTTON');
+	const alertist_run = alertist.confirm('TITLE', 'BODY', 'OKBUTTON', 'CANCELBUTTON');
 	const title_text = alertist_run.element.querySelector('.alertist-title').innerHTML;
 	const body_text = alertist_run.element.querySelector('.alertist-body').innerHTML;
 	const button_text = alertist_run.element.querySelector('.alertist-footer_button').innerHTML;
+	const cancel_text = alertist_run.element.querySelector('.alertist-footer_cancelbutton').innerHTML;
 	const close_button = alertist_run.element.querySelector('.alertist-title_close img').getAttribute('src');
 
 	it('title is correct ', () => {
@@ -34,6 +35,10 @@ describe('open basic alert and test all values', () => {
 
 	it('button is correct ', () => {
 		expect(button_text).toBe('OKBUTTON');
+	});
+
+	it('cancel is correct ', () => {
+		expect(cancel_text).toBe('CANCELBUTTON');
 	});
 
 	it('close image ok', () => {

@@ -16,7 +16,7 @@ const confirmbody = /*html*/ `
 	</dialog>`;
 
 const confirmFn = (...params) => {
-	handler('confirm', params, confirmbody, confirmswitch);
+	return handler('confirm', params, confirmbody, confirmswitch);
 };
 
 const confirmswitch = (params, fixedParams) => {
