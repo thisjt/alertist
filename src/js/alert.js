@@ -71,3 +71,4 @@ const alertswitch = (params, fixedParams) => {
 };
 
 export default alertFn;
+export { alertswitch, alertbody };

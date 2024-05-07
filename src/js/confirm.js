@@ -85,3 +85,4 @@ const confirmswitch = (params, fixedParams) => {
 };
 
 export default confirmFn;
+export { confirmswitch, confirmbody };
