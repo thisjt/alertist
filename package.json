@@ -23,7 +23,7 @@
 		"dev": "npm-run-all -p dev:*",
 		"dev:js": "rollup ./src/js/main.js --format esm --exports default --name \"alertist\" --file ./dist/alertist.js --watch",
 		"dev:css": "sass ./src/css/main.scss ./dist/alertist.css --watch --no-source-map",
-		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose"
 	},
 	"repository": {
 		"type": "git",
