@@ -37,7 +37,7 @@ That's it!
 
 - Supports dragging of the alert window
 - Plenty of customizability
-- Function checker before calling okCallback (WIP)
+- Function checker before calling okCallback
 - Pop out a form into the alert window (WIP)
 
 ---
