@@ -16,7 +16,7 @@
 		"build": "npm-run-all -s build:*",
 		"build:js": "rollup -c --compact",
 		"build:css": "sass ./src/scss/main.scss ./dist/alertist.css --style=compressed --no-source-map",
-		"build:push": "git commit -am \"version patch\" && git push",
+		"build:push": "git commit -am \"minor version patch\" && git push",
 		"build:patch": "npm version patch",
 		"dev": "npm-run-all -p dev:*",
 		"dev:js": "rollup -c rollup.watch.js --watch",

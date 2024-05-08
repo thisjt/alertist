@@ -1,6 +1,4 @@
-'use strict';
-
-let bucket;
+'use strict';let bucket;
 
 const buttons = {
 	close:
@@ -26,9 +24,7 @@ const init = () => {
 	}
 	bucket = bucketSelector;
 	return bucketSelector;
-};
-
-const handler = (type, params, alertbody, alertswitch) => {
+};const handler = (type, params, alertbody, alertswitch) => {
 	init();
 
 	let fixedParams = {
@@ -110,20 +106,19 @@ const handler = (type, params, alertbody, alertswitch) => {
 
 	bucket.append(parsedHTML);
 	parsedHTML.showModal();
+	parsedHTML.querySelector('.alertist-title_close').blur();
 	return {
 		parameters: fixedParams,
 		element: parsedHTML,
 	};
-};
-
-const alertbody = /*html*/ `
+};const alertbody = /*html*/ `
 	<dialog class="alertist alertist-alert" style="transform: translate(0px, 0px)">
 		<div class="alertist-container">
 			<div class="alertist-header">
 				<div class="alertist-title" draggable="true"></div>
 				<button class="alertist-title_close"><img></button>
 			</div>
-			<div class="alertist-body"></div>
+			<div class="alertist-body alertist-wordbreak"></div>
 			<div class="alertist-footer">
 				<button class="alertist-footer_button"></button>
 			</div>
@@ -186,16 +181,14 @@ const alertswitch = (params, fixedParams) => {
 	fixedParams.paramcode = paramcode;
 
 	return fixedParams;
-};
-
-const confirmbody = /*html*/ `
+};const confirmbody = /*html*/ `
 	<dialog class="alertist alertist-confirm" style="transform: translate(0px, 0px)">
 		<div class="alertist-container">
 			<div class="alertist-header">
 				<div class="alertist-title" draggable="true"></div>
 				<button class="alertist-title_close"><img></button>
 			</div>
-			<div class="alertist-body"></div>
+			<div class="alertist-body alertist-wordbreak"></div>
 			<div class="alertist-footer">
 				<button class="alertist-footer_button"></button>
 				<button class="alertist-footer_cancelbutton"></button>
@@ -270,12 +263,8 @@ const confirmswitch = (params, fixedParams) => {
 	}
 
 	return fixedParams;
-};
-
-const alertist = {
+};const alertist = {
 	alert: alertFn,
 	confirm: confirmFn,
 	cleanup,
-};
-
-module.exports = alertist;
+};module.exports=alertist;
