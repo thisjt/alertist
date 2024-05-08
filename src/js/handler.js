@@ -1,7 +1,9 @@
 import init, { bucket, cleanup, buttons } from './init';
 
 const handler = (type, params, alertbody, alertswitch) => {
-	init();
+	if (!init()) {
+		return false;
+	}
 
 	let fixedParams = {
 		title: '',

@@ -8,20 +8,33 @@
 
 		<link rel="stylesheet" href="alertist.css" />
 		<script src="alertist.browser.js"></script>
+		<style>
+			.center-div {
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+		</style>
 	</head>
 	<body>
-		<script>
-			// alertist.alert('TITLE', 'TEXT', 'OK');
-			// alertist.confirm('TITLE', 'TEXT', 'OK', 'CANCEL');
-			alertist.confirm(
-				'TITLE',
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi suscipit asperiores ipsa mollitia dolor, ea aut repellendus quia sed illum unde eveniet expedita, dolore inventore voluptatibus. Consectetur quae alias et?',
-				'OK',
-				'CANCEL',
-			);
-		</script>
+		<div class="center-div">
+			<button onclick="alertist.confirm('Modify User', 'Are you sure you want to submit the changes you<br>made for this user?', 'OK', 'CANCEL');secretmsg.innerHTML='Hi there!'">
+				Modify User
+			</button>
+			<div id="secretmsg"></div>
+		</div>
 
-		<div></div>
+		<script>
+			// alertist.confirm('Modify User', 'Are you sure you want to submit the changes you<br>made for this user?', 'OK', 'CANCEL');
+			// alertist.alert('TITLE', 'TEXT', 'OK');
+			// alertist.confirm(
+			// 	'TITLE',
+			// 	'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi suscipit asperiores ipsa mollitia dolor, ea aut repellendus quia sed illum unde eveniet expedita, dolore inventore voluptatibus. Consectetur quae alias et?',
+			// 	'OK',
+			// 	'CANCEL',
+			// );
+		</script>
 
 		<script>
 			let requestorvalue = 0;
