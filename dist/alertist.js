@@ -25,7 +25,9 @@ const init = () => {
 	bucket = bucketSelector;
 	return bucketSelector;
 };const handler = (type, params, alertbody, alertswitch) => {
-	init();
+	if (!init()) {
+		return false;
+	}
 
 	let fixedParams = {
 		title: '',
