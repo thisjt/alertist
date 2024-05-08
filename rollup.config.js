@@ -5,6 +5,7 @@ export default [
 			name: 'alertist',
 			file: 'dist/alertist.js',
 			format: 'esm',
+			compact: true,
 		},
 	},
 	{
@@ -13,6 +14,7 @@ export default [
 			name: 'alertist',
 			file: 'dist/alertist.browser.js',
 			format: 'iife',
+			compact: true,
 		},
 	},
 	{
@@ -20,6 +22,7 @@ export default [
 		output: {
 			file: 'dist/alertist.cjs',
 			format: 'cjs',
+			compact: true,
 		},
 	},
 ];
