@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Alertist Dev Environment</title>
+
+		<link rel="stylesheet" href="alertist.css" />
+		<script src="alertist.browser.js"></script>
+	</head>
+	<body>
+		<div></div>
+		<script>
+			let requestorvalue = 0;
+			async function requestor() {
+				const response = await fetch('http://localhost:32578/watch');
+				const requestedvalue = await response.json();
+				if (requestorvalue && requestorvalue !== requestedvalue) {
+					window.location.reload();
+				}
+				requestorvalue = requestedvalue;
+				setTimeout(requestor, 250);
+			}
+			requestor();
+		</script>
+	</body>
+</html>

@@ -14,16 +14,14 @@
 	},
 	"scripts": {
 		"build": "npm-run-all -s build:*",
-		"build:esm": "rollup ./src/js/main.js --format esm --exports default --name \"alertist\" --file ./dist/alertist.js",
-		"build:iife": "rollup ./src/js/main.js --format iife --name \"alertist\" --file ./dist/alertist.browser.js",
-		"build:cjs": "rollup ./src/js/main.js --format cjs --file ./dist/alertist.cjs",
-		"build:css": "sass ./src/scss/main.scss ./dist/alertist.css --no-source-map",
+		"build:js": "rollup -c --compact",
+		"build:css": "sass ./src/scss/main.scss ./dist/alertist.css --style=compressed --no-source-map",
 		"build:push": "git commit -am \"version patch\" && git push",
 		"build:patch": "npm version patch",
 		"dev": "npm-run-all -p dev:*",
-		"dev:js": "rollup ./src/js/main.js --format esm --exports default --name \"alertist\" --file ./dist/alertist.js --watch",
-		"dev:browser": "rollup ./src/js/main.js --format iife --name \"alertist\" --file ./dist/alertist.browser.js",
-		"dev:css": "sass ./src/css/main.scss ./dist/alertist.css --watch --no-source-map",
+		"dev:js": "rollup -c rollup.watch.js --watch",
+		"dev:css": "sass ./src/scss/main.scss ./dev/alertist.css --watch --no-source-map",
+		"dev:watcher": "node rollup.watch.js --reload",
 		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose"
 	},
 	"repository": {
