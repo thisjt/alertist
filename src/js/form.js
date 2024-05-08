@@ -1,16 +1,13 @@
 import handler from './handler';
 
 const formbody = /*html*/ `
-	<dialog class="alertist alertist-alert" style="transform: translate(0px, 0px)">
+	<dialog class="alertist alertist-form" style="transform: translate(0px, 0px)">
 		<div class="alertist-container">
 			<div class="alertist-header">
 				<div class="alertist-title" draggable="true"></div>
 				<button class="alertist-title_close"><img></button>
 			</div>
 			<div class="alertist-body alertist-wordbreak"></div>
-			<div class="alertist-footer">
-				<button class="alertist-footer_button"></button>
-			</div>
 		</div>
 	</dialog>`;
 
@@ -26,3 +23,6 @@ const formbody = /*html*/ `
 const formFn = (...params) => {
 	return handler('form', params, formbody);
 };
+
+export default formFn;
+export { formbody };
