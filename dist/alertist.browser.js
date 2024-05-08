@@ -13,7 +13,6 @@ const cleanup = () => {
 
 const init = () => {
 	if (typeof document !== 'object') {
-		console.warn('alertist: init - Not in a browser environment.');
 		return false;
 	}
 	let bucketSelector = document.querySelector('.alertist-bucket');
@@ -24,8 +23,9 @@ const init = () => {
 	}
 	bucket = bucketSelector;
 	return bucketSelector;
-};const handler = (type, params, alertbody, alertswitch) => {
+};const handler = (type, params, alertbody) => {
 	if (!init()) {
+		console.warn('alertist: init - Not in a browser environment.');
 		return false;
 	}
 
@@ -43,7 +43,8 @@ const init = () => {
 	if (params[0] && typeof params[0] === 'object' && !Array.isArray(params[0])) {
 		fixedParams = { ...fixedParams, ...params[0] };
 	} else {
-		fixedParams = { ...fixedParams, ...alertswitch(params, fixedParams) };
+		console.warn('alertist: init - We are only accepting object as input.');
+		return false;
 	}
 
 	const { title, text, button, cancel, okCallback, cancelCallback, check } = fixedParams;
@@ -128,61 +129,7 @@ const init = () => {
 	</dialog>`;
 
 const alertFn = (...params) => {
-	return handler('alert', params, alertbody, alertswitch);
-};
-
-const alertswitch = (params, fixedParams) => {
-	let paramcode = '';
-	params.forEach((param) => {
-		paramcode += typeof param === 'string' ? 's' : typeof param === 'function' ? 'f' : 'x';
-	});
-
-	switch (paramcode) {
-		case 'ssfff':
-			fixedParams.check = params[4];
-		case 'ssff':
-			fixedParams.cancelCallback = params[3];
-		case 'ssf':
-			fixedParams.okCallback = params[2];
-			fixedParams.text = params[1];
-			fixedParams.title = params[0];
-			break;
-
-		case 'sssfff':
-			fixedParams.check = params[5];
-		case 'sssff':
-			fixedParams.cancelCallback = params[4];
-		case 'sssf':
-			fixedParams.okCallback = params[3];
-		case 'sss':
-			fixedParams.button = params[2];
-		case 'ss':
-			fixedParams.text = params[1];
-			fixedParams.title = params[0];
-			break;
-
-		case 'sfff':
-			fixedParams.check = params[3];
-		case 'sff':
-			fixedParams.cancelCallback = params[2];
-		case 'sf':
-			fixedParams.okCallback = params[1];
-		case 's':
-			fixedParams.text = params[0];
-			break;
-
-		case '':
-			console.warn('alertist: alert - Not enough parameters or found invalid parameters. Needs at least 1.');
-			break;
-
-		default:
-			console.warn('alertist: alert - Too many parameters or found invalid parameters. Max of 6 only.');
-			break;
-	}
-
-	fixedParams.paramcode = paramcode;
-
-	return fixedParams;
+	return handler('alert', params, alertbody);
 };const confirmbody = /*html*/ `
 	<dialog class="alertist alertist-confirm" style="transform: translate(0px, 0px)">
 		<div class="alertist-container">
@@ -199,72 +146,7 @@ const alertswitch = (params, fixedParams) => {
 	</dialog>`;
 
 const confirmFn = (...params) => {
-	return handler('confirm', params, confirmbody, confirmswitch);
-};
-
-const confirmswitch = (params, fixedParams) => {
-	let paramcode = '';
-	params.forEach((param) => {
-		paramcode += typeof param === 'string' ? 's' : typeof param === 'function' ? 'f' : 'x';
-	});
-
-	switch (paramcode) {
-		case 'ssfff':
-			fixedParams.check = params[4];
-		case 'ssff':
-			fixedParams.cancelCallback = params[3];
-		case 'ssf':
-			fixedParams.okCallback = params[2];
-			fixedParams.text = params[1];
-			fixedParams.title = params[0];
-			break;
-
-		case 'sssfff':
-			fixedParams.check = params[5];
-		case 'sssff':
-			fixedParams.cancelCallback = params[4];
-		case 'sssf':
-			fixedParams.okCallback = params[3];
-			fixedParams.button = params[2];
-			fixedParams.text = params[1];
-			fixedParams.title = params[0];
-			break;
-
-		case 'ssssfff':
-			fixedParams.check = params[6];
-		case 'ssssff':
-			fixedParams.cancelCallback = params[5];
-		case 'ssssf':
-			fixedParams.okCallback = params[4];
-		case 'ssss':
-			fixedParams.cancel = params[3];
-		case 'sss':
-			fixedParams.button = params[2];
-		case 'ss':
-			fixedParams.text = params[1];
-			fixedParams.title = params[0];
-			break;
-
-		case 'sfff':
-			fixedParams.check = params[3];
-		case 'sff':
-			fixedParams.cancelCallback = params[2];
-		case 'sf':
-			fixedParams.okCallback = params[1];
-		case 's':
-			fixedParams.text = params[0];
-			break;
-
-		case '':
-			console.warn('alertist: confirm - Not enough parameters or found invalid parameters. Needs at least 1.');
-			break;
-
-		default:
-			console.warn('alertist: confirm - Too many parameters or found invalid parameters. Max of 7 only.');
-			break;
-	}
-
-	return fixedParams;
+	return handler('confirm', params, confirmbody);
 };const alertist = {
 	alert: alertFn,
 	confirm: confirmFn,
