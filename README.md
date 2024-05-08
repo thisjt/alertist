@@ -35,10 +35,10 @@ That's it!
 
 ## Features
 
-- Supports dragging of the alert window
+- Supports dragging of the dialog window
 - Plenty of customizability
 - Function checker before calling okCallback
-- Pop out a form into the alert window (WIP)
+- Pop out a form into the dialog window
 
 ---
 
@@ -55,6 +55,7 @@ as of now this is what the package offers.
 
 1. Alert
 2. Confirm
+3. Form Pullout
 
 ## Alert
 
@@ -112,6 +113,45 @@ dialog.alertist.alertist-confirm
 		div.alertist-footer
 			button.alertist-footer_button
 			button.alertist-footer_cancelbutton
+```
+
+## Form Pullout
+
+Pulls the form created in the DOM and puts it inside a pop-up dialog box.
+
+Syntax:
+```javascript
+// Use it like this:
+alertist.form({
+	title: 'Log In to this Website',
+	target: 'form#login',
+	submit: false,
+	okCallback: (e) => {
+		const form = e.querySelector('form#login');
+		console.log(form.username, form.password);
+	},
+	check: (elem) => {
+		return new Promise((resolve, reject) => {
+			alertist.confirm({ // [alertist.confirm] Supports chaining!
+				text: 'Are you sure you want to log in?',
+				okCallback: () => {
+					resolve();
+				},
+				cancelCallback: () => {
+					reject();
+				},
+			});
+		});
+	},
+});
+```
+
+```html
+<form id="login">
+	username: <input placeholder="admin" name="username" /><br>
+	password: <input placeholder="********" name="password" /><br>
+	<input type="submit" value="Log In" />
+</form>
 ```
 
 ## `callback` Functions
