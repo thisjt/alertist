@@ -26,7 +26,7 @@ your document.
 
 ```html
 <link href="https://unpkg.com/alertist/dist/alertist.css" rel="stylesheet">
-<script src="https://unpkg.com/alertist/dist/alertist_browser.js"></script>
+<script src="https://unpkg.com/alertist/dist/alertist.browser.js"></script>
 ```
 
 That's it!
