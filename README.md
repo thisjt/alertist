@@ -71,20 +71,6 @@ const check = () => {
 };
 
 // Use it like this:
-alertist.alert('Hello world!');
-alertist.alert('Hello world!', okCallback);
-alertist.alert('Hello world!', okCallback, cancelCallback);
-alertist.alert('Hello world!', okCallback, cancelCallback, check);
-alertist.alert('Title', 'Hello world!');
-alertist.alert('Title', 'Hello world!', 'Yes');
-alertist.alert('Title', 'Hello world!', okCallback);
-alertist.alert('Title', 'Hello world!', 'Yes', okCallback);
-alertist.alert('Title', 'Hello world!', okCallback, cancelCallback);
-alertist.alert('Title', 'Hello world!', okCallback, cancelCallback, check);
-alertist.alert('Title', 'Hello world!', 'Yes', okCallback, cancelCallback);
-alertist.alert('Title', 'Hello world!', 'Yes', okCallback, cancelCallback, check);
-
-// Or avoid the hassle and do it like this:
 alertist.alert({
 	title: 'Title',
 	text: 'Hello world!',
@@ -126,20 +112,6 @@ const check = () => {
 };
 
 // Use it like this:
-alertist.confirm('Hello world?', okCallback);
-alertist.confirm('Hello world?', okCallback, cancelCallback);
-alertist.confirm('Hello world?', okCallback, cancelCallback, check);
-alertist.confirm('Title', 'Hello world?', okCallback);
-alertist.confirm('Title', 'Hello world?', okCallback, cancelCallback);
-alertist.confirm('Title', 'Hello world?', okCallback, cancelCallback, check);
-alertist.confirm('Title', 'Hello world?', 'Yes', okCallback);
-alertist.confirm('Title', 'Hello world?', 'Yes', okCallback, cancelCallback);
-alertist.confirm('Title', 'Hello world?', 'Yes', okCallback, cancelCallback, check);
-alertist.confirm('Title', 'Hello world?', 'Yes', 'No', okCallback);
-alertist.confirm('Title', 'Hello world?', 'Yes', 'No', okCallback, cancelCallback);
-alertist.confirm('Title', 'Hello world?', 'Yes', 'No', okCallback, cancelCallback, check);
-
-// Or avoid the hassle and do it like this:
 alertist.confirm({
 	title: 'Title',
 	text: 'Hello world!',

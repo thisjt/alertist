@@ -16,12 +16,11 @@
 		"build": "npm-run-all -s build:*",
 		"build:js": "rollup -c",
 		"build:css": "sass ./src/scss/main.scss ./dist/alertist.css --style=compressed --no-source-map",
-		"build:push": "git commit -am \"minor version patch\" && git push",
-		"build:patch": "npm version patch",
 		"dev": "npm-run-all -p dev:*",
 		"dev:js": "rollup -c rollup.watch.js --watch",
 		"dev:css": "sass ./src/scss/main.scss ./dev/alertist.css --watch --embed-source-map",
 		"dev:watcher": "node rollup.watch.js --watchloader",
+		"patch": "npm version patch",
 		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose"
 	},
 	"repository": {

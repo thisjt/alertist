@@ -13,7 +13,6 @@ export const cleanup = () => {
 
 const init = () => {
 	if (typeof document !== 'object') {
-		console.warn('alertist: init - Not in a browser environment.');
 		return false;
 	}
 	let bucketSelector = document.querySelector('.alertist-bucket');

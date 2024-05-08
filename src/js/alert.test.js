@@ -13,7 +13,7 @@ global.document = dom.window.document;
 global.DOMParser = dom.window.DOMParser;
 
 describe('open basic alert and test all values', () => {
-	const alertist_run = alertist.alert('TITLE1', 'BODY', 'OKBUTTON');
+	const alertist_run = alertist.alert({ title: 'TITLE1', text: 'BODY', button: 'OKBUTTON' });
 	const title_text = alertist_run.element.querySelector('.alertist-title').innerHTML;
 	const body_text = alertist_run.element.querySelector('.alertist-body').innerHTML;
 	const button_text = alertist_run.element.querySelector('.alertist-footer_button').innerHTML;
@@ -39,8 +39,13 @@ describe('open basic alert and test all values', () => {
 describe('open "alert" and test ok callback', () => {
 	it('dialog closed, okCallback called', (done) => {
 		let okstatus = 0;
-		const alertist_run = alertist.alert('TITLE2', 'BODY', 'OKBUTTON', () => {
-			okstatus = 1;
+		const alertist_run = alertist.alert({
+			title: 'TITLE1',
+			text: 'BODY',
+			button: 'OKBUTTON',
+			okCallback: () => {
+				okstatus = 1;
+			},
 		});
 		alertist_run.element.setAttribute('open', '');
 		alertist_run.element.querySelector('.alertist-footer_button').click();
@@ -54,15 +59,14 @@ describe('open "alert" and test ok callback', () => {
 describe('open "alert" and test close callback', () => {
 	it('dialog closed, x button clicked, closeCallback called', (done) => {
 		let okstatus = 0;
-		const alertist_run = alertist.alert(
-			'TITLE2',
-			'BODY',
-			'OKBUTTON',
-			() => {},
-			() => {
+		const alertist_run = alertist.alert({
+			title: 'TITLE1',
+			text: 'BODY',
+			button: 'OKBUTTON',
+			cancelCallback: () => {
 				okstatus = 1;
 			},
-		);
+		});
 		alertist_run.element.setAttribute('open', '');
 		alertist_run.element.querySelector('.alertist-title_close').click();
 		setTimeout(() => {
@@ -73,15 +77,14 @@ describe('open "alert" and test close callback', () => {
 
 	it('dialog closed, backdrop clicked, closeCallback called', (done) => {
 		let okstatus = 0;
-		const alertist_run = alertist.alert(
-			'TITLE2',
-			'BODY',
-			'OKBUTTON',
-			() => {},
-			() => {
+		const alertist_run = alertist.alert({
+			title: 'TITLE1',
+			text: 'BODY',
+			button: 'OKBUTTON',
+			cancelCallback: () => {
 				okstatus = 1;
 			},
-		);
+		});
 		alertist_run.element.setAttribute('open', '');
 		alertist_run.element.click();
 		setTimeout(() => {

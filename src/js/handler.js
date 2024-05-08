@@ -1,7 +1,8 @@
 import init, { bucket, cleanup, buttons } from './init';
 
-const handler = (type, params, alertbody, alertswitch) => {
+const handler = (type, params, alertbody) => {
 	if (!init()) {
+		console.warn('alertist: init - Not in a browser environment.');
 		return false;
 	}
 
@@ -19,7 +20,8 @@ const handler = (type, params, alertbody, alertswitch) => {
 	if (params[0] && typeof params[0] === 'object' && !Array.isArray(params[0])) {
 		fixedParams = { ...fixedParams, ...params[0] };
 	} else {
-		fixedParams = { ...fixedParams, ...alertswitch(params, fixedParams) };
+		console.warn('alertist: init - We are only accepting object as input.');
+		return false;
 	}
 
 	const { title, text, button, cancel, okCallback, cancelCallback, check } = fixedParams;

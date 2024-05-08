@@ -13,7 +13,12 @@ global.document = dom.window.document;
 global.DOMParser = dom.window.DOMParser;
 
 describe('open "confirm" and test all values', () => {
-	const alertist_run = alertist.confirm('TITLE', 'BODY', 'OKBUTTON', 'CANCELBUTTON');
+	const alertist_run = alertist.confirm({
+		title: 'TITLE',
+		text: 'BODY',
+		button: 'OKBUTTON',
+		cancel: 'CANCELBUTTON',
+	});
 	const title_text = alertist_run.element.querySelector('.alertist-title').innerHTML;
 	const body_text = alertist_run.element.querySelector('.alertist-body').innerHTML;
 	const button_text = alertist_run.element.querySelector('.alertist-footer_button').innerHTML;
@@ -44,8 +49,14 @@ describe('open "confirm" and test all values', () => {
 describe('open "confirm" and test ok callback', () => {
 	it('dialog closed, okCallback called', (done) => {
 		let okstatus = 0;
-		const alertist_run = alertist.confirm('TITLE2', 'BODY', 'OKBUTTON', () => {
-			okstatus = 1;
+		const alertist_run = alertist.confirm({
+			title: 'TITLE',
+			text: 'BODY',
+			button: 'OKBUTTON',
+			cancel: 'CANCELBUTTON',
+			okCallback: () => {
+				okstatus = 1;
+			},
 		});
 		alertist_run.element.setAttribute('open', '');
 		alertist_run.element.querySelector('.alertist-footer_button').click();
@@ -59,16 +70,15 @@ describe('open "confirm" and test ok callback', () => {
 describe('open "confirm" and test close callback', () => {
 	it('dialog closed, x button clicked, closeCallback called', (done) => {
 		let okstatus = 0;
-		const alertist_run = alertist.confirm(
-			'TITLE2',
-			'BODY',
-			'OKBUTTON',
-			'CANCELBUTTON',
-			() => {},
-			() => {
+		const alertist_run = alertist.confirm({
+			title: 'TITLE',
+			text: 'BODY',
+			button: 'OKBUTTON',
+			cancel: 'CANCELBUTTON',
+			cancelCallback: () => {
 				okstatus = 1;
 			},
-		);
+		});
 		alertist_run.element.setAttribute('open', '');
 		alertist_run.element.querySelector('.alertist-title_close').click();
 		setTimeout(() => {
@@ -79,16 +89,15 @@ describe('open "confirm" and test close callback', () => {
 
 	it('dialog closed, cancel button clicked, closeCallback called', (done) => {
 		let okstatus = 0;
-		const alertist_run = alertist.confirm(
-			'TITLE2',
-			'BODY',
-			'OKBUTTON',
-			'CANCELBUTTON',
-			() => {},
-			() => {
+		const alertist_run = alertist.confirm({
+			title: 'TITLE',
+			text: 'BODY',
+			button: 'OKBUTTON',
+			cancel: 'CANCELBUTTON',
+			cancelCallback: () => {
 				okstatus = 1;
 			},
-		);
+		});
 		alertist_run.element.setAttribute('open', '');
 		alertist_run.element.querySelector('.alertist-footer_cancelbutton').click();
 		setTimeout(() => {
@@ -99,16 +108,15 @@ describe('open "confirm" and test close callback', () => {
 
 	it('dialog closed, backdrop clicked, closeCallback called', (done) => {
 		let okstatus = 0;
-		const alertist_run = alertist.confirm(
-			'TITLE2',
-			'BODY',
-			'OKBUTTON',
-			'CANCELBUTTON',
-			() => {},
-			() => {
+		const alertist_run = alertist.confirm({
+			title: 'TITLE',
+			text: 'BODY',
+			button: 'OKBUTTON',
+			cancel: 'CANCELBUTTON',
+			cancelCallback: () => {
 				okstatus = 1;
 			},
-		);
+		});
 		alertist_run.element.setAttribute('open', '');
 		alertist_run.element.click();
 		setTimeout(() => {
