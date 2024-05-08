@@ -2,6 +2,8 @@
 
 A simple alert management system built on top of the native [**"dialog"**](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) HTML tag.
 
+![Demo of the Alertist Package](src/demo.gif "Demo of the Alertist Package")
+
 Simply install the package:
 
 ```
