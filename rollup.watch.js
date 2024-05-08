@@ -1,14 +1,5 @@
 import http from 'http';
-import scss from 'rollup-plugin-scss';
-
-function watchLoader() {
-	return {
-		name: 'watchLoader',
-		watchChange() {
-			fetch('http://localhost:32578/trigger');
-		},
-	};
-}
+import chokidar from 'chokidar';
 
 export default [
 	{
@@ -18,12 +9,11 @@ export default [
 			file: 'dev/alertist.browser.js',
 			format: 'iife',
 		},
-		plugins: [watchLoader(), scss({ fileName: './dev/alertist.css' })],
 	},
 ];
 
 let args = process.argv;
-if (args[2] === '--reload') {
+if (args[2] === '--watchloader') {
 	let watchcounter = new Date().getTime();
 	http
 		.createServer(function (req, res) {
@@ -33,13 +23,15 @@ if (args[2] === '--reload') {
 
 			if (req.url == '/watch') {
 				res.write(JSON.stringify(watchcounter));
-			} else if (req.url == '/trigger') {
-				res.write('ok');
-				watchcounter = new Date().getTime();
 			} else {
 				res.write('hi');
 			}
 			res.end();
 		})
 		.listen(32578);
+
+	chokidar.watch('./dev').on('all', () => {
+		console.log('Changes detected in "dev" folder. Refreshing...');
+		watchcounter = new Date().getTime();
+	});
 }

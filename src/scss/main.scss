@@ -63,6 +63,11 @@
 			padding: 10px;
 		}
 
+		&-wordbreak {
+			max-width: 500px;
+			word-wrap: break-word;
+		}
+
 		&-footer {
 			display: flex;
 

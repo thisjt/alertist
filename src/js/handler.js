@@ -82,6 +82,7 @@ const handler = (type, params, alertbody, alertswitch) => {
 
 	bucket.append(parsedHTML);
 	parsedHTML.showModal();
+	parsedHTML.querySelector('.alertist-title_close').blur();
 	return {
 		parameters: fixedParams,
 		element: parsedHTML,
