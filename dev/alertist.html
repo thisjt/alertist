@@ -18,51 +18,11 @@
 		</style>
 	</head>
 	<body>
+		<form class="alertist alertist-form">This is a test!</form>
+
 		<script>
-			alertist.alert({
-				title: 'Title',
-				text: 'Test',
-				check: () => {
-					return true;
-				},
-			});
-			alertist.alert({
-				title: 'Title',
-				text: 'Test',
-				check: () => {
-					return false;
-				},
-			});
-			alertist.alert({
-				title: 'Title',
-				text: 'Test',
-				check: () => {
-					return new Promise((resolve, reject) => {
-						setTimeout(() => {
-							resolve('b');
-						}, 1000);
-					});
-				},
-			});
-			alertist.alert({
-				title: 'Title',
-				text: 'Test',
-				check: () => {
-					return new Promise((resolve, reject) => {
-						setTimeout(() => {
-							reject('a');
-						}, 1000);
-					});
-				},
-			});
-			// alertist.confirm('Modify User', 'Are you sure you want to submit the changes you<br>made for this user?', 'OK', 'CANCEL');
-			// alertist.alert('TITLE', 'TEXT', 'OK');
-			// alertist.confirm(
-			// 	'TITLE',
-			// 	'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi suscipit asperiores ipsa mollitia dolor, ea aut repellendus quia sed illum unde eveniet expedita, dolore inventore voluptatibus. Consectetur quae alias et?',
-			// 	'OK',
-			// 	'CANCEL',
-			// );
+			alertist.form({});
+			// alertist.alert({ text: 'TEST' });
 		</script>
 
 		<script>
