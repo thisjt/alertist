@@ -60,25 +60,15 @@ as of now this is what the package offers.
 
 Syntax:
 ```javascript
-const okCallback = () => {
-	console.log('OK Button clicked!');
-};
-const cancelCallback = () => {
-	console.log('X button or outside backdrop clicked!');
-};
-const check = () => {
-	return true;
-};
-
 // Use it like this:
 alertist.alert({
 	title: 'Title',
 	text: 'Hello world!',
 	button: 'Yes', // default: 'OK'
-	okCallback,
-	cancelCallback,
-	check,
-})
+	okCallback: () => {},
+	cancelCallback: () => {},
+	check: () => { return true }, // You can omit this
+});
 ```
 
 Here's the HTML if you want to style this alert type yourself:
@@ -101,26 +91,16 @@ Here's the HTML if you want to style this alert type yourself:
 
 Syntax:
 ```javascript
-const okCallback = () => {
-	console.log('OK Button clicked!');
-};
-const cancelCallback = () => {
-	console.log('X button or Cancel or outside backdrop clicked!');
-};
-const check = () => {
-	return true;
-};
-
 // Use it like this:
 alertist.confirm({
 	title: 'Title',
 	text: 'Hello world!',
 	button: 'Yes', // default: 'OK'
 	cancel: 'No', // default: 'Cancel'
-	okCallback,
-	cancelCallback,
-	check,
-})
+	okCallback: () => {},
+	cancelCallback: () => {},
+	check: () => { return true }, // You can omit this
+});
 ```
 
 Here's the HTML if you want to style this alert type yourself:
@@ -140,4 +120,63 @@ Here's the HTML if you want to style this alert type yourself:
 </dialog>
 ```
 
+## `callback` Functions
 
+There are three functions that you can add to the alertist object parameter.
+
+### `okCallback`
+
+Pretty self explanatory. This function will run when the user clicks on the "OK" button.
+
+### `cancelCallback`
+
+This function will run when either the X button, the Cancel button, or the background backdrop
+gets clicked.
+
+### `check`
+
+*Usage:*
+```javascript
+alertist.confirm({
+	text: 'Hello world!',
+	check: (dialogElement) => { return true },
+});
+
+alertist.confirm({
+	text: 'Hello world!',
+	check: (dialogElement) => { return false },
+});
+
+alertist.confirm({
+	text: 'Hello world!',
+	check: (dialogElement) => {
+		return new Promise((resolve, reject) => {
+			resolve();
+		});
+	},
+});
+
+alertist.confirm({
+	text: 'Hello world!',
+	check: (dialogElement) => {
+		return new Promise((resolve, reject) => {
+			reject();
+		});
+	},
+});
+
+alertist.confirm({
+	text: 'Hello world!',
+	check: async (dialogElement) => {
+		const value = await fetch(`https://example.com/api`)
+		return value === 'ok' ? true : false;
+	},
+});
+```
+
+This is a function that will run when the user attempts to click on the "OK" button. If unassigned,
+this defaults to a function that returns `true`, but you can override this so that you can try doing
+some kind of check before the `okCallback` function runs. It needs a return statement if assigned, and 
+will accept either a `return true`, `return false`, a promise that `resolve()` or a promise that
+`reject()`. If the function receives a `false` or a `reject()`, the alert box will remain open and will
+not close.
