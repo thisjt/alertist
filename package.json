@@ -1,11 +1,11 @@
 {
 	"name": "alertist",
 	"version": "0.2.9",
-	"description": "A simple alert management system built on top of the native \"<dialog>\" HTML tag.",
+	"description": "A simple alert management system built on top of the native \"dialog\" HTML tag.",
 	"style": "dist/alertist.css",
 	"main": "dist/alertist.cjs",
 	"module": "dist/alertist.js",
-	"unpkg": "./dist/alertist_browser.js",
+	"unpkg": "./dist/alertist.browser.js",
 	"exports": {
 		".": {
 			"require": "./dist/alertist.cjs",
@@ -15,13 +15,14 @@
 	"scripts": {
 		"build": "npm-run-all -s build:*",
 		"build:esm": "rollup ./src/js/main.js --format esm --exports default --name \"alertist\" --file ./dist/alertist.js",
-		"build:iife": "rollup ./src/js/main.js --format iife --name \"alertist\" --file ./dist/alertist_browser.js",
+		"build:iife": "rollup ./src/js/main.js --format iife --name \"alertist\" --file ./dist/alertist.browser.js",
 		"build:cjs": "rollup ./src/js/main.js --format cjs --file ./dist/alertist.cjs",
 		"build:css": "sass ./src/scss/main.scss ./dist/alertist.css --no-source-map",
 		"build:push": "git commit -am \"version patch\" && git push",
 		"build:patch": "npm version patch",
 		"dev": "npm-run-all -p dev:*",
 		"dev:js": "rollup ./src/js/main.js --format esm --exports default --name \"alertist\" --file ./dist/alertist.js --watch",
+		"dev:browser": "rollup ./src/js/main.js --format iife --name \"alertist\" --file ./dist/alertist.browser.js",
 		"dev:css": "sass ./src/css/main.scss ./dist/alertist.css --watch --no-source-map",
 		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose"
 	},
