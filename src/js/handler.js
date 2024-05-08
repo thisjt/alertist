@@ -32,13 +32,17 @@ const handler = (type, params, alertbody) => {
 	parsedHTML.querySelector('.alertist-title_close img').setAttribute('src', buttons.close);
 	parsedHTML.querySelector('.alertist-footer_button').textContent = button;
 	parsedHTML.querySelector('.alertist-footer_button').addEventListener('click', (e) => {
-		Promise.resolve(check).then((executeCallback) => {
-			if (executeCallback) {
-				parsedHTML.close();
-				okCallback();
-				cleanup();
-			}
-		});
+		const checkFn = check(parsedHTML);
+		const isCheckAPromise = checkFn instanceof Promise;
+		Promise.resolve(checkFn)
+			.then((checker) => {
+				if ((!isCheckAPromise && checker === true) || isCheckAPromise) {
+					parsedHTML.close();
+					okCallback();
+					cleanup();
+				}
+			})
+			.catch(() => {});
 	});
 	const cancelCallbackFn = () => {
 		parsedHTML.close();

@@ -12,7 +12,7 @@ dom.window.HTMLDialogElement.prototype.close = () => {};
 global.document = dom.window.document;
 global.DOMParser = dom.window.DOMParser;
 
-describe('open basic alert and test all values', () => {
+describe('open "alert" and test all values', () => {
 	const alertist_run = alertist.alert({ title: 'TITLE1', text: 'BODY', button: 'OKBUTTON' });
 	const title_text = alertist_run.element.querySelector('.alertist-title').innerHTML;
 	const body_text = alertist_run.element.querySelector('.alertist-body').innerHTML;
@@ -91,5 +91,99 @@ describe('open "alert" and test close callback', () => {
 			expect(okstatus).toBe(1);
 			done();
 		}, 50);
+	});
+});
+
+describe('open "alert" and test check callback', () => {
+	it('dialog closed, check returns boolean true, okCallback called', (done) => {
+		let okstatus = 0;
+		const alertist_run = alertist.alert({
+			title: 'TITLE1',
+			text: 'BODY',
+			button: 'OKBUTTON',
+			okCallback: () => {
+				okstatus = 1;
+			},
+			check: () => {
+				return true;
+			},
+		});
+		alertist_run.element.setAttribute('open', '');
+		alertist_run.element.querySelector('.alertist-footer_button').click();
+		setTimeout(() => {
+			expect(okstatus).toBe(1);
+			done();
+		}, 50);
+	});
+
+	it('dialog remains open, check returns boolean false', (done) => {
+		let okstatus = 0;
+		const alertist_run = alertist.alert({
+			title: 'TITLE1',
+			text: 'BODY',
+			button: 'OKBUTTON',
+			okCallback: () => {
+				okstatus = 1;
+			},
+			check: () => {
+				return false;
+			},
+		});
+		alertist_run.element.setAttribute('open', '');
+		alertist_run.element.querySelector('.alertist-footer_button').click();
+		setTimeout(() => {
+			expect(okstatus).toBe(0);
+			done();
+		}, 50);
+	});
+
+	it('dialog closed, check returns Promise that resolves, okCallback called', (done) => {
+		let okstatus = 0;
+		const alertist_run = alertist.alert({
+			title: 'TITLE1',
+			text: 'BODY',
+			button: 'OKBUTTON',
+			okCallback: () => {
+				okstatus = 1;
+			},
+			check: () => {
+				return new Promise((resolve, reject) => {
+					setTimeout(() => {
+						resolve();
+					}, 100);
+				});
+			},
+		});
+		alertist_run.element.setAttribute('open', '');
+		alertist_run.element.querySelector('.alertist-footer_button').click();
+		setTimeout(() => {
+			expect(okstatus).toBe(1);
+			done();
+		}, 200);
+	});
+
+	it('dialog remains open, check returns Promise that rejects', (done) => {
+		let okstatus = 0;
+		const alertist_run = alertist.alert({
+			title: 'TITLE1',
+			text: 'BODY',
+			button: 'OKBUTTON',
+			okCallback: () => {
+				okstatus = 1;
+			},
+			check: () => {
+				return new Promise((resolve, reject) => {
+					setTimeout(() => {
+						reject();
+					}, 100);
+				});
+			},
+		});
+		alertist_run.element.setAttribute('open', '');
+		alertist_run.element.querySelector('.alertist-footer_button').click();
+		setTimeout(() => {
+			expect(okstatus).toBe(0);
+			done();
+		}, 200);
 	});
 });
