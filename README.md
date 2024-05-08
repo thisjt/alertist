@@ -67,7 +67,7 @@ alertist.alert({
 	button: 'Yes', // default: 'OK'
 	okCallback: () => {},
 	cancelCallback: () => {},
-	check: () => { return true }, // You can omit this
+	check: (dialogElement) => { return true }, // Optional
 });
 ```
 
@@ -99,7 +99,7 @@ alertist.confirm({
 	cancel: 'No', // default: 'Cancel'
 	okCallback: () => {},
 	cancelCallback: () => {},
-	check: () => { return true }, // You can omit this
+	check: (dialogElement) => { return true }, // Optional
 });
 ```
 
