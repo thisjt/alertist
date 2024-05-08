@@ -12,7 +12,7 @@ export const cleanup = () => {
 };
 
 const init = () => {
-	if (typeof document !== 'object') {
+	if (typeof document !== 'object' || typeof DOMParser !== 'function') {
 		return false;
 	}
 	let bucketSelector = document.querySelector('.alertist-bucket');

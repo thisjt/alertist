@@ -1,11 +1,15 @@
-import alertFn from './alert';
-import confirmFn from './confirm';
-import { cleanup } from './init';
+import alertFn, { alertbody } from './alert';
+import confirmFn, { confirmbody } from './confirm';
+import { cleanup, buttons } from './init';
 
 const alertist = {
 	alert: alertFn,
 	confirm: confirmFn,
-	cleanup,
+	custom: {
+		buttons,
+		alertbody,
+		confirmbody,
+	},
 };
 
 export default alertist;
