@@ -1,4 +1,5 @@
 import http from 'http';
+import scss from 'rollup-plugin-scss';
 
 function watchLoader() {
 	return {
@@ -17,7 +18,7 @@ export default [
 			file: 'dev/alertist.browser.js',
 			format: 'iife',
 		},
-		plugins: [watchLoader()],
+		plugins: [watchLoader(), scss({ fileName: './dev/alertist.css' })],
 	},
 ];
 
