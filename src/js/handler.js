@@ -7,6 +7,7 @@ const handler = (type, params, alertbody) => {
 	}
 
 	let fixedParams = {
+		target: null,
 		title: '',
 		text: '',
 		button: 'OK',
@@ -24,26 +25,61 @@ const handler = (type, params, alertbody) => {
 		return false;
 	}
 
-	const { title, text, button, cancel, okCallback, cancelCallback, check } = fixedParams;
+	const { title, text, button, cancel, okCallback, cancelCallback, check, target, submit } = fixedParams;
 
 	let parsedHTML = new DOMParser().parseFromString(alertbody, 'text/html').querySelector('dialog');
 	parsedHTML.querySelector('.alertist-title').textContent = title;
-	parsedHTML.querySelector('.alertist-body').innerHTML = text;
 	parsedHTML.querySelector('.alertist-title_close img').setAttribute('src', buttons.close);
-	parsedHTML.querySelector('.alertist-footer_button').textContent = button;
-	parsedHTML.querySelector('.alertist-footer_button').addEventListener('click', (e) => {
-		const checkFn = check(parsedHTML);
-		const isCheckAPromise = checkFn instanceof Promise;
-		Promise.resolve(checkFn)
-			.then((checker) => {
-				if ((!isCheckAPromise && checker === true) || isCheckAPromise) {
-					parsedHTML.close();
-					okCallback();
-					cleanup();
-				}
-			})
-			.catch(() => {});
-	});
+
+	if (type === 'alert' || type === 'confirm') {
+		parsedHTML.querySelector('.alertist-body').innerHTML = text;
+		parsedHTML.querySelector('.alertist-footer_button').textContent = button;
+		parsedHTML.querySelector('.alertist-footer_button').addEventListener('click', (e) => {
+			const checkFn = check(parsedHTML);
+			const isCheckAPromise = checkFn instanceof Promise;
+			Promise.resolve(checkFn)
+				.then((checker) => {
+					if ((!isCheckAPromise && checker === true) || isCheckAPromise) {
+						parsedHTML.close();
+						okCallback();
+						cleanup();
+					}
+				})
+				.catch(() => {});
+		});
+	}
+	if (type === 'form') {
+		const targetElement = document.querySelector(target);
+		if (!targetElement) {
+			console.warn('alertist: form - Target not found in DOM.');
+			return false;
+		}
+
+		parsedHTML.querySelector('.alertist-container').append(targetElement);
+		targetElement.classList.add('alertist-body');
+		targetElement.setAttribute('data-check', 'false');
+		targetElement.addEventListener('submit', (e) => {
+			if (targetElement.getAttribute('data-check') === 'false') {
+				e.preventDefault();
+				const checkFn = check(parsedHTML);
+				const isCheckAPromise = checkFn instanceof Promise;
+				Promise.resolve(checkFn)
+					.then((checker) => {
+						if ((!isCheckAPromise && checker === true) || isCheckAPromise) {
+							parsedHTML.close();
+							okCallback(parsedHTML);
+							if (submit) {
+								targetElement.setAttribute('data-check', 'true');
+								targetElement.submit();
+							}
+							cleanup();
+						}
+					})
+					.catch(() => {});
+			}
+		});
+	}
+
 	const cancelCallbackFn = () => {
 		parsedHTML.close();
 		cancelCallback();

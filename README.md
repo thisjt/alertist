@@ -129,21 +129,28 @@ gets clicked.
 
 ### `check`
 
+This is a function that will run when the user attempts to click on the "OK" button. If unassigned,
+this defaults to a function that returns `true`, but you can override this so that you can try doing
+some kind of check before the `okCallback` function runs. It needs a return statement if assigned, and 
+will accept either a `return true`, `return false`, a promise that `resolve()` or a promise that
+`reject()`. If the function receives a `false` or a `reject()`, the alert box will remain open and will
+not close.
+
 *Usage:*
 ```javascript
 alertist.confirm({
 	text: 'Hello world!',
-	check: (dialogElement) => { return true },
+	check: ({dialogElement}) => { return true },
 });
 
 alertist.confirm({
 	text: 'Hello world!',
-	check: (dialogElement) => { return false },
+	check: ({dialogElement}) => { return false },
 });
 
 alertist.confirm({
 	text: 'Hello world!',
-	check: (dialogElement) => {
+	check: ({dialogElement}) => {
 		return new Promise((resolve, reject) => {
 			resolve();
 		});
@@ -167,10 +174,3 @@ alertist.confirm({
 	},
 });
 ```
-
-This is a function that will run when the user attempts to click on the "OK" button. If unassigned,
-this defaults to a function that returns `true`, but you can override this so that you can try doing
-some kind of check before the `okCallback` function runs. It needs a return statement if assigned, and 
-will accept either a `return true`, `return false`, a promise that `resolve()` or a promise that
-`reject()`. If the function receives a `false` or a `reject()`, the alert box will remain open and will
-not close.

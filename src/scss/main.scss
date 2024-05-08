@@ -21,7 +21,7 @@
 
 	& {
 		&-container {
-			min-width: 350px;
+			min-width: 300px;
 			display: flex;
 			flex-direction: column;
 		}
@@ -61,7 +61,6 @@
 			background-color: $alertist-body-bg;
 			color: $alertist-body-color;
 			min-height: 80px;
-			padding: 10px;
 		}
 
 		&-wordbreak {
@@ -104,6 +103,9 @@
 				width: 100%;
 			}
 		}
+		.alertist-body {
+			padding: 10px;
+		}
 	}
 
 	&-confirm {
@@ -115,6 +117,19 @@
 			&_cancelbutton {
 				width: 50%;
 			}
+		}
+		.alertist-body {
+			padding: 10px;
+		}
+	}
+
+	&-form {
+		.alertist-container {
+			height: 100%;
+		}
+
+		.alertist-body {
+			flex-grow: 1;
 		}
 	}
 
