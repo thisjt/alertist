@@ -73,18 +73,15 @@ alertist.alert({
 
 Here's the HTML if you want to style this alert type yourself:
 ```html
-<dialog class="alertist alertist-alert" style="transform: translate(0px, 0px)">
-	<div class="alertist-container">
-		<div class="alertist-header">
-			<div class="alertist-title" draggable="true"></div>
-			<button class="alertist-title_close"><img></button>
-		</div>
-		<div class="alertist-body"></div>
-		<div class="alertist-footer">
-			<button class="alertist-footer_button"></button>
-		</div>
-	</div>
-</dialog>
+dialog.alertist.alertist-confirm
+	div.alertist-container
+		div.alertist-header
+			div.alertist-title
+			button.alertist-title_close
+				img
+		div.alertist-body
+		div.alertist-footer
+			button.alertist-footer_button
 ```
 
 ## Confirm
@@ -103,21 +100,18 @@ alertist.confirm({
 });
 ```
 
-Here's the HTML if you want to style this alert type yourself:
-```html
-<dialog class="alertist alertist-confirm" style="transform: translate(0px, 0px)">
-	<div class="alertist-container">
-		<div class="alertist-header">
-			<div class="alertist-title" draggable="true"></div>
-			<button class="alertist-title_close"><img></button>
-		</div>
-		<div class="alertist-body"></div>
-		<div class="alertist-footer">
-			<button class="alertist-footer_button"></button>
-			<button class="alertist-footer_cancelbutton"></button>
-		</div>
-	</div>
-</dialog>
+Here's the HTML structure if you want to style this alert type yourself:
+```
+dialog.alertist.alertist-confirm
+	div.alertist-container
+		div.alertist-header
+			div.alertist-title
+			button.alertist-title_close
+				img
+		div.alertist-body
+		div.alertist-footer
+			button.alertist-footer_button
+			button.alertist-footer_cancelbutton
 ```
 
 ## `callback` Functions
