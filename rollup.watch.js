@@ -21,7 +21,7 @@ if (args[2] === '--watchloader') {
 			res.setHeader('Access-Control-Allow-Methods', 'GET');
 			res.setHeader('Access-Control-Max-Age', 2592000);
 
-			if (req.url == '/watch') {
+			if (req.url === '/watch') {
 				res.write(JSON.stringify(watchcounter));
 			} else {
 				res.write('hi');

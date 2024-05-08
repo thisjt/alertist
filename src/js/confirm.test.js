@@ -2,7 +2,7 @@ import alertist from './main';
 import jsdom from 'jsdom';
 const JSDOM = jsdom.JSDOM;
 
-const dom = new JSDOM(`<!DOCTYPE html><html lang="en"></html>`);
+const dom = new JSDOM('<!DOCTYPE html><html lang="en"></html>');
 
 // No support for HTMLDialogElement yet
 // https://github.com/jsdom/jsdom/issues/3294
