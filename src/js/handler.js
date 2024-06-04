@@ -17,6 +17,7 @@ const handler = (type, params, alertbody) => {
 		check: () => {
 			return true;
 		},
+		titleClass: '',
 	};
 	if (params[0] && typeof params[0] === 'object' && !Array.isArray(params[0])) {
 		fixedParams = { ...fixedParams, ...params[0] };
@@ -25,10 +26,16 @@ const handler = (type, params, alertbody) => {
 		return false;
 	}
 
-	const { title, text, button, cancel, okCallback, cancelCallback, check, target, submit } = fixedParams;
+	const { title, text, button, cancel, okCallback, cancelCallback, check, target, submit, titleClass } = fixedParams;
 
 	let parsedHTML = new DOMParser().parseFromString(alertbody, 'text/html').querySelector('dialog');
 	parsedHTML.querySelector('.alertist-title').textContent = title;
+	if (titleClass.length) {
+		const titleClassExploded = titleClass.split(' ');
+		titleClassExploded.forEach(titleClassNode => {
+			titleClassNode.classList.add(titleClassNode);
+		});
+	}
 	parsedHTML.querySelector('.alertist-title_close img').setAttribute('src', buttons.close);
 
 	if (type === 'alert' || type === 'confirm') {

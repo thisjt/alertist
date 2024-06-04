@@ -12,7 +12,7 @@ const cleanup = () => {
 };
 
 const init = () => {
-	if (typeof document !== 'object') {
+	if (typeof document !== 'object' || typeof DOMParser !== 'function') {
 		return false;
 	}
 	let bucketSelector = document.querySelector('.alertist-bucket');
@@ -30,6 +30,7 @@ const init = () => {
 	}
 
 	let fixedParams = {
+		target: null,
 		title: '',
 		text: '',
 		button: 'OK',
@@ -39,6 +40,7 @@ const init = () => {
 		check: () => {
 			return true;
 		},
+		titleClass: '',
 	};
 	if (params[0] && typeof params[0] === 'object' && !Array.isArray(params[0])) {
 		fixedParams = { ...fixedParams, ...params[0] };
@@ -47,22 +49,67 @@ const init = () => {
 		return false;
 	}
 
-	const { title, text, button, cancel, okCallback, cancelCallback, check } = fixedParams;
+	const { title, text, button, cancel, okCallback, cancelCallback, check, target, submit, titleClass } = fixedParams;
 
 	let parsedHTML = new DOMParser().parseFromString(alertbody, 'text/html').querySelector('dialog');
 	parsedHTML.querySelector('.alertist-title').textContent = title;
-	parsedHTML.querySelector('.alertist-body').innerHTML = text;
+	if (titleClass.length) {
+		const titleClassExploded = titleClass.split(' ');
+		titleClassExploded.forEach(titleClassNode => {
+			titleClassNode.classList.add(titleClassNode);
+		});
+	}
 	parsedHTML.querySelector('.alertist-title_close img').setAttribute('src', buttons.close);
-	parsedHTML.querySelector('.alertist-footer_button').textContent = button;
-	parsedHTML.querySelector('.alertist-footer_button').addEventListener('click', (e) => {
-		Promise.resolve(check).then((executeCallback) => {
-			if (executeCallback) {
-				parsedHTML.close();
-				okCallback();
-				cleanup();
+
+	if (type === 'alert' || type === 'confirm') {
+		parsedHTML.querySelector('.alertist-body').innerHTML = text;
+		parsedHTML.querySelector('.alertist-footer_button').textContent = button;
+		parsedHTML.querySelector('.alertist-footer_button').addEventListener('click', (e) => {
+			const checkFn = check(parsedHTML);
+			const isCheckAPromise = checkFn instanceof Promise;
+			Promise.resolve(checkFn)
+				.then((checker) => {
+					if ((!isCheckAPromise && checker === true) || isCheckAPromise) {
+						parsedHTML.close();
+						okCallback();
+						cleanup();
+					}
+				})
+				.catch(() => {});
+		});
+	}
+	if (type === 'form') {
+		const targetElement = document.querySelector(target);
+		if (!targetElement) {
+			console.warn('alertist: form - Target not found in DOM.');
+			return false;
+		}
+
+		parsedHTML.querySelector('.alertist-container').append(targetElement);
+		targetElement.classList.add('alertist-body');
+		targetElement.setAttribute('data-check', 'false');
+		targetElement.addEventListener('submit', (e) => {
+			if (targetElement.getAttribute('data-check') === 'false') {
+				e.preventDefault();
+				const checkFn = check(parsedHTML);
+				const isCheckAPromise = checkFn instanceof Promise;
+				Promise.resolve(checkFn)
+					.then((checker) => {
+						if ((!isCheckAPromise && checker === true) || isCheckAPromise) {
+							parsedHTML.close();
+							okCallback(parsedHTML);
+							if (submit) {
+								targetElement.setAttribute('data-check', 'true');
+								targetElement.submit();
+							}
+							cleanup();
+						}
+					})
+					.catch(() => {});
 			}
 		});
-	});
+	}
+
 	const cancelCallbackFn = () => {
 		parsedHTML.close();
 		cancelCallback();
@@ -128,6 +175,16 @@ const init = () => {
 		</div>
 	</dialog>`;
 
+/**
+ * @param {Object} alert
+ * @param {string} alert.title - Title of the Alert Box
+ * @param {string} alert.text - Text body of the Alert Box
+ * @param {string} alert.button - OK Button text of the Alert Box
+ * @param {function} alert.okCallback - Function that gets called after user clicks OK
+ * @param {function} alert.cancelCallback - Function that gets called after user clicks the X button or the backdrop
+ * @param {function} alert.check - Runs before the okCallback. Return false or Promise.reject() keeps the alert open and okCallback will not run
+ * @returns {Object|false} - Returns the Dialog DOM element of the Alert Box. Returns false if not in browser environment
+ */
 const alertFn = (...params) => {
 	return handler('alert', params, alertbody);
 };const confirmbody = /*html*/ `
@@ -145,10 +202,50 @@ const alertFn = (...params) => {
 		</div>
 	</dialog>`;
 
+/**
+ * @param {Object} confirm
+ * @param {string} confirm.title - Title of the Confirm Box
+ * @param {string} confirm.text - Text body of the Confirm Box
+ * @param {string} confirm.button - OK Button text of the Confirm Box
+ * @param {string} confirm.cancel - Cancel button text of the Confirm Box
+ * @param {function} confirm.okCallback - Function that gets called after user clicks OK
+ * @param {function} confirm.cancelCallback - Function that gets called after user clicks Cancel, X, or the backdrop
+ * @param {function} confirm.check - Runs before the okCallback. Return false or Promise.reject() keeps the confirm open and okCallback will not run
+ * @returns {Object|false} - Returns the Dialog DOM element of the Confirm Box. Returns false if not in browser environment
+ */
 const confirmFn = (...params) => {
 	return handler('confirm', params, confirmbody);
+};const formbody = /*html*/ `
+	<dialog class="alertist alertist-form" style="transform: translate(0px, 0px)">
+		<div class="alertist-container">
+			<div class="alertist-header">
+				<div class="alertist-title" draggable="true"></div>
+				<button class="alertist-title_close"><img></button>
+			</div>
+			<!-- .alertist-body -->
+		</div>
+	</dialog>`;
+
+/**
+ * @param {Object} confirm
+ * @param {string} confirm.title - Title of the dialog box
+ * @param {string|Object} confirm.target - Target of the form/element to be pulled to the alertist dialog box
+ * @param {boolean} confirm.submit - If true, will trigger form.submit() when check succeeds
+ * @param {function} confirm.okCallback - Function that gets called after user clicks OK
+ * @param {function} confirm.cancelCallback - Function that gets called after user clicks the X button or the backdrop
+ * @param {function} confirm.check - Runs before the okCallback. Return false or Promise.reject() keeps the confirm open and okCallback will not run
+ * @returns {Object|false} - Returns the Dialog DOM element of the Alert Box. Returns false if not in browser environment
+ */
+const formFn = (...params) => {
+	return handler('form', params, formbody);
 };const alertist = {
 	alert: alertFn,
 	confirm: confirmFn,
-	cleanup,
+	form: formFn,
+	custom: {
+		buttons,
+		alertbody,
+		confirmbody,
+		formbody,
+	},
 };export{alertist as default};
