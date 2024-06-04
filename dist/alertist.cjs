@@ -52,13 +52,16 @@ const init = () => {
 	const { title, text, button, cancel, okCallback, cancelCallback, check, target, submit, titleClass } = fixedParams;
 
 	let parsedHTML = new DOMParser().parseFromString(alertbody, 'text/html').querySelector('dialog');
+
 	parsedHTML.querySelector('.alertist-title').textContent = title;
+
 	if (titleClass.length) {
 		const titleClassExploded = titleClass.split(' ');
 		titleClassExploded.forEach((titleClassNode) => {
 			parsedHTML.querySelector('.alertist-title').classList.add(titleClassNode);
 		});
 	}
+
 	parsedHTML.querySelector('.alertist-title_close img').setAttribute('src', buttons.close);
 
 	if (type === 'alert' || type === 'confirm') {
