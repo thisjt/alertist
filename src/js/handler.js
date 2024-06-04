@@ -32,8 +32,8 @@ const handler = (type, params, alertbody) => {
 	parsedHTML.querySelector('.alertist-title').textContent = title;
 	if (titleClass.length) {
 		const titleClassExploded = titleClass.split(' ');
-		titleClassExploded.forEach(titleClassNode => {
-			titleClassNode.classList.add(titleClassNode);
+		titleClassExploded.forEach((titleClassNode) => {
+			parsedHTML.querySelector('.alertist-title').classList.add(titleClassNode);
 		});
 	}
 	parsedHTML.querySelector('.alertist-title_close img').setAttribute('src', buttons.close);
