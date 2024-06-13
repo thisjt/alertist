@@ -15,14 +15,13 @@ const alertbody = /*html*/ `
 	</dialog>`;
 
 /**
- * @param {Object} alert
+ * @param {object} alert
  * @param {string} alert.title - Title of the Alert Box
  * @param {string} alert.text - Text body of the Alert Box
  * @param {string} alert.button - OK Button text of the Alert Box
  * @param {function} alert.okCallback - Function that gets called after user clicks OK
  * @param {function} alert.cancelCallback - Function that gets called after user clicks the X button or the backdrop
  * @param {function} alert.check - Runs before the okCallback. Return false or Promise.reject() keeps the alert open and okCallback will not run
- * @returns {Object|false} - Returns the Dialog DOM element of the Alert Box. Returns false if not in browser environment
  */
 const alertFn = (...alert) => {
 	return handler('alert', alert, alertbody);

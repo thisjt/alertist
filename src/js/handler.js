@@ -1,5 +1,11 @@
 import init, { bucket, cleanup, buttons } from './init';
 
+/**
+ * @param {"alert"|"confirm"|"form"} type
+ * @param {} params
+ * @param {string} alertbody
+ * @returns
+ */
 const handler = (type, params, alertbody) => {
 	if (!init()) {
 		console.warn('alertist: init - Not in a browser environment.');
