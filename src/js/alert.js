@@ -24,8 +24,8 @@ const alertbody = /*html*/ `
  * @param {function} alert.check - Runs before the okCallback. Return false or Promise.reject() keeps the alert open and okCallback will not run
  * @returns {Object|false} - Returns the Dialog DOM element of the Alert Box. Returns false if not in browser environment
  */
-const alertFn = (...params) => {
-	return handler('alert', params, alertbody);
+const alertFn = (...alert) => {
+	return handler('alert', alert, alertbody);
 };
 
 export default alertFn;
