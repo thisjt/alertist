@@ -43,6 +43,7 @@
 		"browser"
 	],
 	"devDependencies": {
+		"@rollup/plugin-terser": "^0.4.4",
 		"chokidar": "^3.6.0",
 		"eslint": "^9.2.0",
 		"globals": "^15.1.0",
