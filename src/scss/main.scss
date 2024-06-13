@@ -31,6 +31,7 @@
 			background-color: $alertist-header-bg;
 			color: $alertist-header-color;
 		}
+
 		&-title {
 			padding-left: 10px;
 			flex-grow: 1;
@@ -54,6 +55,18 @@
 			&:hover,
 			&:focus {
 				background-color: $alertist-header-bg-close-hover;
+			}
+		}
+
+		&-title_error {
+			background-color: $alertist-header-error-bg;
+			color: $alertist-header-color;
+		}
+		&-title_error_close {
+			background-color: $alertist-header-error-bg;
+			&:hover,
+			&:focus {
+				background-color: $alertist-header-error-bg-close-hover;
 			}
 		}
 

@@ -2,9 +2,13 @@ $alertist-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !default;
 
 $alertist-backdrop: rgba(0, 0, 0, 0.6) !default;
 
-$alertist-header-bg: #2d563b !default;
 $alertist-header-color: #fff !default;
+$alertist-header-bg: #2d563b !default;
 $alertist-header-bg-close-hover: #5fae79 !default;
+
+$alertist-header-error-bg: #a73d3d !default;
+$alertist-header-error-bg-close-hover: #f55 !default;
+
 $alertist-header-bg-font: bold !default;
 
 $alertist-body-bg: #fff !default;
