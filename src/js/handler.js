@@ -51,7 +51,7 @@ const handler = (type, params, alertbody) => {
 		parsedHTML.querySelector('.alertist-title_close').classList.add('alertist-title_error_close');
 	}
 
-	if (type === 'error') parsedHTML.querySelector('.alertist-title_close img').setAttribute('src', buttons.close);
+	parsedHTML.querySelector('.alertist-title_close img').setAttribute('src', buttons.close);
 
 	if (type === 'alert' || type === 'confirm') {
 		parsedHTML.querySelector('.alertist-body').innerHTML = text;
