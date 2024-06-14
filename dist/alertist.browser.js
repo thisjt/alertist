@@ -55,8 +55,8 @@ var alertist = (function () {
 			},
 			titleClass: '',
 		};
-		if (params[0] && typeof params[0] === 'object' && !Array.isArray(params[0])) {
-			fixedParams = { ...fixedParams, ...params[0] };
+		if (params && typeof params === 'object' && !Array.isArray(params)) {
+			fixedParams = { ...fixedParams, ...params };
 		} else {
 			console.warn('alertist: init - We are only accepting object as input.');
 			return false;
