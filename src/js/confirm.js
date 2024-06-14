@@ -25,7 +25,6 @@ const confirmbody = /*html*/ `
  * @param {function} [confirm.okCallback] - Function that gets called after user clicks OK
  * @param {function} [confirm.cancelCallback] - Function that gets called after user clicks Cancel, X, or the backdrop
  * @param {function} [confirm.check] - Runs before the okCallback. Return false or Promise.reject() keeps the confirm open and okCallback will not run
- * @returns {object|false} - Returns the Dialog DOM element of the Confirm Box. Returns false if not in browser environment
  */
 const confirmFn = (confirm) => {
 	return handler('confirm', confirm, confirmbody);
