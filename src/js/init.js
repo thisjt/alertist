@@ -6,12 +6,6 @@ export const buttons = {
 		'QB2LMik1kADIXZ8xXOUTtuqcbEXzbB3lK8RIQ29zgLdz9EgWYJJODRElui9zcSRBIGEkFPyc/EOwBXCq0L3WEW3Ur4xxa8hrkKHkNMqMa9dfe7lN8fcqFfPQQr+E4AWhjYziJasJmK1ERWhOqI6I/koMDV9q/Is8AAAAASUVORK5CYII=',
 };
 
-export const cleanup = () => {
-	if (bucket) {
-		bucket.querySelectorAll('dialog:not([open])').forEach((elem) => elem.remove());
-	}
-};
-
 const init = () => {
 	if (typeof document !== 'object' || typeof DOMParser !== 'function') {
 		return false;

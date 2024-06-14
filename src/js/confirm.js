@@ -19,7 +19,7 @@ const confirmbody = /*html*/ `
  * @param {object} confirm
  * @param {string} [confirm.title] - Title of the Confirm Box
  * @param {string} confirm.text - Text body of the Confirm Box
- * @param {"error"|undefined} [alert.type] - Type of the Confirm Box. Only "error" supported for now
+ * @param {"error"} [confirm.type] - Type of the Confirm Box. Only "error" supported for now
  * @param {string} [confirm.button] - OK Button text of the Confirm Box
  * @param {string} [confirm.cancel] - Cancel button text of the Confirm Box
  * @param {function} [confirm.okCallback] - Function that gets called after user clicks OK
@@ -33,3 +33,7 @@ const confirmFn = (confirm) => {
 
 export default confirmFn;
 export { confirmbody };
+
+/*
+
+*/
