@@ -1,6 +1,6 @@
 {
 	"name": "alertist",
-	"version": "0.3.21",
+	"version": "0.3.22",
 	"description": "A simple alert management system built on top of the native \"dialog\" HTML tag.",
 	"style": "dist/alertist.css",
 	"main": "dist/alertist.cjs",
