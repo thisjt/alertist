@@ -14,6 +14,8 @@
 	},
 	"scripts": {
 		"build": "npm-run-all -s build:*",
+		"build:check": "eslint",
+		"build:test": "pnpm run test",
 		"build:js": "rollup -c",
 		"build:css": "sass ./src/scss/main.scss ./dist/alertist.css --style=compressed --no-source-map",
 		"dev": "npm-run-all -p dev:*",
