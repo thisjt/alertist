@@ -2,7 +2,8 @@ let bucket;
 
 const buttons = {
 	close:
-		'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAElBMVEX///9HcEz///////////////84chYNAAAABnRSTlP9ABWejzIjLOoFAAAAlUlEQVQoz3VSWRbEIAwi2/2vPG5tg8nohz6JBBFIhDRjnEIB0xtQB2LMik1kADIXZ8xXOUTtuqcbEXzbB3lK8RIQ29zgLdz9EgWYJJODRElui9zcSRBIGEkFPyc/EOwBXCq0L3WEW3Ur4xxa8hrkKHkNMqMa9dfe7lN8fcqFfPQQr+E4AWhjYziJasJmK1ERWhOqI6I/koMDV9q/Is8AAAAASUVORK5CYII=',
+		'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAElBMVEX///9HcEz///////////////84chYNAAAABnRSTlP9ABWejzIjLOoFAAAAlUlEQVQoz3VSWRbEIAwi2/2vPG5tg8nohz6JBBFIhDRjnEIB0xt' +
+		'QB2LMik1kADIXZ8xXOUTtuqcbEXzbB3lK8RIQ29zgLdz9EgWYJJODRElui9zcSRBIGEkFPyc/EOwBXCq0L3WEW3Ur4xxa8hrkKHkNMqMa9dfe7lN8fcqFfPQQr+E4AWhjYziJasJmK1ERWhOqI6I/koMDV9q/Is8AAAAASUVORK5CYII=',
 };
 
 const cleanup = () => {
@@ -204,7 +205,7 @@ const alertbody = /*html*/ `
  * @param {function} [alert.cancelCallback] - Function that gets called after user clicks the X button or the backdrop
  * @param {function} [alert.check] - Runs before the okCallback. Return false or Promise.reject() keeps the alert open and okCallback will not run
  */
-const alertFn = (...alert) => {
+const alertFn = (alert) => {
 	return handler('alert', alert, alertbody);
 };
 
@@ -235,7 +236,7 @@ const confirmbody = /*html*/ `
  * @param {function} [confirm.check] - Runs before the okCallback. Return false or Promise.reject() keeps the confirm open and okCallback will not run
  * @returns {object|false} - Returns the Dialog DOM element of the Confirm Box. Returns false if not in browser environment
  */
-const confirmFn = (...confirm) => {
+const confirmFn = (confirm) => {
 	return handler('confirm', confirm, confirmbody);
 };
 
@@ -260,7 +261,7 @@ const formbody = /*html*/ `
  * @param {function} confirm.check - Runs before the okCallback. Return false or Promise.reject() keeps the confirm open and okCallback will not run
  * @returns {object|false} - Returns the Dialog DOM element of the Alert Box. Returns false if not in browser environment
  */
-const formFn = (...confirm) => {
+const formFn = (confirm) => {
 	return handler('form', confirm, formbody);
 };
 
