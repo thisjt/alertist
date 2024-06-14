@@ -204,7 +204,6 @@ const alertbody = /*html*/ `
  * @param {function} [alert.okCallback] - Function that gets called after user clicks OK
  * @param {function} [alert.cancelCallback] - Function that gets called after user clicks the X button or the backdrop
  * @param {function} [alert.check] - Runs before the okCallback. Return false or Promise.reject() keeps the alert open and okCallback will not run
- * @returns {object|false} - Returns the Dialog DOM element of the Alert Box. Returns false if not in browser environment
  */
 const alertFn = (alert) => {
 	return handler('alert', alert, alertbody);
@@ -235,7 +234,6 @@ const confirmbody = /*html*/ `
  * @param {function} [confirm.okCallback] - Function that gets called after user clicks OK
  * @param {function} [confirm.cancelCallback] - Function that gets called after user clicks Cancel, X, or the backdrop
  * @param {function} [confirm.check] - Runs before the okCallback. Return false or Promise.reject() keeps the confirm open and okCallback will not run
- * @returns {object|false} - Returns the Dialog DOM element of the Confirm Box. Returns false if not in browser environment
  */
 const confirmFn = (confirm) => {
 	return handler('confirm', confirm, confirmbody);
@@ -264,24 +262,20 @@ const formbody = /*html*/ `
  * @param {function} confirm.okCallback - Function that gets called after user clicks OK
  * @param {function} confirm.cancelCallback - Function that gets called after user clicks the X button or the backdrop
  * @param {function} confirm.check - Runs before the okCallback. Return false or Promise.reject() keeps the confirm open and okCallback will not run
- * @returns {object|false} - Returns the Dialog DOM element of the Alert Box. Returns false if not in browser environment
  */
 const formFn = (confirm) => {
 	return handler('form', confirm, formbody);
 };
 
 /**
- * @type {object} Alertist - A simple alert management system built on top of the native "dialog" HTML tag.
- * @property {function} alert - Alert Box function
- * @property {function} confirm - Confirm Box function
- * @property {object} custom - Customization options
- * @property {object} custom.buttons - Custom button icons
- * @property {string} custom.alertbody - Custom Alert Box HTML
- * @property {string} custom.confirmbody - Custom Confirm Box HTML
+ * @module alertist
+ * @description
+ * A simple alert management system built on top of the native "dialog" HTML tag.
  * @example
  * import alertist from 'alertist';
  * alertist.alert({ text: 'Hello, World!' });
  * alertist.confirm({ text: 'Hello, World!' });
+ * @returns {Object} alertist
  */
 const alertist = {
 	alert: alertFn,
