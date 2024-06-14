@@ -21,7 +21,7 @@ const formbody = /*html*/ `
  * @param {function} confirm.check - Runs before the okCallback. Return false or Promise.reject() keeps the confirm open and okCallback will not run
  * @returns {object|false} - Returns the Dialog DOM element of the Alert Box. Returns false if not in browser environment
  */
-const formFn = (...confirm) => {
+const formFn = (confirm) => {
 	return handler('form', confirm, formbody);
 };
 

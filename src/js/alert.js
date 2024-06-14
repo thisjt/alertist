@@ -24,7 +24,7 @@ const alertbody = /*html*/ `
  * @param {function} [alert.cancelCallback] - Function that gets called after user clicks the X button or the backdrop
  * @param {function} [alert.check] - Runs before the okCallback. Return false or Promise.reject() keeps the alert open and okCallback will not run
  */
-const alertFn = (...alert) => {
+const alertFn = (alert) => {
 	return handler('alert', alert, alertbody);
 };
 
