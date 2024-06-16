@@ -1,6 +1,8 @@
 @import './variables.scss';
 @import './reset.scss';
 
+@import '../../lib/alert/alert.scss';
+
 .alertist {
 	font-family: $alertist-font-family;
 	outline: 0;

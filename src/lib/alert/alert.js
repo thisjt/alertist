@@ -7,14 +7,14 @@ import { alertistBucket, alertistStringToHtml, alertistCleanup, alertistInit, al
  * @param {string} [options.title] - Title of the Alert Box
  * @param {"error"} [options.type] - Type of the Alert Box. Only "error" supported for now
  * @param {string} [options.button] - OK Button text of the Alert Box
- * @returns {Promise<void>} Promise<void>
+ * @returns {Promise<void>} Promise&lt;void&gt;
  * @example
  * import alertist from 'alertist';
  * alertist.alert({ text: 'Hello!' });
  */
 export default async function alertifyAlert({ text, title, type, button }) {
 	if (!alertistInit()) {
-		console.warn('alertist: init - Not in a browser environment.');
+		console.error('alertist: init - not in a browser environment.');
 		return;
 	}
 
