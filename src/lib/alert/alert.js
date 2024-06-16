@@ -5,12 +5,14 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } f
  * @param {Object} options
  * @param {string} options.text - Text body of the Alert Box
  * @param {string} [options.title] - Title of the Alert Box
- * @param {"error"} [options.type] - Type of the Alert Box. Only "error" supported for now
+ * @param {"error"} [options.type] - Type of the Alert Box. Only `error` supported for now
  * @param {string} [options.button] - OK Button text of the Alert Box
- * @returns {Promise<void>} Promise&lt;void&gt;
+ * @returns {Promise<void>} `Promise<void>`
  * @example
+ * ```js
  * import alertist from 'alertist';
  * alertist.alert({ text: 'Hello!' });
+ * ```
  */
 export default async function alertifyAlert({ text, title, type, button }) {
 	if (!alertistInit()) {

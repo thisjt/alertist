@@ -5,13 +5,15 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } f
  * @param {Object} options
  * @param {string} options.text - Text body of the Confirm Box
  * @param {string} [options.title] - Title of the Confirm Box
- * @param {"error"} [options.type] - Type of the Confirm Box. Only "error" supported for now
+ * @param {"error"} [options.type] - Type of the Confirm Box. Only `error` supported for now
  * @param {string} [options.button] - OK Button text of the Confirm Box
  * @param {string} [options.cancel] - Cancel button text of the Confirm Box
- * @returns {Promise<boolean | null>} Promise&lt;boolean&gt; - true if the user clicked OK, false if the user clicked Cancel or closed the dialog
+ * @returns {Promise<true | null>} `Promise<true | null>` - `true` if the user clicked OK, `null` if the user clicked Cancel or closed the dialog
  * @example
+ * ```js
  * import alertist from 'alertist';
  * alertist.confirm({ text: 'Hello!' });
+ * ```
  */
 export default async function alertifyConfirm({ text, title, type, button, cancel }) {
 	if (!alertistInit()) {
@@ -60,12 +62,12 @@ export default async function alertifyConfirm({ text, title, type, button, cance
 		});
 
 		parsedHTML.querySelector('.alertist-footer_cancelbutton')?.addEventListener('click', () => {
-			resolve(false);
+			resolve(null);
 			parsedHTML.close();
 		});
 
 		parsedHTML.querySelector('.alertist-title_close')?.addEventListener('click', () => {
-			resolve(false);
+			resolve(null);
 			parsedHTML.close();
 		});
 
@@ -73,7 +75,7 @@ export default async function alertifyConfirm({ text, title, type, button, cance
 			const event = /**@type {KeyboardEvent}*/ (e);
 			if (event.key === 'Escape') {
 				e.preventDefault();
-				resolve(false);
+				resolve(null);
 				parsedHTML.close();
 			}
 		});
