@@ -30,6 +30,10 @@ export default async function alertifyPrompt({ text, title, custom, type, placeh
 						<button class="alertist-title_close"><img src="${alertistButtons.close}" alt=""></button>
 					</div>
 					<div class="alertist-body alertist-wordbreak"></div>
+					<div class="alertist-input">
+						<input type="text">
+						<textarea></textarea>
+					</div>
 					<div class="alertist-footer">
 						<button class="alertist-footer_button"></button>
 						<button class="alertist-footer_cancelbutton"></button>
@@ -43,6 +47,17 @@ export default async function alertifyPrompt({ text, title, custom, type, placeh
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-body')).innerHTML = text;
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-footer_button')).textContent = button || 'OK';
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-footer_cancelbutton')).textContent = cancel || 'Cancel';
+	/**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input input')).placeholder = placeholder || '';
+	/**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input textarea')).placeholder = placeholder || '';
+
+	if (type === 'textarea') {
+		/**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input input')).remove();
+	} else if (type === 'password') {
+		/**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input textarea')).remove();
+		/**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input input')).type = 'password';
+	} else {
+		/**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input textarea')).remove();
+	}
 
 	if (custom === 'error') {
 		/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-title')).classList.add('alertist-title_error');
@@ -57,7 +72,9 @@ export default async function alertifyPrompt({ text, title, custom, type, placeh
 
 	return new Promise((resolve) => {
 		parsedHTML.querySelector('.alertist-footer_button')?.addEventListener('click', () => {
-			resolve('asd');
+			let input = /**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input input'));
+			let textarea = /**@type {HTMLTextAreaElement}*/ (parsedHTML.querySelector('.alertist-input textarea'));
+			resolve(input ? input.value : textarea ? textarea.value : null);
 			parsedHTML.close();
 		});
 

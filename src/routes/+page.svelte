@@ -50,7 +50,7 @@
 				alertist
 					.prompt({
 						title: 'Hello!',
-						text: 'This is a test! This is a long text! This is a test! This is a long text! This is a test! This is a long text!',
+						text: 'This is a test!',
 						placeholder: 'Type something...',
 					})
 					.then((result) => {
@@ -60,6 +60,37 @@
 						});
 					});
 			}}>Basic</button>
+		<button
+			on:click={() => {
+				alertist
+					.prompt({
+						title: 'Hello!',
+						text: 'This is a test! This is a long text! This is a test! This is a long text! This is a test! This is a long text!',
+						placeholder: 'Type something...',
+					})
+					.then((result) => {
+						alertist.alert({
+							title: 'Hello!',
+							text: `You typed: ${result !== null ? result : '<i>canceled</i>'}`,
+						});
+					});
+			}}>Long Text</button>
+		<button
+			on:click={() => {
+				alertist
+					.prompt({
+						title: 'Hello!',
+						text: 'This is a test!',
+						type: 'textarea',
+						placeholder: 'Type something...',
+					})
+					.then((result) => {
+						alertist.alert({
+							title: 'Hello!',
+							text: `You typed: ${result !== null ? result : '<i>canceled</i>'}`,
+						});
+					});
+			}}>Textarea</button>
 	</div>
 	<div>Toast Examples</div>
 	<div>

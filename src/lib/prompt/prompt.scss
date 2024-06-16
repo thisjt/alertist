@@ -12,5 +12,28 @@
 		.alertist-body {
 			padding: 10px;
 		}
+
+		.alertist-input {
+			width: 100%;
+			background-color: $alertist-body-bg;
+			padding: 5px 10px;
+
+			input {
+				width: 100%;
+				padding: 10px;
+				border: 1px solid #333;
+				border-radius: 5px;
+				margin-bottom: 10px;
+			}
+
+			textarea {
+				width: 100%;
+				padding: 10px;
+				border: 1px solid #333;
+				border-radius: 5px;
+				margin-bottom: 10px;
+				min-height: 100px;
+			}
+		}
 	}
 }
