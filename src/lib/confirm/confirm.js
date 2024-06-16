@@ -23,8 +23,8 @@ export default async function alertifyConfirm({ text, title, type, button, cance
 
 	const parsedHTML = /**@type {HTMLDialogElement} */ (
 		alertistStringToHtml(/*html*/ `
-			<dialog class="alertist alertist-confirm">
-				<div class="alertist-container">
+			<dialog class="alertist">
+				<div class="alertist-container alertist-confirm">
 					<div class="alertist-header">
 						<div class="alertist-title" draggable="true"></div>
 						<button class="alertist-title_close"><img src="${alertistButtons.close}" alt=""></button>

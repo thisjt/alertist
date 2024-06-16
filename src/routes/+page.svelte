@@ -45,16 +45,26 @@
 	</div>
 	<div>Prompt Examples</div>
 	<div>
-		<button>Basic</button>
-		<button>Long Text</button>
-		<button>Cancel Clicked</button>
+		<button
+			on:click={() => {
+				alertist
+					.prompt({
+						title: 'Hello!',
+						text: 'This is a test! This is a long text! This is a test! This is a long text! This is a test! This is a long text!',
+						placeholder: 'Type something...',
+					})
+					.then((result) => {
+						alertist.alert({
+							title: 'Hello!',
+							text: `You typed: ${result !== null ? result : '<i>canceled</i>'}`,
+						});
+					});
+			}}>Basic</button>
 	</div>
 	<div>Toast Examples</div>
 	<div>
 		<button>Basic</button>
 		<button>Click to Dismiss</button>
-		<button>Callback</button>
-		<button>Multiple/Stacking</button>
 	</div>
 </div>
 

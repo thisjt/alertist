@@ -2,6 +2,9 @@
 @import './reset.scss';
 
 @import '../../lib/alert/alert.scss';
+@import '../../lib/confirm/confirm.scss';
+@import '../../lib/prompt/prompt.scss';
+@import '../../lib/toast/toast.scss';
 
 .alertist {
 	font-family: $alertist-font-family;
@@ -115,42 +118,6 @@
 					background-color: $alertist-footer-cancel-bg-hover;
 				}
 			}
-		}
-	}
-
-	&-alert {
-		.alertist-footer {
-			&_button {
-				width: 100%;
-			}
-		}
-		.alertist-body {
-			padding: 10px;
-		}
-	}
-
-	&-confirm {
-		.alertist-footer {
-			&_button {
-				width: 50%;
-			}
-
-			&_cancelbutton {
-				width: 50%;
-			}
-		}
-		.alertist-body {
-			padding: 10px;
-		}
-	}
-
-	&-form {
-		.alertist-container {
-			height: 100%;
-		}
-
-		.alertist-body {
-			flex-grow: 1;
 		}
 	}
 
