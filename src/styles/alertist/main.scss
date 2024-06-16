@@ -4,6 +4,12 @@
 .alertist {
 	font-family: $alertist-font-family;
 	outline: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	background-color: transparent;
+	align-items: center;
+	justify-content: center;
 
 	&::backdrop {
 		opacity: 1;
