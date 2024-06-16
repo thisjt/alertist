@@ -1,7 +1,7 @@
-import { alertistBucket, alertistStringToHtml, alertistCleanup, alertistInit, alertistButtons } from '../util';
+import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } from '../util';
 
 /**
- * Displays an alert using the Alertify library.
+ * Displays an Alert Box using the Alertify library.
  * @param {Object} options
  * @param {string} options.text - Text body of the Alert Box
  * @param {string} [options.title] - Title of the Alert Box

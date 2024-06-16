@@ -1,4 +1,5 @@
 import alertifyAlert from './alert/alert';
+import alertifyConfirm from './confirm/confirm';
 
 /**
  * @namespace Alertist
@@ -15,6 +16,7 @@ import alertifyAlert from './alert/alert';
  */
 const alertist = {
 	alert: alertifyAlert,
+	confirm: alertifyConfirm,
 };
 
 export default alertist;

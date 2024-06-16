@@ -7,10 +7,14 @@
 	<div>
 		<button
 			on:click={() => {
-				alertist.alert({
-					title: 'Hello!',
-					text: 'This is a test!',
-				});
+				alertist
+					.alert({
+						title: 'Hello!',
+						text: 'This is a test!',
+					})
+					.then(() => {
+						console.log('hi!');
+					});
 			}}>Basic</button>
 
 		<button
@@ -22,9 +26,22 @@
 	</div>
 	<div>Confirm Examples</div>
 	<div>
-		<button>Basic</button>
-		<button>Long Text</button>
-		<button>Cancel Clicked</button>
+		<button
+			on:click={() => {
+				alertist
+					.confirm({
+						title: 'Hello!',
+						text: 'This is a test! This is a long text! This is a test! This is a long text! This is a test! This is a long text!',
+						button: 'CustomOK',
+						cancel: 'CustomCancel',
+					})
+					.then((result) => {
+						alertist.alert({
+							title: 'Hello!',
+							text: result ? 'Confirmed!' : 'Cancelled!',
+						});
+					});
+			}}>Basic</button>
 	</div>
 	<div>Prompt Examples</div>
 	<div>
