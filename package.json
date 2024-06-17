@@ -4,12 +4,15 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"build": "npm-run-all -s build:*",
+		"build:check": "eslint",
+		"build:test": "pnpm run test",
+		"build:js": "rollup -c",
+		"build:css": "sass ./src/scss/main.scss ./dist/alertist.css --style=compressed --no-source-map"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
