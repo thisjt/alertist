@@ -5,7 +5,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } f
  * @param {Object} options
  * @param {string} options.text - Text body of the Confirm Box
  * @param {string} [options.title] - Title of the Confirm Box
- * @param {"error"} [options.type] - Type of the Confirm Box. Only `error` supported for now
+ * @param {"error"} [options.custom] - Title bar customization. Only `error` supported for now
  * @param {string} [options.button] - OK Button text of the Confirm Box
  * @param {string} [options.cancel] - Cancel button text of the Confirm Box
  * @returns {Promise<true | null>} `Promise<true | null>` - `true` if the user clicked OK, `null` if the user clicked Cancel or closed the dialog
@@ -15,7 +15,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } f
  * alertist.confirm({ text: 'Hello!' });
  * ```
  */
-export default async function alertifyConfirm({ text, title, type, button, cancel }) {
+export default async function alertifyConfirm({ text, title, custom, button, cancel }) {
 	if (!alertistInit()) {
 		console.error('alertist: init - not in a browser environment.');
 		return null;
@@ -44,7 +44,7 @@ export default async function alertifyConfirm({ text, title, type, button, cance
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-footer_button')).textContent = button || 'OK';
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-footer_cancelbutton')).textContent = cancel || 'Cancel';
 
-	if (type === 'error') {
+	if (custom === 'error') {
 		/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-title')).classList.add('alertist-title_error');
 		/**@type {HTMLButtonElement}*/ (parsedHTML.querySelector('.alertist-title_close')).classList.add('alertist-title_error_close');
 	}

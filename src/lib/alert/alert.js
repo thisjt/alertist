@@ -5,7 +5,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } f
  * @param {Object} options
  * @param {string} options.text - Text body of the Alert Box
  * @param {string} [options.title] - Title of the Alert Box
- * @param {"error"} [options.type] - Type of the Alert Box. Only `error` supported for now
+ * @param {"error"} [options.custom] - Title bar customization. Only `error` supported for now
  * @param {string} [options.button] - OK Button text of the Alert Box
  * @returns {Promise<void>} `Promise<void>`
  * @example
@@ -14,7 +14,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } f
  * alertist.alert({ text: 'Hello!' });
  * ```
  */
-export default async function alertifyAlert({ text, title, type, button }) {
+export default async function alertifyAlert({ text, title, custom, button }) {
 	if (!alertistInit()) {
 		console.error('alertist: init - not in a browser environment.');
 		return;
@@ -41,7 +41,7 @@ export default async function alertifyAlert({ text, title, type, button }) {
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-body')).innerHTML = text;
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-footer_button')).textContent = button || 'OK';
 
-	if (type === 'error') {
+	if (custom === 'error') {
 		/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-title')).classList.add('alertist-title_error');
 		/**@type {HTMLButtonElement}*/ (parsedHTML.querySelector('.alertist-title_close')).classList.add('alertist-title_error_close');
 	}

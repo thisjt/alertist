@@ -88,6 +88,7 @@
 						alertist.alert({
 							title: 'Hello!',
 							text: `You typed: ${result !== null ? result : '<i>canceled</i>'}`,
+							custom: result === null ? 'error' : undefined,
 						});
 					});
 			}}>Textarea</button>
