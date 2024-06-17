@@ -1,6 +1,9 @@
 /**@type {HTMLElement | null} */
 export let alertistBucket = null;
 
+/**@type {HTMLElement | null} */
+export let alertistToastBucket = null;
+
 /**
  * Converts a string to an HTMLElement.
  * @param {string} string
@@ -14,20 +17,34 @@ export function alertistStringToHtml(string) {
 
 /**
  * Initializes the alertist bucket.
- * @returns {HTMLElement | null} HTMLElement
+ * @returns {null | true}
  */
 export function alertistInit() {
 	if (typeof document !== 'object' || typeof DOMParser !== 'function') {
 		return null;
 	}
 	let bucketSelector = /**@type {HTMLElement}*/ (document.querySelector('.alertist-bucket'));
+	let toastBucketSelector = /**@type {HTMLElement}*/ (document.querySelector('.alertist-toast-bucket'));
 	if (!bucketSelector) {
 		bucketSelector = document.createElement('span');
 		bucketSelector.classList.add('alertist-bucket');
 		document.querySelector('body')?.append(bucketSelector);
 		alertistBucket = bucketSelector;
 	}
-	return bucketSelector;
+	if (!toastBucketSelector) {
+		toastBucketSelector = alertistStringToHtml(/*html*/ `
+			<div class="alertist-toast-bucket" popover="manual">
+				<div class="alertist-toast-container">
+				</div>
+			</div>
+		`);
+
+		document.querySelector('body')?.append(toastBucketSelector);
+		toastBucketSelector.showPopover();
+		alertistToastBucket = toastBucketSelector.querySelector('.alertist-toast-container');
+	}
+
+	return true;
 }
 
 /**

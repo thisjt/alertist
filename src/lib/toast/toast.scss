@@ -1,0 +1,30 @@
+.alertist-toast-bucket {
+	width: fit-content;
+	height: fit-content;
+	display: block;
+	margin: auto;
+	background-color: transparent;
+	border: 0;
+	padding: 0;
+
+	.alertist-toast-container {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+
+		.alertist-toast-notification {
+			background-color: $alertist-toast-bg;
+			color: $alertist-toast-color;
+			padding: 20px;
+			transform: translate(110%, 0);
+			transition: transform 0.4s ease-in-out;
+
+			&.alertist-toast-notification-enter {
+				transform: translate(0, 0);
+			}
+		}
+	}
+}

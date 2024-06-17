@@ -1,7 +1,7 @@
 import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } from '../util';
 
 /**
- * Displays an Alert Box using the Alertify library.
+ * Displays an Alert Box using the Alertist library.
  * @param {Object} options
  * @param {string} options.text - Text body of the Alert Box
  * @param {string} [options.title] - Title of the Alert Box
@@ -14,7 +14,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } f
  * alertist.alert({ text: 'Hello!' });
  * ```
  */
-export default async function alertifyAlert({ text, title, custom, button }) {
+export default async function alertistAlert({ text, title, custom, button }) {
 	if (!alertistInit()) {
 		console.error('alertist: init - not in a browser environment.');
 		return;

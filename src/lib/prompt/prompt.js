@@ -1,7 +1,7 @@
 import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } from '../util';
 
 /**
- * Displays a Prompt Box using the Alertify library.
+ * Displays a Prompt Box using the Alertist library.
  * @param {Object} options
  * @param {string} options.text - Text body of the Prompt Box
  * @param {string} [options.title] - Title of the Prompt Box
@@ -15,7 +15,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } f
  * import alertist from 'alertist';
  * alertist.prompt({ text: 'Hello!' });
  */
-export default async function alertifyPrompt({ text, title, custom, type, placeholder, button, cancel }) {
+export default async function alertistPrompt({ text, title, custom, type, placeholder, button, cancel }) {
 	if (!alertistInit()) {
 		console.error('alertist: init - not in a browser environment.');
 		return null;

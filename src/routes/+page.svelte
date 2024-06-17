@@ -95,7 +95,10 @@
 	</div>
 	<div>Toast Examples</div>
 	<div>
-		<button>Basic</button>
+		<button
+			on:click={() => {
+				alertist.toast({ text: `Hello! The current time is ${new Date().toLocaleString()}.` });
+			}}>Basic</button>
 		<button>Click to Dismiss</button>
 	</div>
 </div>

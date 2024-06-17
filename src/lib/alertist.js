@@ -1,6 +1,7 @@
-import alertifyAlert from './alert/alert';
-import alertifyConfirm from './confirm/confirm';
-import alertifyPrompt from './prompt/prompt';
+import alertistAlert from './alert/alert';
+import alertistConfirm from './confirm/confirm';
+import alertistPrompt from './prompt/prompt';
+import alertistToast from './toast/toast';
 
 /**
  * @namespace Alertist
@@ -16,9 +17,10 @@ import alertifyPrompt from './prompt/prompt';
  * @returns {Alertist} Object that contains the alertist library methods
  */
 const alertist = {
-	alert: alertifyAlert,
-	confirm: alertifyConfirm,
-	prompt: alertifyPrompt,
+	alert: alertistAlert,
+	confirm: alertistConfirm,
+	prompt: alertistPrompt,
+	toast: alertistToast,
 };
 
 export default alertist;
