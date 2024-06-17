@@ -1,6 +1,17 @@
 {
 	"name": "alertist",
 	"version": "0.4.24",
+	"description": "A simple alert management system built on top of the native \"dialog\" HTML tag.",
+	"style": "dist/alertist.css",
+	"main": "dist/alertist.cjs",
+	"module": "dist/alertist.js",
+	"unpkg": "./dist/alertist.browser.js",
+	"exports": {
+		".": {
+			"require": "./dist/alertist.cjs",
+			"import": "./dist/alertist.js"
+		}
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
@@ -33,5 +44,23 @@
 		"typescript": "^5.0.0",
 		"vite": "^5.0.3"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/thisjt/alertist.git"
+	},
+	"author": "thisjt",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/thisjt/alertist/issues"
+	},
+	"homepage": "https://github.com/thisjt/alertist#readme",
+	"keywords": [
+		"alert",
+		"alerts",
+		"confirm",
+		"prompt",
+		"toast",
+		"browser"
+	],
 	"type": "module"
 }
