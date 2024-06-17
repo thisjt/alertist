@@ -2,7 +2,7 @@ import terser from '@rollup/plugin-terser';
 
 export default [
 	{
-		input: 'src/js/main.js',
+		input: 'src/lib/alertist.js',
 		output: {
 			name: 'alertist',
 			file: 'dist/alertist.js',
@@ -10,7 +10,7 @@ export default [
 		},
 	},
 	{
-		input: 'src/js/main.js',
+		input: 'src/lib/alertist.js',
 		output: {
 			name: 'alertist',
 			file: 'dist/alertist.min.js',
@@ -20,7 +20,7 @@ export default [
 		},
 	},
 	{
-		input: 'src/js/main.js',
+		input: 'src/lib/alertist.js',
 		output: {
 			name: 'alertist',
 			file: 'dist/alertist.browser.js',
@@ -28,7 +28,7 @@ export default [
 		},
 	},
 	{
-		input: 'src/js/main.js',
+		input: 'src/lib/alertist.js',
 		output: {
 			name: 'alertist',
 			file: 'dist/alertist.browser.min.js',
@@ -38,14 +38,14 @@ export default [
 		},
 	},
 	{
-		input: 'src/js/main.js',
+		input: 'src/lib/alertist.js',
 		output: {
 			file: 'dist/alertist.cjs',
 			format: 'cjs',
 		},
 	},
 	{
-		input: 'src/js/main.js',
+		input: 'src/lib/alertist.js',
 		output: {
 			file: 'dist/alertist.min.cjs',
 			format: 'cjs',

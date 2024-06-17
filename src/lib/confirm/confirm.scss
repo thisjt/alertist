@@ -1,0 +1,17 @@
+.alertist {
+	& &-confirm {
+		.alertist-footer {
+			&_button {
+				width: 50%;
+			}
+
+			&_cancelbutton {
+				width: 50%;
+			}
+		}
+		.alertist-body {
+			padding: 10px;
+			min-height: 80px;
+		}
+	}
+}

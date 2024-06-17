@@ -1,0 +1,13 @@
+.alertist {
+	& &-alert {
+		.alertist-footer {
+			&_button {
+				width: 100%;
+			}
+		}
+		.alertist-body {
+			padding: 10px;
+			min-height: 80px;
+		}
+	}
+}

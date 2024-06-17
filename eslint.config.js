@@ -17,7 +17,7 @@ export default [
 				process: 'readonly',
 			},
 		},
-		ignores: ['.github/**/*', 'node_modules/**/*', 'dist/**/*', 'dev/**/*'],
+		ignores: ['.github/**/*', 'node_modules/**/*', 'dist/**/*', '.svelte-kit/**/*'],
 		rules: {
 			'no-undef': ['error', { typeof: true }],
 			indent: ['error', 'tab', { SwitchCase: 1 }],
