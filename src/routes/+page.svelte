@@ -96,10 +96,22 @@
 	<div>Toast Examples</div>
 	<div>
 		<button
-			on:click={() => {
-				alertist.toast({ text: `Hello! The current time is ${new Date().toLocaleString()}.` });
+			on:click={async () => {
+				const action = await alertist.toast({ text: `Hello! The current time is ${new Date().toLocaleString()}.` });
+				alertist.alert({ text: `Toast closed by ${action ? 'user' : 'timeout'}!` });
 			}}>Basic</button>
-		<button>Click to Dismiss</button>
+		<button
+			on:click={() => {
+				alertist.toast({ text: `Hello! The current time is ${new Date().toLocaleString()}.`, closebutton: true });
+			}}>With X Button</button>
+		<button
+			on:click={() => {
+				alertist.toast({ text: `Hello! The current time is ${new Date().toLocaleString()}.`, timeout: 1000 });
+			}}>1 Second Timeout</button>
+		<button
+			on:click={() => {
+				alertist.toast({ text: `Hello! The current time is ${new Date().toLocaleString()}.`, closebutton: true, closeonclick: false });
+			}}>No Close on Click</button>
 	</div>
 </div>
 

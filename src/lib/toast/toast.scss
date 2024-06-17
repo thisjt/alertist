@@ -21,9 +21,26 @@
 			padding: 20px;
 			transform: translate(110%, 0);
 			transition: transform 0.4s ease-in-out;
+			cursor: pointer;
+
+			&:hover {
+				background-color: $alertist-toast-bg-hover;
+			}
 
 			&.alertist-toast-notification-enter {
 				transform: translate(0, 0);
+			}
+
+			.alertist-toast-close {
+				float: right;
+				margin: 0 0 0 20px;
+				padding: 8px;
+				background-color: transparent;
+				border: 0;
+
+				&:hover {
+					background-color: $alertist-header-bg-close-hover;
+				}
 			}
 		}
 	}
