@@ -63,8 +63,7 @@
 			display: flex;
 			background-color: $alertist-header-bg;
 
-			&:hover,
-			&:focus {
+			&:hover {
 				background-color: $alertist-header-bg-close-hover;
 			}
 		}
@@ -75,8 +74,7 @@
 		}
 		&-title_error_close {
 			background-color: $alertist-header-error-bg;
-			&:hover,
-			&:focus {
+			&:hover {
 				background-color: $alertist-header-error-bg-close-hover;
 			}
 		}
@@ -103,8 +101,7 @@
 				background-color: $alertist-footer-button-bg;
 				color: $alertist-footer-button-color;
 				font-weight: $alertist-footer-button-font;
-				&:hover,
-				&:focus {
+				&:hover {
 					background-color: $alertist-footer-button-bg-hover;
 				}
 			}
@@ -112,8 +109,7 @@
 				background-color: $alertist-footer-cancel-bg;
 				color: $alertist-footer-cancel-color;
 				font-weight: $alertist-footer-cancel-font;
-				&:hover,
-				&:focus {
+				&:hover {
 					background-color: $alertist-footer-cancel-bg-hover;
 				}
 			}
