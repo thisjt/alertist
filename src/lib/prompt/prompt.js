@@ -72,6 +72,9 @@ export default async function alertistPrompt({ text, title, custom, type, placeh
 
 		case 'password':
 			inputElement.type = 'password';
+			textareaElement.remove();
+			inputElement.focus();
+			break;
 		default:
 			textareaElement.remove();
 			inputElement.focus();
