@@ -1,7 +1,6 @@
 {
 	"name": "alertist",
 	"version": "0.4.24",
-	"private": true,
 	"scripts": {
 		"dev": "vite dev",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
