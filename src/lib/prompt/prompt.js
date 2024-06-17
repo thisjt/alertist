@@ -6,7 +6,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } f
  * @param {string} options.text - Text body of the Prompt Box
  * @param {string} [options.title] - Title of the Prompt Box
  * @param {"error"} [options.custom] - Title bar customization
- * @param {"input" | "textarea" | "password"} [options.type] - Type of the Prompt Box. Can be `input` (default),`textarea`, or `password`
+ * @param {"input" | "textarea" | "password"} [options.type] - Type of the Prompt Box. Can be `input` (default), `textarea`, or `password`
  * @param {string} [options.placeholder] - Placeholder text of the Prompt Box
  * @param {string} [options.button] - OK Button text of the Prompt Box
  * @param {string} [options.cancel] - Cancel button text of the Prompt Box
@@ -43,21 +43,15 @@ export default async function alertifyPrompt({ text, title, custom, type, placeh
 		`)
 	);
 
+	let inputElement = /**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input input'));
+	let textareaElement = /**@type {HTMLTextAreaElement}*/ (parsedHTML.querySelector('.alertist-input textarea'));
+
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-title')).textContent = title || '';
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-body')).innerHTML = text;
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-footer_button')).textContent = button || 'OK';
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-footer_cancelbutton')).textContent = cancel || 'Cancel';
-	/**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input input')).placeholder = placeholder || '';
-	/**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input textarea')).placeholder = placeholder || '';
-
-	if (type === 'textarea') {
-		/**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input input')).remove();
-	} else if (type === 'password') {
-		/**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input textarea')).remove();
-		/**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input input')).type = 'password';
-	} else {
-		/**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input textarea')).remove();
-	}
+	inputElement.placeholder = placeholder || '';
+	textareaElement.placeholder = placeholder || '';
 
 	if (custom === 'error') {
 		/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-title')).classList.add('alertist-title_error');
@@ -68,13 +62,34 @@ export default async function alertifyPrompt({ text, title, custom, type, placeh
 
 	parsedHTML.showModal();
 
-	/**@type {HTMLButtonElement}*/ (parsedHTML.querySelector('.alertist-footer_button')).focus();
+	let inputMainElement = type === 'textarea' ? textareaElement : inputElement;
+
+	switch (type) {
+		case 'textarea':
+			inputElement.remove();
+			textareaElement.focus();
+			break;
+
+		case 'password':
+			inputElement.type = 'password';
+		default:
+			textareaElement.remove();
+			inputElement.focus();
+			break;
+	}
 
 	return new Promise((resolve) => {
+		inputMainElement.addEventListener('keydown', (e) => {
+			const event = /**@type {KeyboardEvent}*/ (e);
+			if (event.key === 'Enter' && !event.shiftKey) {
+				e.preventDefault();
+				resolve(inputMainElement.value);
+				parsedHTML.close();
+			}
+		});
+
 		parsedHTML.querySelector('.alertist-footer_button')?.addEventListener('click', () => {
-			let input = /**@type {HTMLInputElement}*/ (parsedHTML.querySelector('.alertist-input input'));
-			let textarea = /**@type {HTMLTextAreaElement}*/ (parsedHTML.querySelector('.alertist-input textarea'));
-			resolve(input ? input.value : textarea ? textarea.value : null);
+			resolve(inputMainElement.value);
 			parsedHTML.close();
 		});
 
