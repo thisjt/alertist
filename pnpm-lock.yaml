@@ -56,8 +56,11 @@ importers:
       svelte-check:
         specifier: ^3.6.0
         version: 3.8.0(postcss-load-config@3.1.4(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.5)(svelte@4.2.18)
+      tsc:
+        specifier: ^2.0.4
+        version: 2.0.4
       typescript:
-        specifier: ^5.0.0
+        specifier: ^5.4.5
         version: 5.4.5
       vite:
         specifier: ^5.0.3
@@ -1472,6 +1475,10 @@ packages:
   totalist@3.0.1:
     resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
     engines: {node: '>=6'}
+
+  tsc@2.0.4:
+    resolution: {integrity: sha512-fzoSieZI5KKJVBYGvwbVZs/J5za84f2lSTLPYf6AGiIf43tZ3GNrI1QzTLcjtyDDP4aLxd46RTZq1nQxe7+k5Q==}
+    hasBin: true
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -3023,6 +3030,8 @@ snapshots:
       is-number: 7.0.0
 
   totalist@3.0.1: {}
+
+  tsc@2.0.4: {}
 
   type-check@0.4.0:
     dependencies:

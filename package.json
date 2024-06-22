@@ -22,7 +22,8 @@
 		"build:check": "eslint",
 		"build:js": "rollup -c",
 		"build:css": "sass ./src/styles/alertist/main.scss ./dist/alertist.css --style=compressed --no-source-map",
-		"build:scss": "echo.@import './../src/styles/alertist/main.scss'; > dist/alertist.scss"
+		"build:scss": "echo.@import './../src/styles/alertist/main.scss'; > dist/alertist.scss",
+		"build:types": "pnpm --package=typescript dlx tsc"
 	},
 	"devDependencies": {
 		"@rollup/plugin-terser": "^0.4.4",
@@ -41,7 +42,8 @@
 		"sass": "^1.77.5",
 		"svelte": "^4.2.7",
 		"svelte-check": "^3.6.0",
-		"typescript": "^5.0.0",
+		"tsc": "^2.0.4",
+		"typescript": "^5.4.5",
 		"vite": "^5.0.3"
 	},
 	"repository": {
