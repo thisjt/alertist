@@ -20,10 +20,10 @@ describe('alertistAlert', () => {
 				expect(1).toBe(0);
 			} else {
 				expect(1).toBe(1);
-				expect(alertistDialog.outerHTML).toContain('alertist-title_error_close');
-				expect(alertistDialog.outerHTML).toContain('#value1#');
-				expect(alertistDialog.outerHTML).toContain('#value2#');
-				expect(alertistDialog.outerHTML).toContain('#value3#');
+				expect(alertistDialog.querySelector('.alertist-title_close').outerHTML).toContain('alertist-title_error_close');
+				expect(alertistDialog.querySelector('.alertist-body').outerHTML).toContain('#value1#');
+				expect(alertistDialog.querySelector('.alertist-title').outerHTML).toContain('#value2#');
+				expect(alertistDialog.querySelector('.alertist-footer_button').outerHTML).toContain('#value3#');
 			}
 			document.querySelector('.alertist-footer_button').click();
 		}, 100);
