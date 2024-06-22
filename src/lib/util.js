@@ -48,16 +48,6 @@ export function alertistInit() {
 }
 
 /**
- * Cleans up the alertist bucket.
- * @returns {void} void
- */
-export function alertistCleanup() {
-	if (alertistBucket) {
-		alertistBucket.querySelectorAll('dialog:not([open])').forEach((elem) => elem.remove());
-	}
-}
-
-/**
  * Returns a random string.
  * @returns {string} Random string
  */
