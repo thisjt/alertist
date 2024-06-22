@@ -4,8 +4,8 @@ dom();
 
 import alertistAlert from './alert';
 
-describe('alertistAlert', () => {
-	test('alertistAlert usage', async () => {
+describe('alertist alert', () => {
+	test.sequential('basic usage, close using ok button', async () => {
 		alertistAlert({
 			text: '#value1#',
 			title: '#value2#',
@@ -34,13 +34,17 @@ describe('alertistAlert', () => {
 			} else {
 				expect(1).toBe(0);
 			}
-			alertistAlert({
-				text: 'text',
-			}).then(() => {
-				expect(1).toBe(1);
-			});
 		}, 200);
 
+		await vi.runAllTimersAsync();
+	});
+
+	test.sequential('close using x button', async () => {
+		alertistAlert({
+			text: 'text',
+		}).then(() => {
+			expect(1).toBe(1);
+		});
 		setTimeout(() => {
 			const alertistDialog = document.querySelector('.alertist');
 			if (alertistDialog === null) {
@@ -49,7 +53,7 @@ describe('alertistAlert', () => {
 				expect(1).toBe(1);
 				document.querySelector('.alertist-title_close').click();
 			}
-		}, 300);
+		}, 100);
 
 		setTimeout(() => {
 			const alertistDialog = document.querySelector('.alertist');
@@ -58,12 +62,12 @@ describe('alertistAlert', () => {
 			} else {
 				expect(1).toBe(0);
 			}
-		}, 400);
+		}, 200);
 
 		await vi.runAllTimersAsync();
 	});
 
-	test('alertistAlert outside document context', async () => {
+	test.sequential('use outside browser context', async () => {
 		document = undefined;
 		DOMParser = undefined;
 		await alertistAlert({ text: 'Hello!' });

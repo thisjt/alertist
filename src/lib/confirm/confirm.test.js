@@ -61,5 +61,7 @@ describe('alertistConfirm', () => {
 				expect(1).toBe(0);
 			}
 		}, 400);
+
+		await vi.runAllTimersAsync();
 	});
 });
