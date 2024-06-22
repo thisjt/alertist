@@ -19,7 +19,6 @@ describe('alertistAlert', () => {
 			if (alertistDialog === null) {
 				expect(1).toBe(0);
 			} else {
-				expect(1).toBe(1);
 				expect(alertistDialog.querySelector('.alertist-title_close').outerHTML).toContain('alertist-title_error_close');
 				expect(alertistDialog.querySelector('.alertist-body').outerHTML).toContain('#value1#');
 				expect(alertistDialog.querySelector('.alertist-title').outerHTML).toContain('#value2#');
