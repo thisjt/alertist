@@ -3,7 +3,7 @@ import { alertistBucket, alertistToastBucket, alertistStringToHtml, alertistInit
 import dom from './fakedom';
 dom();
 
-describe.skip('alertist util', () => {
+describe('alertist util', () => {
 	test('alertistBucket is null', () => {
 		expect(alertistBucket).toBe(null);
 	});
