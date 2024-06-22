@@ -1,4 +1,4 @@
-import dom from './fakedom';
+import dom from './dom';
 dom();
 
 import { expect, test, describe } from 'vitest';

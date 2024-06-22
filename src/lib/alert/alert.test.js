@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
-import dom from '../fakedom';
+import dom from '../dom';
 dom();
 
 import alertistAlert from './alert';

@@ -22,6 +22,7 @@ export default function dom() {
 
 	vi.stubGlobal('document', doc);
 	vi.stubGlobal('DOMParser', dom.window.DOMParser);
+	vi.stubGlobal('KeyboardEvent', dom.window.KeyboardEvent);
 	vi.useFakeTimers();
 
 	return dom;

@@ -1,11 +1,11 @@
 import { describe, expect, test, vi } from 'vitest';
-import dom from '../fakedom';
+import dom from '../dom';
 dom();
 
 import alertistConfirm from './confirm';
 
-describe('alertistConfirm', () => {
-	test('alertistConfirm usage', async () => {
+describe('alertist confirm', () => {
+	test.sequential('basic usage, close using ok button', async () => {
 		alertistConfirm({
 			text: '#value1#',
 			title: '#value2#',
@@ -36,13 +36,17 @@ describe('alertistConfirm', () => {
 			} else {
 				expect(1).toBe(0);
 			}
-			alertistConfirm({
-				text: 'text',
-			}).then((value) => {
-				expect(value).toBe(null);
-			});
 		}, 200);
 
+		await vi.runAllTimersAsync();
+	});
+
+	test.sequential('close using x button', async () => {
+		alertistConfirm({
+			text: 'text',
+		}).then((value) => {
+			expect(value).toBe(null);
+		});
 		setTimeout(() => {
 			const alertistDialog = document.querySelector('.alertist');
 			if (alertistDialog === null) {
@@ -51,7 +55,7 @@ describe('alertistConfirm', () => {
 				expect(1).toBe(1);
 				document.querySelector('.alertist-title_close').click();
 			}
-		}, 300);
+		}, 100);
 
 		setTimeout(() => {
 			const alertistDialog = document.querySelector('.alertist');
@@ -60,8 +64,71 @@ describe('alertistConfirm', () => {
 			} else {
 				expect(1).toBe(0);
 			}
-		}, 400);
+		}, 200);
 
 		await vi.runAllTimersAsync();
+	});
+
+	test.sequential('close using cancel button', async () => {
+		alertistConfirm({
+			text: 'text',
+		}).then((value) => {
+			expect(value).toBe(null);
+		});
+		setTimeout(() => {
+			const alertistDialog = document.querySelector('.alertist');
+			if (alertistDialog === null) {
+				expect(1).toBe(0);
+			} else {
+				expect(1).toBe(1);
+				document.querySelector('.alertist-footer_cancelbutton').click();
+			}
+		}, 100);
+
+		setTimeout(() => {
+			const alertistDialog = document.querySelector('.alertist');
+			if (alertistDialog === null) {
+				expect(1).toBe(1);
+			} else {
+				expect(1).toBe(0);
+			}
+		}, 200);
+
+		await vi.runAllTimersAsync();
+	});
+
+	test.sequential('close using escape key', async () => {
+		alertistConfirm({
+			text: 'text',
+		}).then((value) => {
+			expect(value).toBe(null);
+		});
+		setTimeout(() => {
+			const alertistDialog = document.querySelector('.alertist');
+			if (alertistDialog === null) {
+				expect(1).toBe(0);
+			} else {
+				expect(1).toBe(1);
+				document.querySelector('.alertist').dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+			}
+		}, 100);
+
+		setTimeout(() => {
+			const alertistDialog = document.querySelector('.alertist');
+			if (alertistDialog === null) {
+				expect(1).toBe(1);
+			} else {
+				expect(1).toBe(0);
+			}
+		}, 200);
+
+		await vi.runAllTimersAsync();
+	});
+
+	test.sequential('use outside browser context', async () => {
+		document = undefined;
+		DOMParser = undefined;
+		await alertistConfirm({ text: 'Hello!' });
+		expect(1).toBe(1);
 	});
 });
