@@ -57,6 +57,14 @@ export function alertistCleanup() {
 	}
 }
 
+/**
+ * Returns a random string.
+ * @returns {string} Random string
+ */
+export function alertistRandomString() {
+	return Math.random().toString(36).substring(2);
+}
+
 export const alertistButtons = {
 	close:
 		'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAElBMVEX///9HcEz///////////////84chYNAAAABnRSTlP9ABWejzIjLOoFAAAAlUlEQVQoz3VSWRbEIAwi2/2vPG5tg8nohz6JBBFIhDRjnEIB0xt' +
