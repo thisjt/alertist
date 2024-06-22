@@ -6,6 +6,7 @@ export default defineConfig({
 			enabled: true,
 			extensions: ['.js'],
 			include: ['src/lib/**/*.js'],
+			exclude: ['src/lib/fakedom.js'],
 		},
 	},
 });
