@@ -130,30 +130,3 @@
 			}}>No Close on Click</button>
 	</div>
 </div>
-
-<style>
-	.examples {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		height: 100vh;
-	}
-
-	.examples div {
-		padding: 10px 0 5px 0;
-	}
-
-	button {
-		margin: 0 10px;
-		background-color: transparent;
-		border: 2px solid #aaa;
-		color: #fff;
-		cursor: pointer;
-		padding: 20px;
-	}
-
-	button:hover {
-		background-color: #aaa;
-	}
-</style>

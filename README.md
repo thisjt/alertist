@@ -1,6 +1,6 @@
 # Alertist
 
-A simple alert management system built on top of the native [**"dialog"**](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) HTML tag.
+A simple alert management system built on top of the native [`dialog`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) HTML tag.
 
 ![Demo of the Alertist Package](src/demo.gif 'Demo of the Alertist Package')
 
@@ -16,9 +16,7 @@ and then import it in your project.
 import alertist from 'alertist';
 ```
 
-Don't forget to import either the SASS file for styling inside the
-`src/scss/main.scss` or include the `dist/alertist.css` file in your
-document.
+Don't forget to import the SASS file located in `dist/alertist.scss` in your project.
 
 If you intend not to use this in a framework and instead just want to test
 it out in a browser, you can use `unpkg` and include the js and css files into
@@ -29,196 +27,88 @@ your document.
 <script src="https://unpkg.com/alertist/dist/alertist.browser.js"></script>
 ```
 
-That's it!
-
----
-
-## Features
-
-- Supports dragging of the dialog window
-- Plenty of customizability
-- Function checker before calling okCallback
-- Pop out a form into the dialog window
-
----
-
 ## Customization
 
 You can customize the dialog styling by overwriting the SASS variables inside the
 `src/scss/variables.scss`. If you want more customizability, you can always style it
 yourself, up to you!
 
----
+## Methods
 
-We currently have 2 types of alerts available. This will expand in the future but
-as of now this is what the package offers.
+### Alert
 
-1. Alert
-2. Confirm
-3. Form Pullout
-
-## Alert
-
-Syntax:
-
-```javascript
-// Use it like this:
-alertist.alert({
-	title: 'Title',
-	text: 'Hello world!',
-	button: 'Yes', // default: 'OK'
-	okCallback: () => {},
-	cancelCallback: () => {},
-	check: (dialogElement) => {
-		return true;
-	}, // Optional
-});
+```js
+alertist
+	.alert({
+		title: 'Title',
+		text: 'Hello world!',
+		button: 'Yes',
+	})
+	.then(() => {
+		// do things after dialog is closed
+	});
 ```
 
-Here's the HTML if you want to style this alert type yourself:
+### Confirm
 
-```html
-dialog.alertist.alertist-confirm div.alertist-container div.alertist-header div.alertist-title button.alertist-title_close img div.alertist-body div.alertist-footer
-button.alertist-footer_button
+```js
+alertist
+	.confirm({
+		title: 'Title',
+		text: 'Hello world!',
+		button: 'Yes',
+		cancel: 'No',
+	})
+	.then((action) => {
+		// do things after confirm is closed
+		// action = true (ok) | null (cancel, x button)
+	});
 ```
 
-## Confirm
+### Prompt
 
-Syntax:
+Make sure to compare strict equality of the `action` variable to
+`null`, as it is possible for the `action` variable to have a string
+with a value of ` ` which will equate to false if directly put inside an
+if else statement. This is useful if you want the input value to be
+optional in the prompt, but handle that the **OK** button is clicked.
 
-```javascript
-// Use it like this:
-alertist.confirm({
-	title: 'Title',
-	text: 'Hello world!',
-	button: 'Yes', // default: 'OK'
-	cancel: 'No', // default: 'Cancel'
-	okCallback: () => {},
-	cancelCallback: () => {},
-	check: (dialogElement) => {
-		return true;
-	}, // Optional
-});
+```js
+alertist
+	.prompt({
+		title: 'Title',
+		text: 'Hello world!',
+		type: 'input', // input, textarea, password, checkbox
+		button: 'Yes',
+		cancel: 'No',
+	})
+	.then((action) => {
+		// do things after the prompt is closed
+		// action = [prompt value] (ok) | null (cancel, x button)
+	});
 ```
 
-Here's the HTML structure if you want to style this alert type yourself:
+`action` variable values:
 
-```
-dialog.alertist.alertist-confirm
-	div.alertist-container
-		div.alertist-header
-			div.alertist-title
-			button.alertist-title_close
-				img
-		div.alertist-body
-		div.alertist-footer
-			button.alertist-footer_button
-			button.alertist-footer_cancelbutton
-```
+| Type     | OK        | Cancel | X      |
+| -------- | --------- | ------ | ------ |
+| input    | `string`  | `null` | `null` |
+| textarea | `string`  | `null` | `null` |
+| password | `string`  | `null` | `null` |
+| checkbox | `boolean` | `null` | `null` |
 
-## Form Pullout
+### Toast
 
-Pulls the form created in the DOM and puts it inside a pop-up dialog box.
+Be careful with setting `timeout:0`, `closeonclick:false`, and `closebutton:false`. This will make the toast permanently persist without any way of closing it until a page refresh happens.
 
-Syntax:
-
-```javascript
-// Use it like this:
-alertist.form({
-	title: 'Log In to this Website',
-	target: 'form#login',
-	submit: false,
-	okCallback: (e) => {
-		const form = e.querySelector('form#login');
-		console.log(form.username, form.password);
-	},
-	check: (elem) => {
-		return new Promise((resolve, reject) => {
-			alertist.confirm({
-				// [alertist.confirm] Supports chaining!
-				text: 'Are you sure you want to log in?',
-				okCallback: () => {
-					resolve();
-				},
-				cancelCallback: () => {
-					reject();
-				},
-			});
-		});
-	},
-});
-```
-
-```html
-<form id="login">
-	username: <input placeholder="admin" name="username" /><br />
-	password: <input placeholder="********" name="password" /><br />
-	<input type="submit" value="Log In" />
-</form>
-```
-
-## `callback` Functions
-
-There are three functions that you can add to the alertist object parameter.
-
-### `okCallback`
-
-Pretty self explanatory. This function will run when the user clicks on the "OK" button.
-
-### `cancelCallback`
-
-This function will run when either the X button, the Cancel button, or the background backdrop
-gets clicked.
-
-### `check`
-
-This is a function that will run when the user attempts to click on the "OK" button. If unassigned,
-this defaults to a function that returns `true`, but you can override this so that you can try doing
-some kind of check before the `okCallback` function runs. It needs a return statement if assigned, and
-will accept either a `return true`, `return false`, a promise that `resolve()` or a promise that
-`reject()`. If the function receives a `false` or a `reject()`, the alert box will remain open and will
-not close.
-
-_Usage:_
-
-```javascript
-alertist.confirm({
-	text: 'Hello world!',
-	check: ({ dialogElement }) => {
-		return true;
-	},
-});
-
-alertist.confirm({
-	text: 'Hello world!',
-	check: ({ dialogElement }) => {
-		return false;
-	},
-});
-
-alertist.confirm({
-	text: 'Hello world!',
-	check: ({ dialogElement }) => {
-		return new Promise((resolve, reject) => {
-			resolve();
-		});
-	},
-});
-
-alertist.confirm({
-	text: 'Hello world!',
-	check: (dialogElement) => {
-		return new Promise((resolve, reject) => {
-			reject();
-		});
-	},
-});
-
-alertist.confirm({
-	text: 'Hello world!',
-	check: async (dialogElement) => {
-		const value = await fetch(`https://example.com/api`);
-		return value === 'ok' ? true : false;
-	},
-});
+```js
+alertist
+	.toast({
+		text: 'Hello world!',
+		timeout: 3000,
+	})
+	.then((action) => {
+		// do things after toast closes
+		// action = true (clicked by user), null (closes by itself)
+	});
 ```
