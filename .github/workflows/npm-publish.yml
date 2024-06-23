@@ -5,7 +5,8 @@ name: Alertist Publisher
 
 on:
   release:
-    types: [edited, published]
+    types: [published]
+  workflow_dispatch:
 
 jobs:
   build:
