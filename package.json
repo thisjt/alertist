@@ -1,6 +1,6 @@
 {
 	"name": "alertist",
-	"version": "0.4.27",
+	"version": "0.4.32",
 	"description": "A simple alert management system built on top of the native \"dialog\" HTML tag.",
 	"style": "dist/alertist.css",
 	"main": "dist/alertist.cjs",
@@ -24,7 +24,7 @@
 		"build:lint": "eslint",
 		"build:js": "rollup -c",
 		"build:css": "sass ./src/styles/alertist/main.scss ./dist/alertist.css --style=compressed --no-source-map",
-		"build:scss": "echo.@import './../src/styles/alertist/main.scss'; > dist/alertist.scss",
+		"build:scss": "echo \"@import './../src/styles/alertist/main.scss';\" > dist/alertist.scss",
 		"build:types": "pnpm --package=typescript dlx tsc",
 		"build:docs": "vite build"
 	},
