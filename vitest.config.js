@@ -14,5 +14,9 @@ export default defineConfig({
 			headless: true,
 			api: 5001,
 		},
+		pool: {
+			enabled: true,
+			workers: 1,
+		},
 	},
 });
