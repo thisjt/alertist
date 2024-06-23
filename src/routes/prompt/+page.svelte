@@ -3,7 +3,7 @@
 </script>
 
 <div class="examples">
-	<div>Prompt Examples</div>
+	<div>Prompt Examples - <a href="../">Back</a></div>
 	<div>
 		<button
 			on:click={() => {

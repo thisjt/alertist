@@ -3,7 +3,16 @@
 </script>
 
 <div class="examples">
-	<div>Alert Examples</div>
+	<div><h1>Alertist</h1></div>
+	<div>
+		A simple alert management system built on top of the<br />
+		native <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog" target="_blank"><code>dialog</code></a> HTML tag.<br />
+		<br />
+		<a href="https://github.com/thisjt/alertist" target="_blank">GitHub</a> -
+		<a href="https://www.npmjs.com/package/alertist" target="_blank">NPM Package</a> -
+		<a href="https://unpkg.com/alertist" target="_blank">Unpkg</a>
+	</div>
+	<div>Basic Usage</div>
 	<div>
 		<button
 			on:click={() => {
@@ -15,118 +24,13 @@
 					.then(() => {
 						console.log('hi!');
 					});
-			}}>Basic</button>
-
-		<button
-			on:click={() => {
-				alertist.alert({
-					text: 'This is a test! This is a long text! This is a test! This is a long text! This is a test! This is a long text!',
-				});
-			}}>Long Text</button>
+			}}>Click Me!</button>
 	</div>
-	<div>Confirm Examples</div>
 	<div>
-		<button
-			on:click={() => {
-				alertist
-					.confirm({
-						title: 'Hello!',
-						text: 'This is a test! This is a long text! This is a test! This is a long text! This is a test! This is a long text!',
-						button: 'CustomOK',
-						cancel: 'CustomCancel',
-					})
-					.then((result) => {
-						alertist.alert({
-							title: 'Hello!',
-							text: result ? 'Confirmed!' : 'Cancelled!',
-						});
-					});
-			}}>Basic</button>
-	</div>
-	<div>Prompt Examples</div>
-	<div>
-		<button
-			on:click={() => {
-				alertist
-					.prompt({
-						title: 'Hello!',
-						text: 'This is a test!',
-						placeholder: 'Type something...',
-					})
-					.then((result) => {
-						alertist.alert({
-							title: 'Hello!',
-							text: `You typed: ${result !== null ? result : '<i>canceled</i>'}`,
-						});
-					});
-			}}>Basic</button>
-		<button
-			on:click={() => {
-				alertist
-					.prompt({
-						title: 'Hello!',
-						text: 'This is a test! This is a long text! This is a test! This is a long text! This is a test! This is a long text!',
-						placeholder: 'Type something...',
-					})
-					.then((result) => {
-						alertist.alert({
-							title: 'Hello!',
-							text: `You typed: ${result !== null ? result : '<i>canceled</i>'}`,
-						});
-					});
-			}}>Long Text</button>
-		<button
-			on:click={() => {
-				alertist
-					.prompt({
-						title: 'Hello!',
-						text: 'This is a test!',
-						type: 'textarea',
-						placeholder: 'Type something...',
-					})
-					.then((result) => {
-						alertist.alert({
-							title: 'Hello!',
-							text: `You typed: ${result !== null ? result : '<i>canceled</i>'}`,
-							custom: result === null ? 'error' : undefined,
-						});
-					});
-			}}>Textarea</button>
-		<button
-			on:click={() => {
-				alertist
-					.prompt({
-						title: 'Hello!',
-						text: 'This is a test!',
-						type: 'checkbox',
-					})
-					.then((result) => {
-						alertist.alert({
-							title: 'Hello!',
-							text: `You did: ${result !== null ? result : '<i>canceled</i>'}`,
-							custom: result === null ? 'error' : undefined,
-						});
-					});
-			}}>Checkbox</button>
-	</div>
-	<div>Toast Examples</div>
-	<div>
-		<button
-			on:click={async () => {
-				const action = await alertist.toast({ text: `Hello! The current time is ${new Date().toLocaleString()}.` });
-				alertist.alert({ text: `Toast closed by ${action ? 'user' : 'timeout'}!` });
-			}}>Basic</button>
-		<button
-			on:click={() => {
-				alertist.toast({ text: `Hello! The current time is ${new Date().toLocaleString()}.`, closebutton: true });
-			}}>With X Button</button>
-		<button
-			on:click={() => {
-				alertist.toast({ text: `Hello! The current time is ${new Date().toLocaleString()}.`, timeout: 1000 });
-			}}>1 Second Timeout</button>
-		<button
-			on:click={() => {
-				alertist.toast({ text: `Hello! The current time is ${new Date().toLocaleString()}.`, closebutton: true, closeonclick: false });
-			}}>No Close on Click</button>
+		Try more examples:<br />
+		<a href="alert">Alert</a> -
+		<a href="confirm">Confirm</a> -
+		<a href="prompt">Prompt</a> -
+		<a href="toast">Toast</a>
 	</div>
 </div>

@@ -1,6 +1,6 @@
 body {
 	background-color: #131313;
-	color: #ccc;
+	color: #bbb;
 	font-family: 'Segoe UI';
 }
 
@@ -10,14 +10,16 @@ body {
 	align-items: center;
 	flex-direction: column;
 	height: 100vh;
+	max-width: 600px;
+	margin: 0 auto;
 }
 
 .examples div {
 	padding: 10px 0 5px 0;
 }
 
-button {
-	margin: 0 10px;
+.examples button {
+	margin: 10px;
 	background-color: transparent;
 	border: 2px solid #aaa;
 	color: #fff;
@@ -25,6 +27,15 @@ button {
 	padding: 20px;
 }
 
-button:hover {
+.examples button:hover {
 	background-color: #aaa;
+}
+
+.examples a {
+	color: #fff;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
 }

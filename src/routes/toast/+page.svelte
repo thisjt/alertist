@@ -3,7 +3,7 @@
 </script>
 
 <div class="examples">
-	<div>Toast Examples</div>
+	<div>Toast Examples - <a href="../">Back</a></div>
 	<div>
 		<button
 			on:click={async () => {
