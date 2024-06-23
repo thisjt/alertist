@@ -4,6 +4,8 @@ A simple alert management system built on top of the native [`dialog`](https://d
 
 ![Demo of the Alertist Package](src/demo.gif 'Demo of the Alertist Package')
 
+[![NPM Registry Publisher](https://github.com/thisjt/alertist/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/thisjt/alertist/actions/workflows/npm-publish.yml) [![Demo Page Deployer](https://github.com/thisjt/alertist/actions/workflows/static.yml/badge.svg)](https://github.com/thisjt/alertist/actions/workflows/static.yml)
+
 You can check for a [demo here](https://thisjt.me/alertist/demo).
 
 Install the package:
