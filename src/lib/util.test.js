@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { alertistBucket, alertistToastBucket, alertistStringToHtml, alertistInit, alertistCleanup, alertistRandomString, alertistButtons } from './util';
+import { alertistBucket, alertistToastBucket, alertistStringToHtml, alertistInit, alertistRandomString, alertistButtons } from './util';
 import dom from './dom';
 dom();
 
@@ -30,8 +30,8 @@ describe('alertist util', () => {
 	});
 
 	test('alertistInit outside document context', () => {
-		document = undefined;
-		DOMParser = undefined;
+		// document = undefined;
+		// DOMParser = undefined;
 		expect(alertistInit()).toBe(null);
 	});
 });

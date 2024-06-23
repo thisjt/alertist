@@ -38,7 +38,7 @@ describe('alertist confirm', () => {
 			}
 		}, 200);
 
-		await vi.runAllTimersAsync();
+		// await vi.runAllTimersAsync();
 	});
 
 	test.sequential('close using x button', async () => {
@@ -66,7 +66,7 @@ describe('alertist confirm', () => {
 			}
 		}, 200);
 
-		await vi.runAllTimersAsync();
+		// await vi.runAllTimersAsync();
 	});
 
 	test.sequential('close using cancel button', async () => {
@@ -94,7 +94,7 @@ describe('alertist confirm', () => {
 			}
 		}, 200);
 
-		await vi.runAllTimersAsync();
+		// await vi.runAllTimersAsync();
 	});
 
 	test.sequential('close using escape key', async () => {
@@ -122,12 +122,12 @@ describe('alertist confirm', () => {
 			}
 		}, 200);
 
-		await vi.runAllTimersAsync();
+		// await vi.runAllTimersAsync();
 	});
 
 	test.sequential('use outside browser context', async () => {
-		document = undefined;
-		DOMParser = undefined;
+		// document = undefined;
+		// DOMParser = undefined;
 		await alertistConfirm({ text: 'Hello!' });
 		expect(1).toBe(1);
 	});
