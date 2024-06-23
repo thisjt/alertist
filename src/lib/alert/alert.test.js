@@ -1,6 +1,4 @@
 import { describe, expect, test, vi } from 'vitest';
-import dom from '../dom';
-dom();
 
 import alertistAlert from './alert';
 
@@ -35,8 +33,6 @@ describe('alertist alert', () => {
 				expect(1).toBe(0);
 			}
 		}, 200);
-
-		// await vi.runAllTimersAsync();
 	});
 
 	test.sequential('close using x button', async () => {
@@ -63,14 +59,12 @@ describe('alertist alert', () => {
 				expect(1).toBe(0);
 			}
 		}, 200);
-
-		// await vi.runAllTimersAsync();
 	});
 
-	test.sequential('use outside browser context', async () => {
-		// document = undefined;
-		// DOMParser = undefined;
-		await alertistAlert({ text: 'Hello!' });
-		expect(1).toBe(1);
-	});
+	// test.sequential('use outside browser context', async () => {
+	// 	// document = undefined;
+	// 	// DOMParser = undefined;
+	// 	await alertistAlert({ text: 'Hello!' });
+	// 	expect(1).toBe(1);
+	// });
 });

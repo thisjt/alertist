@@ -1,7 +1,4 @@
-import dom from './dom';
-dom();
-
-import { expect, test, describe, vi } from 'vitest';
+import { expect, test, describe } from 'vitest';
 
 import alertist from './alertist';
 
@@ -24,7 +21,5 @@ describe.todo('alertist main', () => {
 		setTimeout(() => {
 			expect(document.querySelector('.alertist').length).toBe(0);
 		}, 100);
-
-		// vi.runAllTimersAsync();
 	});
 });

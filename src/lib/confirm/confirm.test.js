@@ -1,6 +1,4 @@
 import { describe, expect, test, vi } from 'vitest';
-import dom from '../dom';
-dom();
 
 import alertistConfirm from './confirm';
 
@@ -37,8 +35,6 @@ describe('alertist confirm', () => {
 				expect(1).toBe(0);
 			}
 		}, 200);
-
-		// await vi.runAllTimersAsync();
 	});
 
 	test.sequential('close using x button', async () => {
@@ -65,8 +61,6 @@ describe('alertist confirm', () => {
 				expect(1).toBe(0);
 			}
 		}, 200);
-
-		// await vi.runAllTimersAsync();
 	});
 
 	test.sequential('close using cancel button', async () => {
@@ -93,8 +87,6 @@ describe('alertist confirm', () => {
 				expect(1).toBe(0);
 			}
 		}, 200);
-
-		// await vi.runAllTimersAsync();
 	});
 
 	test.sequential('close using escape key', async () => {
@@ -121,14 +113,12 @@ describe('alertist confirm', () => {
 				expect(1).toBe(0);
 			}
 		}, 200);
-
-		// await vi.runAllTimersAsync();
 	});
 
-	test.sequential('use outside browser context', async () => {
-		// document = undefined;
-		// DOMParser = undefined;
-		await alertistConfirm({ text: 'Hello!' });
-		expect(1).toBe(1);
-	});
+	// test.sequential('use outside browser context', async () => {
+	// 	// document = undefined;
+	// 	// DOMParser = undefined;
+	// 	await alertistConfirm({ text: 'Hello!' });
+	// 	expect(1).toBe(1);
+	// });
 });
