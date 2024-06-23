@@ -5,29 +5,31 @@ name: Alertist Publisher
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: checkout
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        name: install pnpm
         with:
-          node-version: 16
-      - run: npm ci
-      - run: npm test
-
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+          version: 8
+          run_install: false
+      - name: install nodejs
+        uses: actions/setup-node@v3
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm publish
+      - name: install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: test
+        run: pnpm test
+      - name: build
+        run: pnpm build
+      - name: publish
+        run: pnpm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
