@@ -16,10 +16,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons } f
  * ```
  */
 export default async function alertistConfirm({ text, title, custom, button, cancel }) {
-	if (!alertistInit()) {
-		console.error('alertist: init - not in a browser environment.');
-		return null;
-	}
+	alertistInit();
 
 	const parsedHTML = /**@type {HTMLDialogElement} */ (
 		alertistStringToHtml(/*html*/ `

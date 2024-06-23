@@ -20,9 +20,6 @@ export function alertistStringToHtml(string) {
  * @returns {null | true}
  */
 export function alertistInit() {
-	if (typeof document !== 'object' || typeof DOMParser !== 'function') {
-		return null;
-	}
 	let bucketSelector = /**@type {HTMLElement}*/ (document.querySelector('.alertist-bucket'));
 	let toastBucketSelector = /**@type {HTMLElement}*/ (document.querySelector('.alertist-toast-bucket'));
 	if (!bucketSelector) {

@@ -27,9 +27,4 @@ describe('alertist util', () => {
 	test('alertistInit', () => {
 		expect(alertistInit()).toBe(true);
 	});
-
-	test('alertistInit outside document context', () => {
-		document = undefined;
-		expect(alertistInit()).toBe(null);
-	});
 });

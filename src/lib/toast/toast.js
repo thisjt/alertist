@@ -16,10 +16,7 @@ import { alertistToastBucket, alertistStringToHtml, alertistInit, alertistButton
  * // Be careful with setting timeout:0, closeonclick:false, and closebutton:false. This will make the toast permanently persist until a page refresh happens.
  */
 export default async function alertistToast({ text, closeonclick, closebutton, timeout, type }) {
-	if (!alertistInit()) {
-		console.error('alertist: init - not in a browser environment.');
-		return null;
-	}
+	alertistInit();
 
 	const parsedHTML = /**@type {HTMLDivElement} */ (
 		alertistStringToHtml(/*html*/ `

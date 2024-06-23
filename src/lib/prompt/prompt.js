@@ -16,10 +16,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons, al
  * alertist.prompt({ text: 'Hello!' });
  */
 export default async function alertistPrompt({ text, title, custom, type, placeholder, button, cancel }) {
-	if (!alertistInit()) {
-		console.error('alertist: init - not in a browser environment.');
-		return null;
-	}
+	alertistInit();
 
 	const randomString = alertistRandomString();
 
