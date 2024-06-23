@@ -5,7 +5,7 @@ name: Alertist Publisher
 
 on:
   release:
-    types: [published]
+    types: [edited, published]
 
 jobs:
   build:
