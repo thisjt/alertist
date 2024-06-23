@@ -1,4 +1,4 @@
-name: Deploy Demo to Pages
+name: Demo Page Deployer
 
 on:
   workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         name: install pnpm
         with:
           version: 8
