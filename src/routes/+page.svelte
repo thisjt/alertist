@@ -2,9 +2,9 @@
 	import alertist from '$lib/alertist';
 </script>
 
-<div class="examples">
+<div class="examples main">
 	<div><h1>Alertist</h1></div>
-	<div>
+	<div class="description">
 		A simple alert management system built on top of the<br />
 		native <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog" target="_blank"><code>dialog</code></a> HTML tag.<br />
 		<br />
@@ -26,7 +26,7 @@
 					});
 			}}>Click Me!</button>
 	</div>
-	<div>
+	<div class="footer">
 		Try more examples:<br />
 		<a href="alert">Alert</a> -
 		<a href="confirm">Confirm</a> -
@@ -34,3 +34,13 @@
 		<a href="toast">Toast</a>
 	</div>
 </div>
+
+<style lang="scss">
+	.main {
+		max-width: 400px;
+	}
+	.description,
+	.footer {
+		width: 100%;
+	}
+</style>

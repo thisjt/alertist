@@ -3,7 +3,7 @@
 </script>
 
 <div class="examples">
-	<div>Confirm Examples - <a href="../">Back</a></div>
+	<div>Confirm Examples - <a href="./">Back</a></div>
 	<div>
 		<button
 			on:click={() => {
