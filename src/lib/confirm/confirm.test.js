@@ -114,11 +114,4 @@ describe('alertist confirm', () => {
 			}
 		}, 200);
 	});
-
-	// test.sequential('use outside browser context', async () => {
-	// 	// document = undefined;
-	// 	// DOMParser = undefined;
-	// 	await alertistConfirm({ text: 'Hello!' });
-	// 	expect(1).toBe(1);
-	// });
 });

@@ -18,7 +18,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
 		"format": "prettier --write .",
 		"test": "npm-run-all -s test:*",
-		"test:lint": "prettier --check --end-of-line crlf . && eslint .",
+		"test:lint": "prettier --check --end-of-line auto . && eslint .",
 		"test:code": "vitest run",
 		"build": "npm-run-all -s build:*",
 		"build:lint": "eslint",
