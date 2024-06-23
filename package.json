@@ -17,14 +17,15 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
 		"format": "prettier --write .",
+		"build": "npm-run-all -s test:* build:*",
 		"test:lint": "prettier --check --end-of-line crlf . && eslint .",
 		"test:code": "vitest run",
-		"build": "npm-run-all -s test:* build:*",
 		"build:lint": "eslint",
 		"build:js": "rollup -c",
 		"build:css": "sass ./src/styles/alertist/main.scss ./dist/alertist.css --style=compressed --no-source-map",
 		"build:scss": "echo.@import './../src/styles/alertist/main.scss'; > dist/alertist.scss",
-		"build:types": "pnpm --package=typescript dlx tsc"
+		"build:types": "pnpm --package=typescript dlx tsc",
+		"build:docs": "vite build"
 	},
 	"devDependencies": {
 		"@rollup/plugin-terser": "^0.4.4",
