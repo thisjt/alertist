@@ -19,14 +19,13 @@
 			padding: 5px 10px;
 
 			.alertist-input-container {
-				display: block;
+				display: flex;
 
 				input {
-					width: 100%;
 					padding: 10px;
 					border: 1px solid #333;
 					border-radius: 5px;
-					margin-bottom: 10px;
+					margin: 0 10px;
 				}
 
 				textarea {
@@ -36,6 +35,10 @@
 					border-radius: 5px;
 					margin-bottom: 10px;
 					min-height: 100px;
+				}
+
+				.alertist-input_label {
+					font-style: italic;
 				}
 			}
 		}
@@ -47,6 +50,7 @@
 
 			input {
 				transform: scale(1.5);
+				cursor: pointer;
 			}
 		}
 	}

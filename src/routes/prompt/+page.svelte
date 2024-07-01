@@ -68,5 +68,22 @@
 						});
 					});
 			}}>Checkbox</button>
+		<button
+			on:click={() => {
+				alertist
+					.prompt({
+						title: 'Hello!',
+						text: 'This is a test!',
+						type: 'checkbox',
+						label: 'Please check me!',
+					})
+					.then((result) => {
+						alertist.alert({
+							title: 'Hello!',
+							text: `You did: ${result !== null ? result : '<i>canceled</i>'}`,
+							custom: result === null ? 'error' : undefined,
+						});
+					});
+			}}>Checkbox with Label</button>
 	</div>
 </div>

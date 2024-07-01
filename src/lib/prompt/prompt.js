@@ -7,6 +7,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons, al
  * @param {string} [options.title] - Title of the Prompt Box
  * @param {"error"} [options.custom] - Title bar customization
  * @param {"input" | "textarea" | "password" | "checkbox"} [options.type] - Type of the Prompt Box
+ * @param {string} [options.label] - Text to put next to the input
  * @param {string} [options.placeholder] - Placeholder text of the Prompt Box
  * @param {string} [options.button] - OK Button text of the Prompt Box
  * @param {string} [options.cancel] - Cancel button text of the Prompt Box
@@ -15,7 +16,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons, al
  * import alertist from 'alertist';
  * alertist.prompt({ text: 'Hello!' });
  */
-export default async function alertistPrompt({ text, title, custom, type, placeholder, button, cancel }) {
+export default async function alertistPrompt({ text, title, custom, type, placeholder, button, label, cancel }) {
 	alertistInit();
 
 	const randomString = alertistRandomString();
@@ -33,6 +34,7 @@ export default async function alertistPrompt({ text, title, custom, type, placeh
 						<label class="alertist-input-container" for="alertist-input-${randomString}">
 							<input type="text" id="alertist-input-${randomString}">
 							<textarea></textarea>
+							<div class="alertist-input_label">${label ?? ''}</div>
 						</label>
 					</div>
 					<div class="alertist-footer">
