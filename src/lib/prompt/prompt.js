@@ -67,6 +67,8 @@ export default async function alertistPrompt({ text, title, custom, type, placeh
 
 	let inputMainElement = type === 'textarea' ? textareaElement : inputElement;
 
+	const okbutton = parsedHTML.querySelector('.alertist-footer_button');
+
 	switch (type) {
 		case 'textarea':
 			inputElement.remove();
@@ -82,6 +84,14 @@ export default async function alertistPrompt({ text, title, custom, type, placeh
 			inputElement.type = 'checkbox';
 			inputElement.parentElement.classList.add('alertist-checkbox');
 			textareaElement.remove();
+			okbutton.focus();
+			okbutton.addEventListener('keydown', (e) => {
+				const event = /**@type {KeyboardEvent}*/ (e);
+				if (event.code === 'Space') {
+					e.preventDefault();
+					inputElement.checked = !inputElement.checked;
+				}
+			});
 			break;
 		default:
 			textareaElement.remove();

@@ -7,14 +7,10 @@
 	<div>
 		<button
 			on:click={() => {
-				alertist
-					.alert({
-						title: 'Hello!',
-						text: 'This is a test!',
-					})
-					.then(() => {
-						console.log('hi!');
-					});
+				alertist.alert({
+					title: 'Hello!',
+					text: 'This is a test!',
+				});
 			}}>Basic</button>
 
 		<button
