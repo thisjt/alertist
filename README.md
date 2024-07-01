@@ -6,6 +6,8 @@ A simple alert management system built on top of the native [`dialog`](https://d
 
 [![NPM Registry Publisher](https://github.com/thisjt/alertist/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/thisjt/alertist/actions/workflows/npm-publish.yml) [![Demo Page Deployer](https://github.com/thisjt/alertist/actions/workflows/static.yml/badge.svg)](https://github.com/thisjt/alertist/actions/workflows/static.yml)
 
+[![DeepScan grade](https://deepscan.io/api/teams/24126/projects/27353/branches/874114/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=24126&pid=27353&bid=874114)
+
 You can check for a [demo here](https://thisjt.me/alertist).
 
 Install the package:
