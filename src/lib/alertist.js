@@ -22,7 +22,7 @@ const alertist = {
 	confirm: alertistConfirm,
 	prompt: alertistPrompt,
 	toast: alertistToast,
-	// html: alertistHtml,
+	html: alertistHtml,
 };
 
 export default alertist;

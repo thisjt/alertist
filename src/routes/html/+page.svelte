@@ -19,7 +19,6 @@
 					title: 'Hmmm',
 					button: 'Yes',
 					test: async (dialog) => {
-						console.log(dialog);
 						return new Promise((res) => {
 							alertist
 								.confirm({

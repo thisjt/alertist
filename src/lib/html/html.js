@@ -1,11 +1,11 @@
 import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons, alertistRandomString } from '../util';
 
 /**
- * @async
  * @function testFn
  * @param {HTMLDialogElement} dialog
  * @return {Promise<boolean>}
  */
+
 /**
  * Displays a custom HTML Dialog Box with a "test" function checker using the Alertist library.
  * @param {Object} options
@@ -14,7 +14,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons, al
  * @param {"error"} [options.custom] - Title bar customization
  * @param {string} [options.button] - OK Button text of the Prompt Box
  * @param {string} [options.cancel] - Cancel button text of the Prompt Box
- * @param {testFn} [options.test] - Function/Promise that runs when the user clicks OK. The dialog stays up when the promise rejects. It will close when this promise resolves.
+ * @param {(dialog: HTMLDialogElement) => Promise<boolean>} [options.test] - Function that must return a promise. If it resolves, the dialog closes. Useful for testing input.
  * @returns {Promise<HTMLDialogElement | null>} `Promise<string | null>` - returns the entire Dialog HTML DOM if the user clicks OK, `null` if the user clicked Cancel or closed the dialog
  * @example
  * import alertist from 'alertist';
@@ -55,8 +55,8 @@ export default async function alertistHtml({ text, title, custom, button, cancel
 
 	alertistBucket?.append(parsedHTML);
 	parsedHTML.showModal();
-	const okbutton = parsedHTML.querySelector('.alertist-footer_button');
-	okbutton.focus();
+	const okbutton = /**@type {HTMLButtonElement}*/ (parsedHTML.querySelector('.alertist-footer_button'));
+	okbutton?.focus();
 
 	return new Promise((resolve) => {
 		parsedHTML.querySelector('.alertist-footer_button')?.addEventListener('click', () => {

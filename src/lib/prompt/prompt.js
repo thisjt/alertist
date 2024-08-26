@@ -67,7 +67,7 @@ export default async function alertistPrompt({ text, title, custom, type, placeh
 
 	let inputMainElement = type === 'textarea' ? textareaElement : inputElement;
 
-	const okbutton = parsedHTML.querySelector('.alertist-footer_button');
+	const okbutton = /**@type {HTMLButtonElement}*/ (parsedHTML.querySelector('.alertist-footer_button'));
 
 	switch (type) {
 		case 'textarea':
@@ -82,7 +82,7 @@ export default async function alertistPrompt({ text, title, custom, type, placeh
 			break;
 		case 'checkbox':
 			inputElement.type = 'checkbox';
-			inputElement.parentElement.classList.add('alertist-checkbox');
+			inputElement.parentElement?.classList.add('alertist-checkbox');
 			textareaElement.remove();
 			okbutton.focus();
 			okbutton.addEventListener('keydown', (e) => {
@@ -111,7 +111,7 @@ export default async function alertistPrompt({ text, title, custom, type, placeh
 
 		parsedHTML.querySelector('.alertist-footer_button')?.addEventListener('click', () => {
 			if (inputMainElement.type === 'checkbox') {
-				resolve(inputMainElement.checked);
+				resolve(/**@type {HTMLInputElement}*/ (inputMainElement).checked);
 			} else {
 				resolve(inputMainElement.value);
 			}
