@@ -118,3 +118,31 @@ alertist
 		// action = true (clicked by user), null (closes by itself)
 	});
 ```
+
+### HTML (Custom)
+
+Special method that has an additional "test" function that runs and determines whether to close the dialog or not when the user clicks OK.
+It also exposes the dialog element in the test function as shown below. Useful for input validation.
+
+```js
+alertist.html({
+	text: 'Click OK after you click Yes.',
+	title: 'Hmmm',
+	button: 'Yes',
+	test: async (dialog) => {
+		// dialog variable contains the dialog element
+		return new Promise((res) => {
+			alertist
+				.confirm({
+					text: 'Click OK now!',
+					title: 'Test!',
+					button: 'OK',
+				})
+				.then((conf) => {
+					if (conf === null) return;
+					res(true);
+				});
+		});
+	},
+});
+```
