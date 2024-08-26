@@ -27,7 +27,8 @@
 		<a href="alert">Alert</a> -
 		<a href="confirm">Confirm</a> -
 		<a href="prompt">Prompt</a> -
-		<a href="toast">Toast</a>
+		<a href="toast">Toast</a> -
+		<a href="html">HTML</a>
 	</div>
 </div>
 

@@ -2,6 +2,7 @@ import alertistAlert from './alert/alert';
 import alertistConfirm from './confirm/confirm';
 import alertistPrompt from './prompt/prompt';
 import alertistToast from './toast/toast';
+import alertistHtml from './html/html';
 
 /**
  * @namespace Alertist
@@ -21,6 +22,7 @@ const alertist = {
 	confirm: alertistConfirm,
 	prompt: alertistPrompt,
 	toast: alertistToast,
+	// html: alertistHtml,
 };
 
 export default alertist;
