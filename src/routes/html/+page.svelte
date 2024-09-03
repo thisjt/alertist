@@ -1,5 +1,7 @@
 <script>
 	import alertist from '$lib/alertist';
+
+	let /**@type {HTMLDivElement}*/ bodyMe;
 </script>
 
 <div class="examples">
@@ -12,6 +14,13 @@
 					title: 'The Usual',
 				});
 			}}>Basic</button>
+		<button
+			on:click={async () => {
+				const action = await alertist.html({
+					text: bodyMe,
+					title: 'The Usual',
+				});
+			}}>Custom Element</button>
 		<button
 			on:click={async () => {
 				const action = await alertist.html({
@@ -33,5 +42,10 @@
 					},
 				});
 			}}>With Test</button>
+	</div>
+
+	<div style="border:1px solid #faa" bind:this={bodyMe}>
+		You will see me in the Custom Element!<br />
+		<button style="background-color:#000;color:#fff" on:click={() => alert('basic alert? huh?')}>Clickable</button>
 	</div>
 </div>

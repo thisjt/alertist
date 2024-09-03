@@ -9,7 +9,7 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons, al
 /**
  * Displays a custom HTML Dialog Box with a "test" function checker using the Alertist library.
  * @param {Object} options
- * @param {string} options.text - Text body of the Prompt Box
+ * @param {string | HTMLElement} options.text - Text body of the Prompt Box
  * @param {string} [options.title] - Title of the Prompt Box
  * @param {"error"} [options.custom] - Title bar customization
  * @param {string} [options.button] - OK Button text of the Prompt Box
@@ -44,7 +44,13 @@ export default async function alertistHtml({ text, title, custom, button, cancel
 	);
 
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-title')).textContent = title || '';
-	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-body')).innerHTML = text;
+
+	if (typeof text === 'string') {
+		/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-body')).innerHTML = text;
+	} else {
+		/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-body')).appendChild(text);
+	}
+
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-footer_button')).textContent = button || 'OK';
 	/**@type {HTMLDivElement}*/ (parsedHTML.querySelector('.alertist-footer_cancelbutton')).textContent = cancel || 'Cancel';
 
