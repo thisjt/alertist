@@ -14,13 +14,14 @@ import { alertistBucket, alertistStringToHtml, alertistInit, alertistButtons, al
  * @param {"error"} [options.custom] - Title bar customization
  * @param {string} [options.button] - OK Button text of the Prompt Box
  * @param {string} [options.cancel] - Cancel button text of the Prompt Box
+ * @param {(dialog: HTMLDialogElement) => void} [options.bind] - This function will run right before the dialog showModal triggers
  * @param {(dialog: HTMLDialogElement) => Promise<boolean>} [options.test] - Function that must return a promise. If it resolves, the dialog closes. Useful for testing input.
  * @returns {Promise<HTMLDialogElement | null>} `Promise<string | null>` - returns the entire Dialog HTML DOM if the user clicks OK, `null` if the user clicked Cancel or closed the dialog
  * @example
  * import alertist from 'alertist';
  * alertist.html({ text: 'Hello!' });
  */
-export default async function alertistHtml({ text, title, custom, button, cancel, test }) {
+export default async function alertistHtml({ text, title, custom, button, cancel, test, bind }) {
 	alertistInit();
 
 	const randomString = alertistRandomString();
@@ -60,6 +61,8 @@ export default async function alertistHtml({ text, title, custom, button, cancel
 	}
 
 	alertistBucket?.append(parsedHTML);
+	if (bind) bind(parsedHTML);
+
 	parsedHTML.showModal();
 	const okbutton = /**@type {HTMLButtonElement}*/ (parsedHTML.querySelector('.alertist-footer_button'));
 	okbutton?.focus();
