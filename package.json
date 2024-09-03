@@ -25,7 +25,7 @@
 		"build:js": "rollup -c",
 		"build:css": "sass ./src/styles/alertist/main.scss ./dist/alertist.css --style=compressed --no-source-map",
 		"build:scss": "echo \"@import './../src/styles/alertist/main.scss';\" > dist/alertist.scss",
-		"build:types": "pnpm --package=typescript dlx tsc",
+		"build:types": "pnpm --package=typescript dlx tsc --p tsconfig2.json",
 		"build:docs": "vite build"
 	},
 	"devDependencies": {
